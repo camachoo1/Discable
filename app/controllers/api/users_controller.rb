@@ -1,12 +1,14 @@
 class Api::UsersController < ApplicationController
   wrap_parameters include: User.attribute_names + ["password"]
+  # before_action :require_logged_out, only: [:create] # dont want to create if we are already logged in
 
   def create
     @user = User.new(user_params)
+    @user.status = "online"
+    debugger
 
     if @user.save
       login!(@user)
-      # @user.status = "online"
       render :show
     else
       render json: @user.errors.full_messages, status: 422
@@ -16,6 +18,6 @@ class Api::UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:username, :email, :password)
+    params.require(:user).permit(:email, :username, :password)
   end
 end

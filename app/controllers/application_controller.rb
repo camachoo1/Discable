@@ -1,4 +1,4 @@
-class ApplicationController < ActionController::Base
+class ApplicationController < ActionController::API
   include ActionController::RequestForgeryProtection
   protect_from_forgery with: :exception
   rescue_from StandardError, with: :unhandled_error
@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
     !!current_user
   end
 
-  def logout
+  def logout!
     current_user.status = "offline"
     current_user.reset_session_token! if logged_in?
     session[:session_token] = nil
@@ -37,7 +37,9 @@ class ApplicationController < ActionController::Base
   private
 
   def attach_authenticity_token
+    # debugger
     headers["X-CSRF-Token"] = masked_authenticity_token(session)
+    # debugger
   end
 
   def invalid_authenticity_token
