@@ -11,10 +11,9 @@ const setCurrentUser = (user) => {
   };
 };
 
-const removeCurrentUser = (userId) => {
+const removeCurrentUser = () => {
   return {
     type: REMOVE_CURRENT_USER,
-    userId,
   };
 };
 
@@ -33,11 +32,13 @@ export const login = (user) => async (dispatch) => {
   return res;
 };
 
-export const logout = (userId) => async (dispatch) => {
+export const logout = () => async (dispatch) => {
   const res = await csrfFetch('/api/session', {
     method: 'DELETE',
   });
-  dispatch(removeCurrentUser(userId));
+  // debugger;
+
+  dispatch(removeCurrentUser());
   storeCurrentUser(null);
   return res;
 };
@@ -76,10 +77,11 @@ const sessionReducer = (state = initialState, action) => {
   const nextState = { ...state };
   switch (action.type) {
     case SET_CURRENT_USER:
-      nextState[action.payload.id] = action.payload;
+      // debugger;
+      nextState.user = action.payload.id;
       return nextState;
     case REMOVE_CURRENT_USER:
-      delete nextState[action.userId];
+      nextState.user = null;
       return nextState;
     default:
       return nextState;

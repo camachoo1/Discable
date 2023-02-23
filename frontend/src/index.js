@@ -26,7 +26,7 @@ const initializeApp = () => {
 
   if (currentUser) {
     initialState = {
-      users: {
+      session: {
         [currentUser.id]: currentUser,
       },
     };

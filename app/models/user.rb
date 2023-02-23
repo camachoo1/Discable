@@ -23,10 +23,10 @@ class User < ApplicationRecord
   def self.find_by_credentials(credential, password)
     if credential.include?("@")
       user = User.find_by(email: credential)
-      return user if user&.autheticate(password)
+      return user if user&.authenticate(password)
     else
       user = User.find_by(username: credential)
-      return user if user&.autheticate(password)
+      return user if user&.authenticate(password)
     end
     nil
   end
