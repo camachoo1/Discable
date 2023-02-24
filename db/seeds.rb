@@ -8,6 +8,8 @@
 
 puts "Destroying all previous data..."
 User.destroy_all
+Server.destroy_all
+ServerSubscription.destroy_all
 
 puts "Resetting primary keys..."
 ApplicationRecord.connection.reset_pk_sequence!("users")
@@ -15,7 +17,7 @@ ApplicationRecord.connection.reset_pk_sequence!("users")
 puts "Creating Users…"
 user1 = User.create!(username: "Demo", email: "demo@demo.com", password: "password", status: "online")
 user2 = User.create!(username: "Omar", email: "omar@gmail.com", password: "password", status: "online")
-user3 = User.create!(username: "Paulo", email: "paulo@gmail.com", password: "password", status: "away")
+user3 = User.create!(username: "Paulo", email: "paulo@gmail.com", password: "password", status: "online")
 user4 = User.create!(username: "Chris", email: "chris@gmail.com", password: "password", status: "online")
 user5 = User.create!(username: "Mike", email: "mike@gmail.com", password: "password", status: "online")
 user6 = User.create!(username: "Jason", email: "jason@gmail.com", password: "password", status: "online")
