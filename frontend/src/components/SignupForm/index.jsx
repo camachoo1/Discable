@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import * as sessionActions from '../../store/session';
 import './SignupForm.css';
 
@@ -12,7 +12,7 @@ const SignupFormPage = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to='/me' />;
+  if (sessionUser) return <Navigate to='@/me' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();

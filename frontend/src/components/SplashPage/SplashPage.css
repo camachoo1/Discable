@@ -10,15 +10,16 @@ body {
 
 .nav {
   top: 0;
-  width: 50%;
+  width: 65%;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .nav-left {
-  font-family: 'gg-sans', sans-serif;
+  font-family: 'ginto-nord-2';
   font-size: 18px;
+  color: white;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,7 +27,9 @@ body {
 
 .splash-page-links {
   color: white;
+  text-decoration: none;
   padding: 10px;
+  margin: 10px;
 }
 
 .splash-page-after-nav {

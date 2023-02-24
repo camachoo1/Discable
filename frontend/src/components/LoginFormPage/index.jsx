@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, Redirect } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import './LoginForm.css';
 import { login } from '../../store/session';
 
@@ -12,7 +12,7 @@ const LoginFormPage = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Redirect to='/me' />;
+  if (sessionUser) return <Navigate to='/@me' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -50,13 +50,9 @@ const LoginFormPage = () => {
             </center>
           </div>
 
-          <label
-            htmlFor='credential'
-            className='form-text'
-            // id={errors.length ? 'error-label' : undefined}
-          >
+          <label htmlFor='credential' className='form-text'>
             USERNAME OR EMAIL{' '}
-            <span>{errors.length ? `- ${errors[0]}` : '*'}</span>
+            <span>{errors.length ? ` - ${errors[0]}` : '*'}</span>
           </label>
           <input
             type='text'
@@ -69,11 +65,7 @@ const LoginFormPage = () => {
             autoComplete='off'
           />
 
-          <label
-            htmlFor='password'
-            className='form-text'
-            // id={errors.length ? 'error' : undefined}
-          >
+          <label htmlFor='password' className='form-text'>
             PASSWORD{' '}
             <span>{errors.length ? `- ${errors[0]}` : '*'}</span>
           </label>

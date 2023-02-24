@@ -37,13 +37,13 @@ const initializeApp = () => {
   const root = createRoot(document.getElementById('root'));
   // debugger;
   return root.render(
-    <React.StrictMode>
-      <Provider store={store}>
+    <Provider store={store}>
+      <React.StrictMode>
         <BrowserRouter>
           <App />
         </BrowserRouter>
-      </Provider>
-    </React.StrictMode>
+      </React.StrictMode>
+    </Provider>
   );
 };
 

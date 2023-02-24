@@ -1,17 +1,16 @@
 import './SplashPage.css';
-import logo from '../../assets/logo.png';
+import logo from '../../assets/discord-logo.png';
 import section2 from '../../assets/section2.svg';
 import section3 from '../../assets/section3.svg';
 import section4 from '../../assets/section4.svg';
 import section5 from '../../assets/section5.svg';
 import sparkles from '../../assets/sparkles.svg';
-import { useHistory } from 'react-router-dom';
-// import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const SplashPage = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   const handleClick = (e) => {
-    history.push('/login');
+    navigate('/login');
   };
   return (
     <>
@@ -20,11 +19,13 @@ const SplashPage = () => {
           <div className='nav'>
             <div className='nav-left'>
               <img src={logo} alt='logo' height='50px' />
+              <p>Discable</p>
             </div>
             <div className='nav-mid'>
               <a
                 href='https://github.com/camachoo1/Discable'
                 target='_blank'
+                rel='noreferrer'
                 className='splash-page-links'
               >
                 GitHub
@@ -32,6 +33,7 @@ const SplashPage = () => {
               <a
                 href='https://linkedin.com/in/omar-camacho-aa01b3133'
                 target='_blank'
+                rel='noreferrer'
                 className='splash-page-links'
               >
                 LinkedIn
