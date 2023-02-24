@@ -12,7 +12,7 @@ const SignupFormPage = () => {
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
-  if (sessionUser) return <Navigate to='@/me' />;
+  if (sessionUser) return <Navigate to='/@me' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,7 +27,7 @@ const SignupFormPage = () => {
       } catch {
         data = await res.text(); // Will hit this case if the server is down
       }
-
+      debugger;
       if (data?.errors) setErrors(data.errors);
       else if (data) setErrors([data]);
       else setErrors([res.statusText]);
@@ -43,7 +43,8 @@ const SignupFormPage = () => {
           </center>
 
           <label htmlFor='email' className='form-text'>
-            EMAIL
+            EMAIL{' '}
+            <span>{errors.length ? `- ${errors[0]}` : '*'}</span>
           </label>
           <input
             type='email'
@@ -55,7 +56,8 @@ const SignupFormPage = () => {
           />
 
           <label htmlFor='username' className='form-text'>
-            USERNAME
+            USERNAME{' '}
+            <span>{errors.length ? `- ${errors[0]}` : '*'}</span>
           </label>
           <input
             type='text'
@@ -68,6 +70,7 @@ const SignupFormPage = () => {
 
           <label htmlFor='password' className='form-text'>
             PASSWORD
+            <span>{errors.length ? `- ${errors[0]}` : '*'}</span>
           </label>
           <input
             type='password'
