@@ -20,3 +20,32 @@ user4 = User.create!(username: "Chris", email: "chris@gmail.com", password: "pas
 user5 = User.create!(username: "Mike", email: "mike@gmail.com", password: "password", status: "online")
 user6 = User.create!(username: "Jason", email: "jason@gmail.com", password: "password", status: "online")
 user7 = User.create!(username: "Stan", email: "stan@gmail.com", password: "password", status: "online")
+
+puts "Creating Servers…"
+my_demo_server = Server.create!(server_name: "Demo Server", owner_id: user1.id)
+personal_server = Server.create!(server_name: "My Server", owner_id: user2.id)
+best_cohort = Server.create!(server_name: "November Cohort", owner_id: user3.id)
+shoe_drops = Server.create!(server_name: "Shoe Drops", owner_id: user4.id)
+
+puts "Creating Server Subscriptions…"
+ServerSubscription.create!(user_id: user1.id, server_id: my_demo_server.id)
+ServerSubscription.create!(user_id: user2.id, server_id: my_demo_server.id)
+ServerSubscription.create!(user_id: user3.id, server_id: my_demo_server.id)
+ServerSubscription.create!(user_id: user4.id, server_id: my_demo_server.id)
+
+ServerSubscription.create!(user_id: user1.id, server_id: personal_server.id)
+ServerSubscription.create!(user_id: user2.id, server_id: personal_server.id)
+ServerSubscription.create!(user_id: user3.id, server_id: personal_server.id)
+ServerSubscription.create!(user_id: user4.id, server_id: personal_server.id)
+ServerSubscription.create!(user_id: user5.id, server_id: personal_server.id)
+ServerSubscription.create!(user_id: user6.id, server_id: personal_server.id)
+
+ServerSubscription.create!(user_id: user1.id, server_id: best_cohort.id)
+ServerSubscription.create!(user_id: user3.id, server_id: best_cohort.id)
+ServerSubscription.create!(user_id: user4.id, server_id: best_cohort.id)
+ServerSubscription.create!(user_id: user5.id, server_id: best_cohort.id)
+
+ServerSubscription.create!(user_id: user1.id, server_id: shoe_drops.id)
+ServerSubscription.create!(user_id: user2.id, server_id: shoe_drops.id)
+ServerSubscription.create!(user_id: user6.id, server_id: shoe_drops.id)
+ServerSubscription.create!(user_id: user7.id, server_id: shoe_drops.id)
