@@ -1,6 +1,13 @@
 class Api::ServerSubscriptionsController < ApplicationController
   def create
     @server_subscription = ServerSubscription.new(server_subscription_params)
+    @server = Server.find(params[:server_subscription][:server_id])
+
+    if @server_subscription.save
+      render :show
+    else
+      render json: { errors: @server_subscription.errors.full_messages }, status: 422
+    end
   end
 
   def destroy

@@ -1,7 +1,9 @@
+import './UserShowPage.css';
+
 const UserShowPage = () => {
   return (
     <>
-      <h1>This is the user show page!</h1>
+      <h1>This is the user show page</h1>
     </>
   );
 };

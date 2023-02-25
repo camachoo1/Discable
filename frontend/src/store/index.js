@@ -5,10 +5,12 @@ import {
   compose,
 } from 'redux';
 import thunk from 'redux-thunk';
+import serverReducer from './server';
 import sessionReducer from './session';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
+  servers: serverReducer,
 });
 
 // const middleware = [thunk];

@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { login, logout, signUpUser } from './store/session';
 import * as sessionActions from './store/session';
+import * as serverActions from './store/server';
 
 // Testing
 window.login = login;
@@ -22,6 +23,7 @@ const initializeApp = () => {
   if (process.env.NODE_ENV !== 'production') {
     window.csrfFetch = csrfFetch;
     window.sessionActions = sessionActions;
+    window.serverActions = serverActions;
   }
 
   if (currentUser) {

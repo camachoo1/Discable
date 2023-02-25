@@ -6,6 +6,8 @@ import section4 from '../../assets/section4.svg';
 import section5 from '../../assets/section5.svg';
 import sparkles from '../../assets/sparkles.svg';
 import { useNavigate } from 'react-router-dom';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const SplashPage = () => {
   const navigate = useNavigate();
@@ -28,7 +30,7 @@ const SplashPage = () => {
                 rel='noreferrer'
                 className='splash-page-links'
               >
-                GitHub
+                <GitHubIcon />
               </a>
               <a
                 href='https://linkedin.com/in/omar-camacho-aa01b3133'
@@ -36,7 +38,7 @@ const SplashPage = () => {
                 rel='noreferrer'
                 className='splash-page-links'
               >
-                LinkedIn
+                <LinkedInIcon />
               </a>
             </div>
             <div className='nav-right'>
