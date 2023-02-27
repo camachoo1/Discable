@@ -3,10 +3,6 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate, Navigate } from 'react-router-dom';
 import './ServerFormPage.css';
-// import Modal from 'react-modal';
-// import ServerFormModal from './ServerFormModal';
-
-// Modal.setAppElement('#root');
 
 const ServerFormPage = () => {
   const dispatch = useDispatch();

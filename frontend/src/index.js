@@ -29,7 +29,7 @@ const initializeApp = () => {
   if (currentUser) {
     initialState = {
       session: {
-        [currentUser.id]: currentUser,
+        user: currentUser,
       },
     };
   }

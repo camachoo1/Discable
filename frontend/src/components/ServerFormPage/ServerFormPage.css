@@ -1,9 +1,12 @@
 .server-form {
-  height: 100%;
+  height: 50%;
+  width: 28%;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  background-color: #fff;
+  border-radius: 5px;
 }
 
 .server-form form {

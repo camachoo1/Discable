@@ -21,7 +21,7 @@ const App = () => {
         <Route exact path='/login' element=<LoginFormPage /> />
         <Route exact path='/register' element=<SignupFormPage /> />
         <Route exact path='/@me' element=<UserShowPage /> />
-        <Route exact path='/servers/new' element=<ServerFormPage /> />
+        {/* <Route exact path='/servers/new' element=<ServerFormPage /> /> */}
         <Route
           exact
           path='/servers/:serverId'
