@@ -56,7 +56,6 @@ const ServerFormModal = ({ sessionUser, setShowForm, showForm }) => {
 
   return (
     <div className='modal' onClick={hideModal}>
-      {console.log('rendering')}
       <div className='server-form' onClick={openModal}>
         <form onSubmit={handleSubmit}>
           <div className='server-form-header'>
@@ -95,12 +94,6 @@ const ServerFormModal = ({ sessionUser, setShowForm, showForm }) => {
           </div>
 
           <div className='form-footer'>
-            <button
-              id='bottom-button'
-              // onClick={() => setShowModal(false)}
-            >
-              Back
-            </button>
             <button>Create</button>
           </div>
         </form>

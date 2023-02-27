@@ -19,7 +19,7 @@ class Api::ServersController < ApplicationController
       @server_subscription = ServerSubscription.create(user_id: current_user.id, server_id: @server.id)
       render :show
     else
-      render json: { errors: @server.errors.full_messgaes }, status: 422
+      render json: { errors: @server.errors.full_messages }, status: 422
     end
   end
 
