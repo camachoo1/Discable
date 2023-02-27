@@ -25,9 +25,9 @@ user7 = User.create!(username: "Stan", email: "stan@gmail.com", password: "passw
 
 puts "Creating Servers…"
 my_demo_server = Server.create!(server_name: "Demo Server", owner_id: user1.id)
-personal_server = Server.create!(server_name: "My Server", owner_id: user2.id)
+personal_server = Server.create!(server_name: "Coding", owner_id: user2.id)
 best_cohort = Server.create!(server_name: "November Cohort", owner_id: user3.id)
-shoe_drops = Server.create!(server_name: "Shoe Drops", owner_id: user4.id)
+keyboard_stuff = Server.create!(server_name: "Keyboard Stuff", owner_id: user4.id)
 
 puts "Creating Server Subscriptions…"
 ServerSubscription.create!(user_id: user1.id, server_id: my_demo_server.id)
@@ -47,7 +47,7 @@ ServerSubscription.create!(user_id: user3.id, server_id: best_cohort.id)
 ServerSubscription.create!(user_id: user4.id, server_id: best_cohort.id)
 ServerSubscription.create!(user_id: user5.id, server_id: best_cohort.id)
 
-ServerSubscription.create!(user_id: user1.id, server_id: shoe_drops.id)
-ServerSubscription.create!(user_id: user2.id, server_id: shoe_drops.id)
-ServerSubscription.create!(user_id: user6.id, server_id: shoe_drops.id)
-ServerSubscription.create!(user_id: user7.id, server_id: shoe_drops.id)
+ServerSubscription.create!(user_id: user1.id, server_id: keyboard_stuff.id)
+ServerSubscription.create!(user_id: user2.id, server_id: keyboard_stuff.id)
+ServerSubscription.create!(user_id: user6.id, server_id: keyboard_stuff.id)
+ServerSubscription.create!(user_id: user7.id, server_id: keyboard_stuff.id)

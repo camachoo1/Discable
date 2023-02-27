@@ -97,7 +97,7 @@
   font-size: 15px;
 }
 
-span {
+.form-text > span {
   font-style: italic;
-  color: #ed4245;
+  color: red;
 }

@@ -37,7 +37,6 @@ const initializeApp = () => {
   window.store = store;
 
   const root = createRoot(document.getElementById('root'));
-  // debugger;
   return root.render(
     <Provider store={store}>
       <React.StrictMode>

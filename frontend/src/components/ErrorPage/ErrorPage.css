@@ -1,0 +1,46 @@
+.error-page {
+  height: 100%;
+  width: 100%;
+  background-color: #2c2f33;
+}
+
+
+
+.error-container {
+  margin: 300px 130px;
+  max-width: 600px;
+}
+
+.error-container h1 {
+  font-family: 'ginto-nord-2';
+  color: #5865f2;
+  font-size: 45px;
+  margin-bottom: 10px;
+}
+
+.error-container p {
+  font-family: 'gg-sans';
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.error-links {
+  list-style-type: none;
+  padding-left: 0;
+  margin-top: 15px;
+}
+
+.error-links li {
+  margin: 10px 0;
+}
+
+.error-links a {
+  text-decoration: none;
+  font-family: 'gg-sans';
+  font-size: 20px;
+  color: #00aff4;
+}
+
+.error-links a:hover {
+  color: #0077a6;
+}
