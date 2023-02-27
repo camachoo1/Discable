@@ -1,28 +1,15 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { createServer } from '../../store/server';
-import { useNavigate, Navigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 const ServerFormModal = ({ sessionUser, setShowForm, showForm }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  // const sessionUser = useSelector((store) => store.session.user);
   const [serverName, setServerName] = useState(
     `${sessionUser.username}'s Server`
   );
   const [errors, setErrors] = useState([]);
-
-  // useEffect(() => {
-  //   if (showForm === true) {
-  //     setShowForm(true);
-  //   } else {
-  //     setShowForm(false);
-  //   }
-  //   return () => {
-  //     setShowForm(false);
-  //   };
-  // }, [showForm]);
-  // if (sessionUser) return <Navigate to='/@me' />;
 
   const handleSubmit = (e) => {
     e.preventDefault();

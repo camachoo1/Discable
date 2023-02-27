@@ -27,7 +27,7 @@ const BottomPanel = () => {
             </div>
           </div>
 
-          <div className='settings'>
+          <div className='user-settings'>
             {micToggle ? (
               <MicIcon
                 fontSize='small'

@@ -4,10 +4,11 @@ import { logout } from '../../store/session';
 import { fetchServers } from '../../store/server';
 import './ServerNavBar.css';
 import ServerFormModal from '../ServerFormPage/ServerFormModal';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 const ServerNavBar = () => {
   const [showForm, setShowForm] = useState(false);
+  const location = useLocation();
   const dispatch = useDispatch();
   const sessionUser = useSelector((store) => store.session.user);
   const servers = useSelector((store) => store.servers);
@@ -15,6 +16,8 @@ const ServerNavBar = () => {
   useEffect(() => {
     if (sessionUser) dispatch(fetchServers());
   }, [dispatch, sessionUser]);
+
+  if (location.pathname === '/') return null;
 
   return (
     <>
@@ -86,59 +89,6 @@ const ServerNavBar = () => {
             </nav>
           </div>
         </>
-
-        // <div className='users-info'>
-        //   <div className='servers-list'>
-        //     <div>
-        //       <span onClick={() => navigate('/@me')}>
-        //         <NavLink to={'@me'} className='circles'>
-        //           X
-        //         </NavLink>
-        //       </span>
-        //     </div>
-
-        //     <div className='servers-split'></div>
-
-        //     {Object.values(servers)?.map((server) => (
-        //       <div key={server.id}>
-        //         <span
-        //           onClick={() => navigate(`/servers/${server.id}`)}
-        //         >
-        //           <NavLink
-        //             to={`/servers/${server.id}`}
-        //             className='circles'
-        //           >
-        //             {server.serverName[0]}
-        //           </NavLink>
-        //         </span>
-        //       </div>
-        //     ))}
-
-        //     <div>
-        //       <span
-        //         onClick={(e) => {
-        //           e.stopPropagation();
-        //           navigate('/servers/new');
-        //         }}
-        //         className='circles'
-        //       >
-        //         +
-        //       </span>
-        //     </div>
-
-        //     <div>
-        //       <span
-        //         onClick={(e) => {
-        //           e.stopPropagation();
-        //           dispatch(logout());
-        //         }}
-        //         className='circles'
-        //       >
-        //         -
-        //       </span>
-        //     </div>
-        //   </div>
-        // </div>
       )}
     </>
   );

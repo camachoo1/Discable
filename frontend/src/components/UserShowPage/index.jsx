@@ -14,9 +14,11 @@ const UserShowPage = () => {
     if (sessionUser) dispatch(fetchServers());
   }, [dispatch, sessionUser]);
 
+  if (!sessionUser) return <Navigate to='/login' />;
+
   return (
     <>
-      {!sessionUser && <Navigate to='/login' />}
+      {/* {!sessionUser && <Navigate to='/login' />} */}
       {sessionUser && (
         <div className='user-show'>
           <h2>Welcome {sessionUser.username}!</h2>

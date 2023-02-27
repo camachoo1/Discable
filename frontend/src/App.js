@@ -7,7 +7,6 @@ import SignupFormPage from './components/SignupForm';
 import SplashPage from './components/SplashPage';
 import UserShowPage from './components/UserShowPage';
 import BottomPanel from './components/UserShowPage/BottomPanel';
-import ServerFormPage from './components/ServerFormPage';
 import ErrorPage from './components/ErrorPage';
 
 const App = () => {
