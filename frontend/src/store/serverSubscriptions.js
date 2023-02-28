@@ -1,4 +1,5 @@
 import { ADD_SERVER, REMOVE_SERVER } from './server';
+import { REMOVE_CURRENT_USER } from './session';
 
 const serverSubscriptionsReducer = (state = {}, action) => {
   const nextState = { ...state };
@@ -9,6 +10,8 @@ const serverSubscriptionsReducer = (state = {}, action) => {
     case REMOVE_SERVER:
       delete nextState[action.serverId];
       return nextState;
+    case REMOVE_CURRENT_USER:
+      return {};
     default:
       return nextState;
   }

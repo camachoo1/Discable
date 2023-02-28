@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { deleteServer, leaveServer } from '../../store/server';
 import { useNavigate } from 'react-router-dom';
 import KeyBoardDownArrowIcon from '@mui/icons-material/KeyboardArrowDown';
+import PeopleIcon from '@mui/icons-material/PeopleAlt';
 import CreateIcon from '@mui/icons-material/AddCircle';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
@@ -10,6 +12,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import './ServerShow.css';
 
 const ServerHeader = ({ server, open, setOpen, handleClick }) => {
+  const [showDeleteForm, setShowDeleteForm] = useState(false);
   const sessionUser = useSelector((store) => store.session.user);
   const subscriptions = useSelector((store) =>
     Object.values(store.serverSubscriptions)
@@ -60,8 +63,8 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
             <ul className='settings'>
               <li className='settings-item'>
                 <button>
-                  Create Channel
-                  <CreateIcon
+                  Server Info
+                  <PeopleIcon
                     fontSize='small'
                     sx={{ mt: 0, pr: 0 }}
                   />
@@ -69,6 +72,18 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
               </li>
               {server.ownerId === sessionUser.id ? (
                 <>
+                  <div className='divide-line'></div>
+
+                  <li className='settings-item'>
+                    <button>
+                      Create Channel
+                      <CreateIcon
+                        fontSize='small'
+                        sx={{ mt: 0, pr: 0 }}
+                      />
+                    </button>
+                  </li>
+
                   <div className='divide-line'></div>
 
                   <li className='settings-item'>

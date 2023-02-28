@@ -184,3 +184,8 @@ nav a {
   margin-top: 5px;
   border-radius: inherit;
 }
+
+p > svg {
+  margin-left: 9px;
+  margin-bottom: 3px;
+}

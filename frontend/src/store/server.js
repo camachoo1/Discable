@@ -1,4 +1,5 @@
 import { csrfFetch } from './csrf';
+import { REMOVE_CURRENT_USER } from './session';
 
 // Constants
 export const ADD_SERVER = '/servers/ADD_SERVER';
@@ -114,6 +115,8 @@ const serverReducer = (state = {}, action) => {
     case REMOVE_SERVER:
       delete nextState[action.serverId];
       return nextState;
+    case REMOVE_CURRENT_USER:
+      return {}
     default:
       return nextState;
   }

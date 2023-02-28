@@ -1,15 +1,17 @@
 import { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import MicIcon from '@mui/icons-material/Mic';
 import MicOffIcon from '@mui/icons-material/MicOff';
 import HeadsetIcon from '@mui/icons-material/Headset';
 import HeadsetOffIcon from '@mui/icons-material/HeadsetOff';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useLocation } from 'react-router-dom';
+import { logout } from '../../store/session';
 
 const BottomPanel = () => {
   const sessionUser = useSelector((store) => store.session.user);
   const location = useLocation();
+  const dispatch = useDispatch();
   const [micToggle, setMicToggle] = useState(true);
   const [deafenToggle, setDeafenToggle] = useState(true);
 
@@ -38,7 +40,7 @@ const BottomPanel = () => {
               <MicOffIcon
                 fontSize='small'
                 className='icons'
-                sx={{ transform: 'scaleX(-1)' }}
+                sx={{ transform: 'scaleX(-1)', color: 'red' }}
                 onClick={() => setMicToggle(true)}
               />
             )}
@@ -56,15 +58,19 @@ const BottomPanel = () => {
               <HeadsetOffIcon
                 fontSize='small'
                 className='icons'
-                sx={{ transform: 'scaleX(-1)' }}
+                sx={{ transform: 'scaleX(-1)', color: 'red' }}
                 onClick={() => {
-                  setDeafenToggle((prev) => !prev);
+                  setDeafenToggle((lastState) => !lastState);
                   setMicToggle(true);
                 }}
               />
             )}
 
-            <SettingsIcon fontSize='small' className='icons' />
+            <SettingsIcon
+              fontSize='small'
+              className='icons'
+              onClick={() => dispatch(logout())}
+            />
           </div>
         </div>
       </>

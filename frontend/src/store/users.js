@@ -1,4 +1,5 @@
 import { ADD_SERVER, REMOVE_SERVER } from './server';
+import { REMOVE_CURRENT_USER } from './session';
 
 const usersReducer = (state = {}, action) => {
   const nextState = { ...state };
@@ -8,6 +9,8 @@ const usersReducer = (state = {}, action) => {
     case REMOVE_SERVER:
       delete nextState[action.serverId];
       return nextState;
+    case REMOVE_CURRENT_USER:
+      return {};
     default:
       return nextState;
   }

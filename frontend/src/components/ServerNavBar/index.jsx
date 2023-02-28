@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-// import { logout } from '../../store/session';
 import { fetchServers } from '../../store/server';
 import logo from '../../assets/discord-logo.png';
 import './ServerNavBar.css';
