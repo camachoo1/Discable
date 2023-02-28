@@ -1,13 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../../store/session';
+// import { logout } from '../../store/session';
 import { fetchServers } from '../../store/server';
+import logo from '../../assets/discord-logo.png';
 import './ServerNavBar.css';
 import ServerFormModal from '../ServerFormPage/ServerFormModal';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
+import ExploreIcon from '@mui/icons-material/Explore';
 
 const ServerNavBar = () => {
   const [showForm, setShowForm] = useState(false);
+  const navigate = useNavigate();
   const location = useLocation();
   const dispatch = useDispatch();
   const sessionUser = useSelector((store) => store.session.user);
@@ -39,7 +42,13 @@ const ServerNavBar = () => {
               <ul className='circles'>
                 <NavLink to='/@me'>
                   <li className='circle server-circle'>
-                    <p>X</p>
+                    <p>
+                      <img
+                        src={logo}
+                        alt='logo'
+                        className='logo-icon'
+                      />
+                    </p>
                     <div className='user-action'>
                       <h4 className='user-text'>Home</h4>
                     </div>
@@ -52,6 +61,7 @@ const ServerNavBar = () => {
                   <NavLink
                     to={`/servers/${server.id}`}
                     key={server.id}
+                    className='circle server-circle'
                   >
                     <li className='circle server-circle'>
                       <p>{server.serverName[0]}</p>
@@ -69,7 +79,7 @@ const ServerNavBar = () => {
                   className='circle circle-button'
                   onClick={() => setShowForm(true)}
                 >
-                  <p>+</p>
+                  <p className='redirect-icons'>+</p>
                   <div className='user-action'>
                     <h4 className='user-text'>Add Server</h4>
                   </div>
@@ -78,11 +88,13 @@ const ServerNavBar = () => {
 
                 <li
                   className='circle circle-button'
-                  onClick={() => dispatch(logout())}
+                  onClick={() => navigate('/')}
                 >
-                  <p>-</p>
+                  <p className='redirect-icons'>
+                    <ExploreIcon />
+                  </p>
                   <div className='user-action'>
-                    <h4 className='user-text'>Logout</h4>
+                    <h4 className='user-text'>Homepage</h4>
                   </div>
                 </li>
               </ul>

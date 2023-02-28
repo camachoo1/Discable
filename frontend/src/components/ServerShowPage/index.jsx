@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 import './ServerShow.css';
 import ServerHeader from './ServerHeader';
+import UsersPanel from './UsersPanel';
 
 const ServerShowPage = () => {
   const [open, setOpen] = useState(false);
@@ -11,7 +12,7 @@ const ServerShowPage = () => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((store) => store.session.user);
   const server = useSelector((store) => store.servers[serverId]);
-  const users = useSelector((store) => Object.values(store.users));
+  // const users = useSelector((store) => Object.values(store.users));
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -47,13 +48,7 @@ const ServerShowPage = () => {
               </div>
 
               <div className='users-panel'>
-                <ul>
-                  {users.map((user) => (
-                    <li key={user.id}>
-                      <strong>{user.username}</strong>
-                    </li>
-                  ))}
-                </ul>
+                <UsersPanel />
               </div>
             </div>
           </div>
