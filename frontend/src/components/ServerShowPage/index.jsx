@@ -11,6 +11,7 @@ const ServerShowPage = () => {
   const dispatch = useDispatch();
   const sessionUser = useSelector((store) => store.session.user);
   const server = useSelector((store) => store.servers[serverId]);
+  const users = useSelector((store) => Object.values(store.users));
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -47,7 +48,7 @@ const ServerShowPage = () => {
 
               <div className='users-panel'>
                 <ul>
-                  {Object.values(server.users).map((user) => (
+                  {users.map((user) => (
                     <li key={user.id}>
                       <strong>{user.username}</strong>
                     </li>

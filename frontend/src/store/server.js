@@ -1,20 +1,20 @@
 import { csrfFetch } from './csrf';
 
 // Constants
-const ADD_SERVER = '/servers/ADD_SERVER';
+export const ADD_SERVER = '/servers/ADD_SERVER';
 const ADD_SERVERS = '/servers/ADD_SERVERS';
-const REMOVE_SERVER = '/servers/REMOVE_SERVERS';
+export const REMOVE_SERVER = '/servers/REMOVE_SERVERS';
 
 // Action Creators
 
-export const addServer = (server) => ({
+export const addServer = (payload) => ({
   type: ADD_SERVER,
-  server,
+  payload,
 });
 
-export const addServers = (servers) => ({
+export const addServers = (payload) => ({
   type: ADD_SERVERS,
-  servers,
+  payload,
 });
 
 export const removeServer = (serverId) => ({
@@ -105,9 +105,12 @@ const serverReducer = (state = {}, action) => {
   const nextState = { ...state };
   switch (action.type) {
     case ADD_SERVER:
-      return { ...state, [action.server.id]: action.server };
+      return {
+        ...state,
+        [action.payload.server.id]: action.payload.server,
+      };
     case ADD_SERVERS:
-      return { ...action.servers };
+      return { ...action.payload.servers };
     case REMOVE_SERVER:
       delete nextState[action.serverId];
       return nextState;

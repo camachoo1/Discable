@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { createServer } from '../../store/server';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
+import { Navigate } from 'react-router-dom';
 
-const ServerFormModal = ({ sessionUser, setShowForm, showForm }) => {
+const ServerFormModal = ({ sessionUser, setShowForm }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [serverName, setServerName] = useState(
@@ -81,7 +82,9 @@ const ServerFormModal = ({ sessionUser, setShowForm, showForm }) => {
           </div>
 
           <div className='form-footer'>
-            <button>Create</button>
+            <button onClick={() => <Navigate to='/@me' />}>
+              Create
+            </button>
           </div>
         </form>
       </div>

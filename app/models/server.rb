@@ -24,4 +24,9 @@ class Server < ApplicationRecord
     through: :server_subscriptions,
     source: :user,
     dependent: :destroy
+
+  def user_collector
+    # self.users.map { |u| u.id }
+    self.server_subscriptions.map { |ss| ss.id }
+  end
 end

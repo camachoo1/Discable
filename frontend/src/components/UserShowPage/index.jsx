@@ -34,7 +34,6 @@ const UserShowPage = () => {
               </li>
             ))}
           </ul>
-          <Link to='/servers/new'>Create Server</Link>
         </div>
       )}
     </>

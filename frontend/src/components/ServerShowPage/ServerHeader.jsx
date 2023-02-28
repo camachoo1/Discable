@@ -1,28 +1,44 @@
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteServer } from '../../store/server';
+import { deleteServer, leaveServer } from '../../store/server';
 import { useNavigate } from 'react-router-dom';
 import KeyBoardDownArrowIcon from '@mui/icons-material/KeyboardArrowDown';
-import PeopleIcon from '@mui/icons-material/PeopleAlt';
+import CreateIcon from '@mui/icons-material/AddCircle';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import LeaveIcon from '@mui/icons-material/ArrowCircleLeft';
 import CloseIcon from '@mui/icons-material/Close';
 import './ServerShow.css';
 
 const ServerHeader = ({ server, open, setOpen, handleClick }) => {
   const sessionUser = useSelector((store) => store.session.user);
+  const subscriptions = useSelector((store) =>
+    Object.values(store.serverSubscriptions)
+  );
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleOtherClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
-    setOpen((last) => !last);
+    setOpen((lastState) => !lastState);
   };
 
   const deleteAction = (e) => {
     e.preventDefault();
     e.stopPropagation();
     dispatch(deleteServer(server.id));
+    navigate('/@me');
+  };
+
+  const leaveAction = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dispatch(
+      leaveServer(
+        server.id,
+        subscriptions.find((sub) => sub.userId === sessionUser.id).id
+      )
+    );
     navigate('/@me');
   };
 
@@ -44,15 +60,17 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
             <ul className='settings'>
               <li className='settings-item'>
                 <button>
-                  Server Information
-                  <PeopleIcon
+                  Create Channel
+                  <CreateIcon
                     fontSize='small'
                     sx={{ mt: 0, pr: 0 }}
                   />
                 </button>
               </li>
-              {server.ownerId === sessionUser.id && (
+              {server.ownerId === sessionUser.id ? (
                 <>
+                  <div className='divide-line'></div>
+
                   <li className='settings-item'>
                     <button>
                       Edit Server
@@ -72,6 +90,23 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
                     >
                       Delete Server
                       <DeleteIcon
+                        fontSize='small'
+                        sx={{ mt: 0, pr: 0 }}
+                      />
+                    </button>
+                  </li>
+                </>
+              ) : (
+                <>
+                  <div className='divide-line'></div>
+
+                  <li className='settings-item'>
+                    <button
+                      className='delete-button'
+                      onClick={leaveAction}
+                    >
+                      Leave Server
+                      <LeaveIcon
                         fontSize='small'
                         sx={{ mt: 0, pr: 0 }}
                       />
