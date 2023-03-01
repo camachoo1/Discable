@@ -246,3 +246,14 @@ span {
   font-style: italic;
   color: red;
 }
+
+.delete-confirmation {
+  height: 25%;
+  width: 28%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background-color: #18191c;
+  border-radius: 5px;
+}

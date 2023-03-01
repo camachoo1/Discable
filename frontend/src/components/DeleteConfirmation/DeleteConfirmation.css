@@ -1,11 +1,14 @@
-.delete-confirmation {
+.delete-confirmation > p {
   font-family: 'gg-sans';
   font-weight: bold;
   margin: 5px;
+  color: white;
 }
 
 .delete-header {
   margin: 10px 5px;
+  color: white;
+
 }
 
 .delete-footer {
@@ -29,6 +32,10 @@
   cursor: pointer;
 }
 
+.delete-footer button:hover {
+  background-color: #dd3336;
+}
+
 #cancel-button {
   background-color: #36393f;
   color: white;
@@ -37,4 +44,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.delete-modal {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  z-index: 200;
+  background-color: rgba(28,28,28,0.733);
+}
+
+.modal-show {
+  visibility: visible;
+}
+
+.modal-hide {
+  visibility: hidden;
 }

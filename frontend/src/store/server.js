@@ -116,7 +116,7 @@ const serverReducer = (state = {}, action) => {
       delete nextState[action.serverId];
       return nextState;
     case REMOVE_CURRENT_USER:
-      return {}
+      return {};
     default:
       return nextState;
   }
