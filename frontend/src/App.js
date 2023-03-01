@@ -7,7 +7,6 @@ import SignupFormPage from './components/SignupForm';
 import SplashPage from './components/SplashPage';
 import UserShowPage from './components/UserShowPage';
 import BottomPanel from './components/UserShowPage/BottomPanel';
-import ServerFormPage from './components/ServerFormPage';
 import ErrorPage from './components/ErrorPage';
 
 const App = () => {
@@ -21,7 +20,7 @@ const App = () => {
         <Route exact path='/login' element=<LoginFormPage /> />
         <Route exact path='/register' element=<SignupFormPage /> />
         <Route exact path='/@me' element=<UserShowPage /> />
-        <Route exact path='/servers/new' element=<ServerFormPage /> />
+        {/* <Route exact path='/servers/new' element=<ServerFormPage /> /> */}
         <Route
           exact
           path='/servers/:serverId'

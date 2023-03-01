@@ -1,16 +1,24 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetchServer } from '../../store/server';
 import { useSelector, useDispatch } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
 import './ServerShow.css';
 import ServerHeader from './ServerHeader';
+import UsersPanel from './UsersPanel';
 
 const ServerShowPage = () => {
+  const [open, setOpen] = useState(false);
   const { serverId } = useParams();
   const dispatch = useDispatch();
   const sessionUser = useSelector((store) => store.session.user);
   const server = useSelector((store) => store.servers[serverId]);
+  // const users = useSelector((store) => Object.values(store.users));
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setOpen(false);
+  };
   useEffect(() => {
     dispatch(fetchServer(serverId));
   }, [dispatch, serverId]);
@@ -19,10 +27,15 @@ const ServerShowPage = () => {
 
   return (
     <>
-      <div className='server-show'>
+      <div className='server-show' onClick={handleClick}>
         {server && (
           <div className='server-container'>
-            <ServerHeader server={server} />
+            <ServerHeader
+              server={server}
+              open={open}
+              setOpen={setOpen}
+              handleClick={handleClick}
+            />
             <div className='panels-container'>
               <div className='panel'>
                 <p># general</p>
@@ -35,13 +48,7 @@ const ServerShowPage = () => {
               </div>
 
               <div className='users-panel'>
-                <ul>
-                  {Object.values(server.users).map((user) => (
-                    <li key={user.id}>
-                      <strong>{user.username}</strong>
-                    </li>
-                  ))}
-                </ul>
+                <UsersPanel />
               </div>
             </div>
           </div>

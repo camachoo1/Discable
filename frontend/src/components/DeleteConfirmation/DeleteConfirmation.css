@@ -1,0 +1,66 @@
+.delete-confirmation > p {
+  font-family: 'gg-sans';
+  font-weight: bold;
+  margin: 5px;
+  color: white;
+}
+
+.delete-header {
+  margin: 10px 5px;
+  color: white;
+
+}
+
+.delete-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 15px;
+}
+
+.delete-footer button {
+  font-family: 'gg-sans-med';
+  font-size: 14px;
+  font-weight: bold;
+  width: 115px;
+  border-radius: 4px;
+  border: none;
+  padding: 12px;
+  margin-top: 5px;
+  margin-bottom: 10px;
+  background-color: #e43e41;
+  color: white;
+  cursor: pointer;
+}
+
+.delete-footer button:hover {
+  background-color: #dd3336;
+}
+
+#cancel-button {
+  background-color: #36393f;
+  color: white;
+  font-family: 'gg-sans-med';
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.delete-modal {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100vw;
+  z-index: 200;
+  background-color: rgba(28,28,28,0.733);
+}
+
+.modal-show {
+  visibility: visible;
+}
+
+.modal-hide {
+  visibility: hidden;
+}

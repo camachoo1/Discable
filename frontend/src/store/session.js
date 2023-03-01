@@ -1,7 +1,7 @@
 import { csrfFetch } from './csrf';
 
-const SET_CURRENT_USER = 'session/setCurrentUser';
-const REMOVE_CURRENT_USER = 'session/removeCurrentUser';
+export const SET_CURRENT_USER = 'session/setCurrentUser';
+export const REMOVE_CURRENT_USER = 'session/removeCurrentUser';
 
 // ACTION CREATORS
 const setCurrentUser = (user) => {
@@ -63,8 +63,6 @@ const initialState = {
   user: JSON.parse(sessionStorage.getItem('currentUser')),
 };
 
-// const initialState = {};
-
 // HELPER METHOD TO DRY UP CODE
 const storeCurrentUser = (user) => {
   if (user)
@@ -82,7 +80,7 @@ const sessionReducer = (state = initialState, action) => {
     case REMOVE_CURRENT_USER:
       // nextState.user = null;
       // return nextState;
-      return { ...state, user: null };
+      return { user: null };
     default:
       // return nextState;
       return state;

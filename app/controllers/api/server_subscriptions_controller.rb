@@ -14,6 +14,7 @@ class Api::ServerSubscriptionsController < ApplicationController
     @user = current_user
     @server_subscription = ServerSubscription.find_by(id: params[:id])
 
+    debugger
     if @server_subscription.user_id == current_user.id && @server_subscription.destroy
       @server_subscription.destroy
       render "api/users/show"
