@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { deleteServer, leaveServer } from '../../store/server';
+import { leaveServer } from '../../store/server';
 import { useNavigate } from 'react-router-dom';
 import KeyBoardDownArrowIcon from '@mui/icons-material/KeyboardArrowDown';
 import PeopleIcon from '@mui/icons-material/PeopleAlt';
@@ -31,12 +31,12 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
     setOpen((lastState) => !lastState);
   };
 
-  const deleteAction = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    dispatch(deleteServer(server.id));
-    navigate('/@me');
-  };
+  // const deleteAction = (e) => {
+  //   e.preventDefault();
+  //   e.stopPropagation();
+  //   dispatch(deleteServer(server.id));
+  //   navigate('/@me');
+  // };
 
   const leaveAction = (e) => {
     e.preventDefault();
