@@ -1,43 +1,74 @@
 import { useState } from 'react';
-import { createServer } from '../../store/server';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { createServer, updateServer } from '../../store/server';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
+// import { Navigate } from 'react-router-dom';
 
-const ServerFormModal = () => {
+const ServerFormModal = ({ sessionUser, setShowForm }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const sessionUser = useSelector((store) => store.session.user);
-  const [serverName, setServerName] = useState(
-    `${sessionUser.username}'s Server`
-  );
+  const [serverName, setServerName] = useState('');
   const [errors, setErrors] = useState([]);
-
-  if (sessionUser) return <Navigate to='/@me' />;
+  const { serverId } = useParams();
+  const server = useSelector((store) => store.servers[serverId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
 
-    return dispatch(
-      createServer({ serverName }).then(navigate('/@me'))
-    ).catch(async (res) => {
-      let data;
+    if (!true) {
+      return dispatch(updateServer({ ...server, serverName }))
+        .then(() => {
+          navigate(`/servers/${serverId}`);
+          setShowForm(false);
+        })
+        .catch(async (res) => {
+          let data;
 
-      try {
-        data = await res.clone().json();
-      } catch {
-        data = await res.text();
-      }
+          try {
+            data = await res.clone().json();
+          } catch {
+            data = await res.text();
+          }
 
-      if (data?.errors) setErrors(data.errors);
-      else if (data) setErrors([data]);
-      else setErrors([res.statusText]);
-    });
+          if (data?.errors) setErrors(data.errors);
+          else if (data) setErrors([data]);
+          else setErrors([res.statusText]);
+        });
+    } else {
+      return dispatch(createServer({ serverName }))
+        .then((res) => {
+          navigate(`/servers/${res.server.id}`);
+          setShowForm(false);
+        })
+        .catch(async (res) => {
+          let data;
+
+          try {
+            data = await res.clone().json();
+          } catch {
+            data = await res.text();
+          }
+
+          if (data?.errors) setErrors(data.errors);
+          else if (data) setErrors([data]);
+          else setErrors([res.statusText]);
+        });
+    }
+  };
+
+  const hideModal = (e) => {
+    e.preventDefault();
+    setShowForm(false);
+  };
+
+  const openModal = (e) => {
+    e.stopPropagation();
   };
 
   return (
-    <>
-      <div className='server-form'>
+    <div className='modal' onClick={hideModal}>
+      <div className='server-form' onClick={openModal}>
         <form onSubmit={handleSubmit}>
           <div className='server-form-header'>
             <h2>Customize your server</h2>
@@ -75,17 +106,11 @@ const ServerFormModal = () => {
           </div>
 
           <div className='form-footer'>
-            <button
-              id='bottom-button'
-              // onClick={() => setShowModal(false)}
-            >
-              Back
-            </button>
             <button>Create</button>
           </div>
         </form>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -6,11 +6,15 @@ import {
 } from 'redux';
 import thunk from 'redux-thunk';
 import serverReducer from './server';
+import serverSubscriptionsReducer from './serverSubscriptions';
 import sessionReducer from './session';
+import usersReducer from './users';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
   servers: serverReducer,
+  serverSubscriptions: serverSubscriptionsReducer,
+  users: usersReducer,
 });
 
 // const middleware = [thunk];
