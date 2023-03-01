@@ -10,9 +10,13 @@ puts "Destroying all previous data..."
 User.destroy_all
 Server.destroy_all
 ServerSubscription.destroy_all
+Channel.destroy_all
 
 puts "Resetting primary keys..."
 ApplicationRecord.connection.reset_pk_sequence!("users")
+ApplicationRecord.connection.reset_pk_sequence!("servers")
+ApplicationRecord.connection.reset_pk_sequence!("server_subscriptions")
+ApplicationRecord.connection.reset_pk_sequence!("channels")
 
 puts "Creating Users…"
 user1 = User.create!(username: "Demo", email: "demo@demo.com", password: "password", status: "online")
@@ -51,3 +55,23 @@ ServerSubscription.create!(user_id: user1.id, server_id: keyboard_stuff.id)
 ServerSubscription.create!(user_id: user2.id, server_id: keyboard_stuff.id)
 ServerSubscription.create!(user_id: user6.id, server_id: keyboard_stuff.id)
 ServerSubscription.create!(user_id: user7.id, server_id: keyboard_stuff.id)
+
+puts "Creating Channels…"
+channel1 = Channel.create!(channel_name: "general", server_id: my_demo_server.id)
+channel2 = Channel.create!(channel_name: "random", server_id: my_demo_server.id)
+channel3 = Channel.create!(channel_name: "javascript-help", server_id: my_demo_server.id)
+channel4 = Channel.create!(channel_name: "rails-help", server_id: my_demo_server.id)
+
+channel5 = Channel.create!(channel_name: "general", server_id: personal_server.id)
+channel6 = Channel.create!(channel_name: "upcoming-full-stack-projects", server_id: personal_server.id)
+channel7 = Channel.create!(channel_name: "random", server_id: personal_server.id)
+channel8 = Channel.create!(channel_name: "job-boards", server_id: personal_server.id)
+
+channel9 = Channel.create!(channel_name: "general", server_id: best_cohort.id)
+channel10 = Channel.create!(channel_name: "progress-tracker", server_id: best_cohort.id)
+channel11 = Channel.create!(channel_name: "assessment-prep", server_id: best_cohort.id)
+channel12 = Channel.create!(channel_name: "solutions", server_id: best_cohort.id)
+
+channel13 = Channel.create!(channel_name: "general", server_id: keyboard_stuff.id)
+channel14 = Channel.create!(channel_name: "upcoming-events", server_id: keyboard_stuff.id)
+channel15 = Channel.create!(channel_name: "group-buys", server_id: keyboard_stuff.id)

@@ -25,6 +25,11 @@ class Server < ApplicationRecord
     source: :user,
     dependent: :destroy
 
+  has_many :channels,
+    foreign_key: :server_id,
+    class_name: :Channel,
+    dependent: :destroy
+
   def user_collector
     # self.users.map { |u| u.id }
     self.server_subscriptions.map { |ss| ss.id }
