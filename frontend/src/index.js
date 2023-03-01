@@ -10,6 +10,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { login, logout, signUpUser } from './store/session';
 import * as sessionActions from './store/session';
 import * as serverActions from './store/server';
+import * as channelActions from './store/channel';
 
 // Testing
 window.login = login;
@@ -24,6 +25,7 @@ const initializeApp = () => {
     window.csrfFetch = csrfFetch;
     window.sessionActions = sessionActions;
     window.serverActions = serverActions;
+    window.channelActions = channelActions;
   }
 
   if (currentUser) {
