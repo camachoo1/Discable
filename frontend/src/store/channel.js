@@ -4,6 +4,7 @@ import { csrfFetch } from './csrf';
 const ADD_CHANNELS = 'channels/addChannels';
 const ADD_CHANNEL = 'channels/addChannel';
 const REMOVE_CHANNEL = 'channels/removeChannel';
+const CLEAR_CHANNELS = 'channels/clearChannels';
 
 // Action Creators
 export const addChannels = (payload) => ({
@@ -19,6 +20,10 @@ export const addChannel = (payload) => ({
 export const removeChannel = (channelId) => ({
   type: REMOVE_CHANNEL,
   channelId,
+});
+
+export const clearChannels = () => ({
+  type: CLEAR_CHANNELS,
 });
 
 // Thunk Action Creators
@@ -90,6 +95,8 @@ const channelReducer = (state = {}, action) => {
     case REMOVE_CHANNEL:
       delete nextState[action.channelId];
       return nextState;
+    case CLEAR_CHANNELS:
+      return {};
     default:
       return nextState;
   }

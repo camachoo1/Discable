@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { leaveServer } from '../../store/server';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import KeyBoardDownArrowIcon from '@mui/icons-material/KeyboardArrowDown';
 import PeopleIcon from '@mui/icons-material/PeopleAlt';
 import CreateIcon from '@mui/icons-material/AddCircle';
@@ -11,6 +11,7 @@ import LeaveIcon from '@mui/icons-material/ArrowCircleLeft';
 import CloseIcon from '@mui/icons-material/Close';
 import './ServerShow.css';
 import DeleteConfirmation from '../DeleteConfirmation';
+import TagIcon from '@mui/icons-material/Tag';
 
 const ServerHeader = ({ server, open, setOpen, handleClick }) => {
   const [showDeleteForm, setShowDeleteForm] = useState(false);
@@ -18,6 +19,8 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
   const subscriptions = useSelector((store) =>
     Object.values(store.serverSubscriptions)
   );
+  const { channelId } = useParams();
+  const channel = useSelector((state) => state.channels[channelId]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -150,7 +153,22 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
             </div>
           ) : null}
         </div>
-        <div className='remainder-of-page'></div>
+        <div className='remainder-of-page'>
+          <div className='channel-name'>
+            {channel && (
+              <>
+                <TagIcon
+                  sx={{
+                    mr: '5px',
+                    transform: 'skew(-20deg)',
+                    opcaity: '0.5',
+                  }}
+                />
+                <h4>{channel.channelName}</h4>
+              </>
+            )}
+          </div>
+        </div>
       </div>
     </>
   );

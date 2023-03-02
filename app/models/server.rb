@@ -31,7 +31,10 @@ class Server < ApplicationRecord
     dependent: :destroy
 
   def user_collector
-    # self.users.map { |u| u.id }
     self.server_subscriptions.map { |ss| ss.id }
+  end
+
+  def channel_collector
+    self.channels.map { |channel| channel.id }
   end
 end

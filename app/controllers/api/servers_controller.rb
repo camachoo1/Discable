@@ -16,6 +16,7 @@ class Api::ServersController < ApplicationController
     @server.owner_id = current_user.id
 
     if @server.save
+      Channel.create(channel_name: "general", server_id: @server.id)
       @server_subscription = ServerSubscription.create(user_id: current_user.id, server_id: @server.id)
       render :show
     else

@@ -2,7 +2,7 @@ class Api::ChannelsController < ApplicationController
   wrap_parameters include: Channel.attribute_names
 
   def index
-    @server = Server.find_by(server_id: params[:server_id])
+    @server = Server.find(params[:server_id])
     @channels = @server.channels
     render :index
   end
@@ -13,7 +13,8 @@ class Api::ChannelsController < ApplicationController
   end
 
   def create
-    @server = Server.find_by(server_id: params[:server_id])
+    # debugger
+    @server = Server.find(params[:channel][:server_id])
     @channel = Channel.new(channel_params)
 
     if @channel.save
