@@ -88,6 +88,7 @@ GEM
       i18n (>= 1.8.11, < 2)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    hiredis (0.6.3)
     i18n (1.12.0)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.5)
@@ -186,6 +187,7 @@ DEPENDENCIES
   binding_of_caller
   byebug
   faker
+  hiredis
   jbuilder
   pg (~> 1.1)
   pry-rails

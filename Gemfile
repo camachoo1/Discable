@@ -5,6 +5,7 @@ ruby "3.1.1"
 gem "jbuilder"
 gem "bcrypt"
 gem "redis", "~> 4.0"
+gem "hiredis"
 # gem "rack-cors"
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
