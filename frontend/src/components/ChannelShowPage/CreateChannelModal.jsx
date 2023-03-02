@@ -44,14 +44,12 @@ const CreateChannelModal = ({ sessionUser, setShowCreateForm }) => {
           else setErrors([res.statusText]);
         });
     } else {
-      // debugger;
       const channelInfo = {
         channel_name: channelName,
         server_id: serverId,
       };
       return dispatch(createChannel(channelInfo))
         .then((res) => {
-          debugger;
           navigate(
             `/servers/${res.channel.serverId}/channels/${res.channel.id}`
           );

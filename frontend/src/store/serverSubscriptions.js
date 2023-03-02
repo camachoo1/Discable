@@ -5,7 +5,6 @@ const serverSubscriptionsReducer = (state = {}, action) => {
   const nextState = { ...state };
   switch (action.type) {
     case ADD_SERVER:
-      // debugger;
       return action.payload.serverSubscriptions;
     case REMOVE_SERVER:
       delete nextState[action.serverId];

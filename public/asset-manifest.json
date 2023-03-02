@@ -1,0 +1,28 @@
+{
+  "files": {
+    "main.css": "/static/css/main.35782f39.css",
+    "main.js": "/static/js/main.4277a478.js",
+    "static/media/splashpage-background.png": "/static/media/splashpage-background.aa71fddd0b98aa118fad.png",
+    "static/media/login-background.png": "/static/media/login-background.49c6f4b7cc60233eeb26.png",
+    "static/media/section3.svg": "/static/media/section3.e2236b93f8ca27e6307bfbcf11b4e749.svg",
+    "static/media/section2.svg": "/static/media/section2.2b633b79ba966ad23a683742dfa60cf7.svg",
+    "static/media/section4.svg": "/static/media/section4.58ff7a2be4dde6382f19cf3279d2faef.svg",
+    "static/media/section5.svg": "/static/media/section5.b8b2baa7deaa4d684823cc70302f9f85.svg",
+    "static/media/gg_sans_Bold.ttf": "/static/media/gg_sans_Bold.b48735a1894793607d55.ttf",
+    "static/media/gg_sans_Semibold.ttf": "/static/media/gg_sans_Semibold.bffad55ebdad52c10c0b.ttf",
+    "static/media/gg_sans_Medium.ttf": "/static/media/gg_sans_Medium.69179a204a50af715364.ttf",
+    "static/media/gg_sans_Normal.ttf": "/static/media/gg_sans_Normal.ec197ed3bf9b8d98d9d8.ttf",
+    "static/media/Ginto-Nord-700.woff2": "/static/media/Ginto-Nord-700.071faf8a5cbf8feb4563.woff2",
+    "static/media/Ginto-Nord-500.woff2": "/static/media/Ginto-Nord-500.632d2b00a14088443b57.woff2",
+    "static/media/Ginto-Nord-600.woff2": "/static/media/Ginto-Nord-600.3776ecdece3ec55a49f6.woff2",
+    "static/media/discord-logo.png": "/static/media/discord-logo.8be19e1e15f0dfa85cb4.png",
+    "static/media/sparkles.svg": "/static/media/sparkles.a3f3696d42e79a64b2fc679b6fef9bc4.svg",
+    "index.html": "/index.html",
+    "main.35782f39.css.map": "/static/css/main.35782f39.css.map",
+    "main.4277a478.js.map": "/static/js/main.4277a478.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.35782f39.css",
+    "static/js/main.4277a478.js"
+  ]
+}

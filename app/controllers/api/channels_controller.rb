@@ -13,7 +13,6 @@ class Api::ChannelsController < ApplicationController
   end
 
   def create
-    # debugger
     @server = Server.find(params[:channel][:server_id])
     @channel = Channel.new(channel_params)
 
