@@ -3,6 +3,7 @@ json.server do
   json.extract! @server, :id, :server_name, :owner_id
   json.users @server.user_collector
   json.channels @server.channel_collector
+  json.default_channel @server.channels[0].id
 end
 
 json.serverSubscriptions do
@@ -28,8 +29,3 @@ json.channels do
     end
   end
 end
-
-# json.default_channel do
-#   channel = @server.channels.find("general")
-#   json.partial! "api/channels/channel", channel: channel
-# end

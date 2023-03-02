@@ -9,7 +9,7 @@ import { useLocation } from 'react-router-dom';
 import { logout } from '../../store/session';
 
 const BottomPanel = () => {
-  const sessionUser = useSelector((store) => store.session.user);
+  const sessionUser = useSelector((state) => state.session.user);
   const location = useLocation();
   const dispatch = useDispatch();
   const [micToggle, setMicToggle] = useState(true);

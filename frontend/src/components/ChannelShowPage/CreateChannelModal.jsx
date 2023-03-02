@@ -10,7 +10,7 @@ const CreateChannelModal = ({ sessionUser, setShowCreateForm }) => {
   const [channelName, setChannelName] = useState('');
   const [errors, setErrors] = useState([]);
   const { serverId } = useParams();
-  const server = useSelector((store) => store.servers[serverId]);
+  const server = useSelector((state) => state.servers[serverId]);
   const hideModal = (e) => {
     e.preventDefault();
     setShowCreateForm(false);

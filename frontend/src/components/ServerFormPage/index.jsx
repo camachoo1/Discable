@@ -7,7 +7,7 @@
 // const ServerFormPage = () => {
 //   const dispatch = useDispatch();
 //   const navigate = useNavigate();
-//   const sessionUser = useSelector((store) => store.session.user);
+//   const sessionUser = useSelector((state) => state.session.user);
 //   const [serverName, setServerName] = useState(
 //     `${sessionUser.username}'s Server`
 //   );

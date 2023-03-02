@@ -6,7 +6,7 @@ import { login } from '../../store/session';
 
 const LoginFormPage = () => {
   const dispatch = useDispatch();
-  const sessionUser = useSelector((store) => store.session.user);
+  const sessionUser = useSelector((state) => state.session.user);
 
   const [credential, setCredential] = useState('');
   const [password, setPassword] = useState('');

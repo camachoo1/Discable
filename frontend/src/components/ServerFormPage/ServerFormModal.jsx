@@ -10,7 +10,7 @@ const ServerFormModal = ({ sessionUser, setShowForm }) => {
   const [serverName, setServerName] = useState('');
   const [errors, setErrors] = useState([]);
   const { serverId } = useParams();
-  const server = useSelector((store) => store.servers[serverId]);
+  const server = useSelector((state) => state.servers[serverId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();

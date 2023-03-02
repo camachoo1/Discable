@@ -13,7 +13,7 @@ const UsersPanel = () => {
     'gray',
   ];
   const generateColor = (id) => colors[id % 7];
-  const users = useSelector((store) => Object.values(store.users));
+  const users = useSelector((state) => Object.values(state.users));
 
   return (
     <>

@@ -6,8 +6,8 @@ import './UserShowPage.css';
 
 const UserShowPage = () => {
   const dispatch = useDispatch();
-  const sessionUser = useSelector((store) => store.session.user);
-  // const servers = useSelector((store) => store.servers);
+  const sessionUser = useSelector((state) => state.session.user);
+  // const servers = useSelector((state) => state.servers);
 
   useEffect(() => {
     if (sessionUser) dispatch(fetchServers());

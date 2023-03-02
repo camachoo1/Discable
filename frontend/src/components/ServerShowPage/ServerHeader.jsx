@@ -15,9 +15,9 @@ import TagIcon from '@mui/icons-material/Tag';
 
 const ServerHeader = ({ server, open, setOpen, handleClick }) => {
   const [showDeleteForm, setShowDeleteForm] = useState(false);
-  const sessionUser = useSelector((store) => store.session.user);
-  const subscriptions = useSelector((store) =>
-    Object.values(store.serverSubscriptions)
+  const sessionUser = useSelector((state) => state.session.user);
+  const subscriptions = useSelector((state) =>
+    Object.values(state.serverSubscriptions)
   );
   const { channelId } = useParams();
   const channel = useSelector((state) => state.channels[channelId]);

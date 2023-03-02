@@ -7,10 +7,10 @@ const DeleteConfirmation = ({ sessionUser, setShowDeleteForm }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const { serverId } = useParams();
-  const server = useSelector((store) => store.servers[serverId]);
-  // const sessionUser = useSelector((store) => store.session.user);
-  // const subscriptions = useSelector((store) =>
-  //   Object.values(store.serverSubscriptions)
+  const server = useSelector((state) => state.servers[serverId]);
+  // const sessionUser = useSelector((state) => state.session.user);
+  // const subscriptions = useSelector((state) =>
+  //   Object.values(state.serverSubscriptions)
   // );
 
   const hideDeleteModal = (e) => {

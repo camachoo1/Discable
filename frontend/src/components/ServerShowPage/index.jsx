@@ -28,18 +28,18 @@ const ServerShowPage = () => {
     setOpen(false);
   };
   useEffect(() => {
-    dispatch(clearChannels());
+    // dispatch(clearChannels());
     dispatch(fetchServer(serverId));
     dispatch(fetchChannels(serverId));
   }, [dispatch, serverId]);
 
   if (!sessionUser) return <Navigate to='/login' />;
-  // if (!channelId)
-  //   return (
-  //     <Navigate
-  //       to={`/servers/${server.id}/channels/${server.defaultChannel.id}`}
-  //     />
-  //   );
+  if (!channelId)
+    return (
+      <Navigate
+        to={`/servers/${server.id}/channels/${server.defaultChannel}`}
+      />
+    );
 
   return (
     <>
