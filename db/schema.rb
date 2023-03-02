@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_01_015054) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_02_201443) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_01_015054) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["server_id"], name: "index_channels_on_server_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "author_id", null: false
+    t.bigint "channel_id", null: false
+    t.text "body", null: false
+    t.bigint "parent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_messages_on_author_id"
+    t.index ["channel_id"], name: "index_messages_on_channel_id"
+    t.index ["parent_id"], name: "index_messages_on_parent_id"
   end
 
   create_table "server_subscriptions", force: :cascade do |t|
@@ -55,6 +67,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_01_015054) do
   end
 
   add_foreign_key "channels", "servers"
+  add_foreign_key "messages", "channels"
+  add_foreign_key "messages", "messages", column: "parent_id"
+  add_foreign_key "messages", "users", column: "author_id"
   add_foreign_key "server_subscriptions", "servers"
   add_foreign_key "server_subscriptions", "users"
   add_foreign_key "servers", "users", column: "owner_id"

@@ -9,11 +9,16 @@ Rails.application.routes.draw do
     resource :session, only: [:show, :create, :destroy]
 
     resources :servers, only: [:index, :show, :create, :update, :destroy] do
-      resources :channels, only: [:index, :create]
+      resources :channels, only: [:index, :create] do
+        resources :messages, only: [:index]
+      end
     end
 
-    resources :channels, only: [:update, :show, :destroy]
+    resources :channels, only: [:update, :show, :destroy] do
+      resources :messages, only: [:index]
+    end
     resources :server_subscriptions, only: [:create, :destroy]
+    resources :messages, only: [:show, :create, :update, :destroy]
   end
   get "*path", to: "static_pages#frontend_index"
 end

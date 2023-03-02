@@ -35,6 +35,11 @@ class User < ApplicationRecord
     class_name: :Server,
     dependent: :destroy
 
+  has_many :messages,
+    foreign_key: :author_id,
+    class_name: :Message,
+    dependent: :destroy
+
   def self.find_by_credentials(credential, password)
     if credential.include?("@")
       user = User.find_by(email: credential)

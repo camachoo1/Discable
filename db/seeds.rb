@@ -17,6 +17,7 @@ ApplicationRecord.connection.reset_pk_sequence!("users")
 ApplicationRecord.connection.reset_pk_sequence!("servers")
 ApplicationRecord.connection.reset_pk_sequence!("server_subscriptions")
 ApplicationRecord.connection.reset_pk_sequence!("channels")
+ApplicationRecord.connection.reset_pk_sequence!("messages")
 
 puts "Creating Users…"
 user1 = User.create!(username: "Demo", email: "demo@demo.com", password: "password", status: "online")
@@ -75,3 +76,24 @@ channel12 = Channel.create!(channel_name: "solutions", server_id: best_cohort.id
 channel13 = Channel.create!(channel_name: "general", server_id: keyboard_stuff.id)
 channel14 = Channel.create!(channel_name: "upcoming-events", server_id: keyboard_stuff.id)
 channel15 = Channel.create!(channel_name: "group-buys", server_id: keyboard_stuff.id)
+
+puts "Creating Messages..."
+Message.create!(author_id: user1.id, channel_id: channel1.id, body: "hey everyone!", parent_id: nil)
+Message.create!(author_id: user2.id, channel_id: channel1.id, body: "its the demo channel", parent_id: nil)
+Message.create!(author_id: user1.id, channel_id: channel1.id, body: "send whatever you want", parent_id: nil)
+Message.create!(author_id: user3.id, channel_id: channel1.id, body: "bet", parent_id: nil)
+Message.create!(author_id: user2.id, channel_id: channel1.id, body: "does this thing even work", parent_id: nil)
+Message.create!(author_id: user1.id, channel_id: channel1.id, body: "idk but lets find out!", parent_id: nil)
+
+Message.create!(author_id: user4.id, channel_id: channel6.id, body: "lets do a slack clone next", parent_id: nil)
+Message.create!(author_id: user4.id, channel_id: channel6.id, body: "or learn a new framework...like rust", parent_id: nil)
+Message.create!(author_id: user1.id, channel_id: channel6.id, body: "yes", parent_id: nil)
+Message.create!(author_id: user2.id, channel_id: channel6.id, body: "sounds complicated", parent_id: nil)
+Message.create!(author_id: user3.id, channel_id: channel6.id, body: "find a job while you're at it", parent_id: nil)
+Message.create!(author_id: user5.id, channel_id: channel6.id, body: "^^^ what he said", parent_id: nil)
+Message.create!(author_id: user6.id, channel_id: channel6.id, body: "same", parent_id: nil)
+Message.create!(author_id: user7.id, channel_id: channel6.id, body: "we all need a job", parent_id: nil)
+
+Message.create!(author_id: user2.id, channel_id: channel9.id, body: "hi", parent_id: nil)
+Message.create!(author_id: user5.id, channel_id: channel9.id, body: "wyd?", parent_id: nil)
+Message.create!(author_id: user2.id, channel_id: channel9.id, body: "nada!", parent_id: nil)
