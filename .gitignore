@@ -19,8 +19,9 @@
 !/tmp/pids/.keep
 
 
-/public
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 node_modules
+.DS_Store
+/public
