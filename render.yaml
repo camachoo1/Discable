@@ -1,0 +1,22 @@
+databases:
+  - name: discable
+    user: discable
+    plan: free
+    region: oregon
+
+services:
+  - type: web
+    name: discable
+    plan: free
+    region: oregon
+    branch: main
+    env: ruby
+    buildCommand: './bin/render-build.sh'
+    startCommand: 'rails s'
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: discable
+          property: connectionString
+      - key: RAILS_MASTER_KEY
+        sync: false
