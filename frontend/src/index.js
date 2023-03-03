@@ -11,6 +11,7 @@ import { login, logout, signUpUser } from './store/session';
 import * as sessionActions from './store/session';
 import * as serverActions from './store/server';
 import * as channelActions from './store/channel';
+import * as messageActions from './store/message';
 
 // Testing
 window.login = login;
@@ -26,6 +27,7 @@ const initializeApp = () => {
     window.sessionActions = sessionActions;
     window.serverActions = serverActions;
     window.channelActions = channelActions;
+    window.messageActions = messageActions;
   }
 
   if (currentUser) {

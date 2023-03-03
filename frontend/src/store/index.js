@@ -10,6 +10,7 @@ import serverSubscriptionsReducer from './serverSubscriptions';
 import sessionReducer from './session';
 import usersReducer from './users';
 import channelReducer from './channel';
+import messageReducer from './message';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -17,6 +18,7 @@ const rootReducer = combineReducers({
   serverSubscriptions: serverSubscriptionsReducer,
   users: usersReducer,
   channels: channelReducer,
+  messages: messageReducer,
 });
 
 // const middleware = [thunk];

@@ -1,0 +1,43 @@
+.message-item {
+  display: flex;
+  width: calc(100% - 15px);
+  align-items: center;
+  margin: 7px 0;
+  padding: 10px 5px 10px 10px;
+  border-radius: 3px;
+}
+
+.message-user-icon {
+  width: 40px;
+  height: 40px;
+  margin-left: 3px;
+  margin-right: 10px;
+  border-radius: 50%;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.message-user-logo {
+  width: 30px;
+  height: 30px;
+  border-radius: inherit;
+}
+
+.message-body {
+  width: 100%;
+  margin-left: 7px;
+}
+
+#time {
+  font-size: 0.75rem;
+  font-style: normal;
+  font-family: "gg-sans-med";
+  margin-left: 0.25rem;
+  color: #96989d;
+}
+
+.message-text p {
+  font-family: 'gg-sans';
+}

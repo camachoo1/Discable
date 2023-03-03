@@ -1,6 +1,6 @@
 .user-bubble {
-  width: 32px;
-  height: 32px;
+  width: 35px;
+  height: 35px;
   margin-left: 3px;
   margin-right: 10px;
   border-radius: 50%;
@@ -51,8 +51,8 @@
 }
 
 .user-logo {
-  width: 32px;
-  height: 32px;
+  width: 25px;
+  height: 25px;
   border-radius: inherit;
 }
 
