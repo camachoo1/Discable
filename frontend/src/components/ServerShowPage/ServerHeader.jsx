@@ -12,9 +12,11 @@ import CloseIcon from '@mui/icons-material/Close';
 import './ServerShow.css';
 import DeleteConfirmation from '../DeleteConfirmation';
 import TagIcon from '@mui/icons-material/Tag';
+import { deleteChannel } from '../../store/channel';
 
 const ServerHeader = ({ server, open, setOpen, handleClick }) => {
   const [showDeleteForm, setShowDeleteForm] = useState(false);
+
   const sessionUser = useSelector((state) => state.session.user);
   const subscriptions = useSelector((state) =>
     Object.values(state.serverSubscriptions)
@@ -34,12 +36,14 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
     setOpen((lastState) => !lastState);
   };
 
-  // const deleteAction = (e) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-  //   dispatch(deleteServer(server.id));
-  //   navigate('/@me');
-  // };
+  const deleteAction = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dispatch(deleteChannel(channelId));
+    navigate(
+      `/servers/${server.id}/channels/${server.defaultChannel}`
+    );
+  };
 
   const leaveAction = (e) => {
     e.preventDefault();
@@ -94,9 +98,12 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
                   <>
                     <div className='divide-line'></div>
 
-                    <li className='settings-item'>
+                    <li
+                      className='settings-item'
+                      // onClick={() => setChannelEdit(true)}
+                    >
                       <button>
-                        Create Channel
+                        Edit Channel
                         <CreateIcon
                           fontSize='small'
                           sx={{ mt: 0, pr: 0 }}
@@ -110,6 +117,21 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
                       <button>
                         Edit Server
                         <EditIcon
+                          fontSize='small'
+                          sx={{ mt: 0, pr: 0 }}
+                        />
+                      </button>
+                    </li>
+
+                    <div className='divide-line'></div>
+
+                    <li className='settings-item'>
+                      <button
+                        className='delete-button'
+                        onClick={deleteAction}
+                      >
+                        Delete Channel
+                        <DeleteIcon
                           fontSize='small'
                           sx={{ mt: 0, pr: 0 }}
                         />

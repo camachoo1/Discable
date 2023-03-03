@@ -64,7 +64,7 @@ export const deleteMessage = (messageId) => {
 // Reducer
 
 const messageReducer = (state = {}, action) => {
-  const nextState = { ...state };
+  // const nextState = { ...state };
   switch (action.type) {
     case ADD_MESSAGES:
       return { ...action.payload.messages };
@@ -74,12 +74,14 @@ const messageReducer = (state = {}, action) => {
         [action.payload.message.id]: action.payload.message,
       };
     case REMOVE_MESSAGE:
-      delete nextState[action.messageId];
+      // delete nextState[action.messageId];
+      // return nextState;
+      const { [action.payload]: _, ...nextState } = state;
       return nextState;
     case CLEAR_MESSAGES:
       return {};
     default:
-      return nextState;
+      return state;
   }
 };
 

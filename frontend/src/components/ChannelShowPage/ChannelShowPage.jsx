@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchChannel } from '../../store/channel';
@@ -16,6 +16,16 @@ import './ChannelShowPage.css';
 import MessageItem from '../MessageItem/MessageItem';
 import consumer from '../../consumer';
 
+const useScroll = (toggle) => {
+  const ref = useRef(null);
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.scrollTop = ref.current.scrollHeight;
+    }
+  }, [toggle]);
+  return ref;
+};
+
 const ChannelShowPage = () => {
   const [body, setBody] = useState('');
   const dispatch = useDispatch();
@@ -26,6 +36,7 @@ const ChannelShowPage = () => {
   );
   const sessionUser = useSelector((state) => state.session.user);
   const server = useSelector((state) => state.servers[serverId]);
+  const ref = useScroll(messages);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -66,12 +77,12 @@ const ChannelShowPage = () => {
     );
 
     return () => subscription?.unsubscribe();
-  }, [dispatch, channelId, serverId]);
+  }, [dispatch, channelId]);
 
   return (
     <>
       {channel && (
-        <>
+        <div className='channel-wrapper' ref={ref}>
           <div className='channel-show'>
             <div className='channel-icon'>
               <TagIcon
@@ -111,7 +122,7 @@ const ChannelShowPage = () => {
               autoComplete='off'
             />
           </form>
-        </>
+        </div>
       )}
     </>
   );

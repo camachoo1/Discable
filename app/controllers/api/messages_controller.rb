@@ -44,8 +44,9 @@ class Api::MessagesController < ApplicationController
 
   def destroy
     @message = Message.find_by(id: params[:id])
-    channel = Channel.find(params[:channel_id])
-    server_owner = @message.channel.server.owner_id
+    if @message.channel.server
+      server_owner = @message.channel.server.owner_id
+    end
 
     if current_user.id == server_owner || @message.author_id == current_user.id
       if @message.destroy
