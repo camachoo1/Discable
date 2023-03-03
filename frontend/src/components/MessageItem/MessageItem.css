@@ -7,6 +7,10 @@
   border-radius: 3px;
 }
 
+.message-item:hover{
+  background-color: #32353b;
+}
+
 .message-user-icon {
   width: 40px;
   height: 40px;
@@ -16,6 +20,13 @@
   position: relative;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.message-username {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
 }
 
@@ -41,3 +52,70 @@
 .message-text p {
   font-family: 'gg-sans';
 }
+
+.message-actions {
+  border-radius: 5px;
+  display: flex;
+  border: 1px solid #2c2f33;
+  background-color: #36393f;
+}
+
+.message-actions:hover {
+  cursor: pointer;
+
+}
+
+.edit-action, .delete-action {
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  border-radius: 4px;
+}
+
+
+.edit-action:hover, .delete-action:hover {
+  background-color: #45494e;
+}
+
+.edit-message-form {
+  width: 95%;
+}
+
+.edit-message-form > input {
+  width: calc(100% - 47px);
+  font-family: 'gg-sans-med';
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 9px;
+  background: none;
+  border: none;
+  color: white;
+  background-color: #40444b;
+}
+
+.edit-message-form > input:focus {
+  outline: none;
+}
+
+.msg-edit-info {
+  font-size: 12px;
+}
+
+.msg-edit-info > span {
+  font-family: 'gg-sans';
+  color: #01adf1;
+  font-style: normal;
+  cursor: pointer;
+}
+
+.msg-edit-info > span:hover {
+  text-decoration: underline;
+}
+
+.message-body > p {
+  width: 80%;
+  overflow-wrap: break-word;
+  font-family: 'gg-sans-med';
+}
+

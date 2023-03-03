@@ -32,7 +32,7 @@ class Api::MessagesController < ApplicationController
       if @message.update(message_params)
         ChannelsChannel.broadcast_to @message.channel,
                                      type: "UPDATE_MESSAGE",
-                                     **from_template("api/messages/show", @message)
+                                     **from_template("api/messages/show", message: @message)
         render json: nil, status: :ok
       else
         render json: { errors: @message.errors.full_messages }, status: 422
@@ -44,9 +44,10 @@ class Api::MessagesController < ApplicationController
 
   def destroy
     @message = Message.find_by(id: params[:id])
-    msg_owner = @message.channel.server.owner_id
+    channel = Channel.find(params[:channel_id])
+    server_owner = @message.channel.server.owner_id
 
-    if current_user.id == msg_owner || @message.author_id == current_user.id
+    if current_user.id == server_owner || @message.author_id == current_user.id
       if @message.destroy
         ChannelsChannel.broadcast_to @message.channel,
                                      type: "DESTROY_MESSAGE",

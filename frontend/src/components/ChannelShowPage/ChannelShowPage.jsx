@@ -51,7 +51,6 @@ const ChannelShowPage = () => {
           switch (messageObj.type) {
             case 'RECEIVE_MESSAGE':
               dispatch(addMessage(messageObj));
-              console.log('Received Message', messageObj.body);
               break;
             case 'UPDATE_MESSAGE':
               dispatch(addMessage(messageObj));
@@ -67,7 +66,7 @@ const ChannelShowPage = () => {
     );
 
     return () => subscription?.unsubscribe();
-  }, [dispatch, channelId]);
+  }, [dispatch, channelId, serverId]);
 
   return (
     <>

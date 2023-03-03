@@ -37,7 +37,6 @@ export const fetchMessages =
 
     if (res.ok) {
       const messages = await res.json();
-      // debugger;
       dispatch(addMessages(messages));
     }
   };
@@ -49,26 +48,17 @@ export const createMessage = (messageInfo) => {
   });
 };
 
-export const updateMessage = (messageInfo) => async (dispatch) => {
-  const res = await csrfFetch(`/api/messages/${messageInfo.id}`, {
+export const updateMessage = (messageInfo) => {
+  return csrfFetch(`/api/messages/${messageInfo.id}`, {
     method: 'PATCH',
     body: JSON.stringify(messageInfo),
   });
-
-  if (res.ok) {
-    const message = await res.json();
-    dispatch(addMessage(message));
-  }
 };
 
-export const deleteMessage = (messageId) => async (dispatch) => {
-  const res = await csrfFetch(`/api/messages/${messageId}`, {
+export const deleteMessage = (messageId) => {
+  return csrfFetch(`/api/messages/${messageId}`, {
     method: 'DELETE',
   });
-
-  if (res.ok) {
-    dispatch(removeMessage(messageId));
-  }
 };
 
 // Reducer
