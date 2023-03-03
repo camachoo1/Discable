@@ -2,12 +2,19 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { fetchChannel } from '../../store/channel';
-import { createMessage, fetchMessages } from '../../store/message';
+import {
+  createMessage,
+  fetchMessages,
+  clearMessages,
+  addMessage,
+  removeMessage,
+} from '../../store/message';
 import TagIcon from '@mui/icons-material/Tag';
 import EditIcon from '@mui/icons-material/Edit';
 import './ChannelShowPage.css';
 // import CreateChannelModal from './CreateChannelModal';
 import MessageItem from '../MessageItem/MessageItem';
+import consumer from '../../consumer';
 
 const ChannelShowPage = () => {
   const [body, setBody] = useState('');
@@ -18,11 +25,7 @@ const ChannelShowPage = () => {
     Object.values(state.messages)
   );
   const sessionUser = useSelector((state) => state.session.user);
-
-  useEffect(() => {
-    dispatch(fetchChannel(channelId));
-    dispatch(fetchMessages(serverId, channelId));
-  }, [dispatch, channelId, serverId]);
+  const server = useSelector((state) => state.servers[serverId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -32,9 +35,39 @@ const ChannelShowPage = () => {
       channel_id: channel.id,
       body,
     };
-    dispatch(createMessage(messageInfo));
+    createMessage(messageInfo);
     setBody('');
   };
+
+  useEffect(() => {
+    dispatch(clearMessages());
+    dispatch(fetchMessages(serverId, channelId));
+    dispatch(fetchChannel(channelId));
+
+    const subscription = consumer.subscriptions.create(
+      { channel: 'ChannelsChannel', id: channelId },
+      {
+        received: (messageObj) => {
+          switch (messageObj.type) {
+            case 'RECEIVE_MESSAGE':
+              dispatch(addMessage(messageObj));
+              console.log('Received Message', messageObj.body);
+              break;
+            case 'UPDATE_MESSAGE':
+              dispatch(addMessage(messageObj));
+              break;
+            case 'DESTROY_MESSAGE':
+              dispatch(removeMessage(messageObj.id));
+              break;
+            default:
+              break;
+          }
+        },
+      }
+    );
+
+    return () => subscription?.unsubscribe();
+  }, [dispatch, channelId]);
 
   return (
     <>
@@ -60,7 +93,11 @@ const ChannelShowPage = () => {
 
           <div className='messages-container'>
             {messages?.map((message, idx) => (
-              <MessageItem key={idx} message={message} />
+              <MessageItem
+                key={idx}
+                server={server}
+                message={message}
+              />
             ))}
           </div>
 

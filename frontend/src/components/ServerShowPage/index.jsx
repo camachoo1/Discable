@@ -1,8 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { clearServers, fetchServer } from '../../store/server';
-import { clearChannels, fetchChannels } from '../../store/channel';
+import { fetchServer } from '../../store/server';
+import {
+  addChannel,
+  clearChannels,
+  fetchChannels,
+  removeChannel,
+} from '../../store/channel';
 import { useSelector, useDispatch } from 'react-redux';
-import { Navigate, NavLink, useParams } from 'react-router-dom';
+import {
+  Navigate,
+  NavLink,
+  useParams,
+  useNavigate,
+} from 'react-router-dom';
 import AddIcon from '@mui/icons-material/Add';
 import TagIcon from '@mui/icons-material/Tag';
 import './ServerShow.css';
@@ -10,12 +20,14 @@ import ServerHeader from './ServerHeader';
 import UsersPanel from './UsersPanel';
 import ChannelShowPage from '../ChannelShowPage/ChannelShowPage';
 import CreateChannelModal from '../ChannelShowPage/CreateChannelModal';
+import consumer from '../../consumer';
 
 const ServerShowPage = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [open, setOpen] = useState(false);
   const { serverId, channelId } = useParams();
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const sessionUser = useSelector((state) => state.session.user);
   const server = useSelector((state) => state.servers[serverId]);
   const channels = useSelector((state) =>
@@ -28,10 +40,37 @@ const ServerShowPage = () => {
     setOpen(false);
   };
   useEffect(() => {
-    // dispatch(clearChannels());
+    dispatch(clearChannels());
     dispatch(fetchServer(serverId));
     dispatch(fetchChannels(serverId));
-  }, [dispatch, serverId]);
+
+    const subscription = consumer.subscriptions.create(
+      { channel: 'ServersChannel', id: serverId },
+      {
+        received: (channelObj) => {
+          switch (channelObj.type) {
+            case 'RECEIVE_CHANNEL':
+              dispatch(addChannel(channelObj));
+              break;
+            case 'UPDATE_CHANNEL':
+              dispatch(addChannel(channelObj));
+              break;
+            case 'DESTROY_CHANNEL':
+              dispatch(removeChannel(channelObj.id));
+              if (+channelId === channelObj.id)
+                navigate(
+                  `/servers/${serverId}/channels/${server.defaultChannel}`
+                );
+              break;
+            default:
+              break;
+          }
+        },
+      }
+    );
+
+    return () => subscription?.unsubscribe();
+  }, [dispatch, serverId, channelId]);
 
   if (!sessionUser) return <Navigate to='/login' />;
   if (!channelId)

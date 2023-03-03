@@ -17,6 +17,9 @@ class Api::ChannelsController < ApplicationController
     @channel = Channel.new(channel_params)
 
     if @channel.save
+      ServersChannel.broadcast_to @server,
+                                  type: "RECEIVE_CHANNEL",
+                                  **from_template("api/channels/show", @channel)
       render :show
     else
       render json: { errors: @channel.errors.full_messages }, status: 422
@@ -29,6 +32,9 @@ class Api::ChannelsController < ApplicationController
 
     if current_user.id == @server.owner_id
       if @channel.update(channel_params)
+        ServersChannel.broadcast_to @server,
+                                    type: "UPDATE_CHANNEL",
+                                    **from_template("api/channels/show", @channel)
         render :show
       else
         render json: { errors: @channel.errors.full_messages }, status: 422
@@ -43,7 +49,12 @@ class Api::ChannelsController < ApplicationController
     @server = @channel.server
 
     if current_user.id == @server.owner_id
-      @channel.destroy
+      if @channel.destroy
+        ServersChannel.broadcast_to @server,
+                                    type: "DESTROY_CHANNEL",
+                                    id: @channel.id
+        render json: nil, status: :ok
+      end
     else
       render json: { errors: ["Only the owner of the server can delete this channel."] }, status: 422
     end

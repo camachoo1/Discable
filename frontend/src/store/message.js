@@ -1,10 +1,10 @@
 import { csrfFetch } from './csrf';
-import { REMOVE_CURRENT_USER } from './session';
 
 // Constants
 const ADD_MESSAGES = 'messages/addMessages';
 const ADD_MESSAGE = 'messages/addMessage';
 const REMOVE_MESSAGE = 'messages/removeMessage';
+const CLEAR_MESSAGES = 'messages/clearMessages';
 
 // Action Creators
 
@@ -23,6 +23,10 @@ export const removeMessage = (messageId) => ({
   payload: messageId,
 });
 
+export const clearMessages = () => ({
+  type: CLEAR_MESSAGES,
+});
+
 // Thunk Action Creators
 
 export const fetchMessages =
@@ -38,16 +42,11 @@ export const fetchMessages =
     }
   };
 
-export const createMessage = (messageInfo) => async (dispatch) => {
-  const res = await csrfFetch(`/api/messages`, {
+export const createMessage = (messageInfo) => {
+  return csrfFetch('/api/messages', {
     method: 'POST',
     body: JSON.stringify(messageInfo),
   });
-
-  if (res.ok) {
-    const message = await res.json();
-    dispatch(addMessage(message));
-  }
 };
 
 export const updateMessage = (messageInfo) => async (dispatch) => {
@@ -87,7 +86,7 @@ const messageReducer = (state = {}, action) => {
     case REMOVE_MESSAGE:
       delete nextState[action.messageId];
       return nextState;
-    case REMOVE_CURRENT_USER:
+    case CLEAR_MESSAGES:
       return {};
     default:
       return nextState;

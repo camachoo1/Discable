@@ -5,6 +5,7 @@ class ApplicationController < ActionController::API
   rescue_from ActionController::InvalidAuthenticityToken,
     with: :invalid_authenticity_token
   before_action :snake_case_params, :attach_authenticity_token
+  helper_method :from_template, :current_user
 
   def current_user
     return nil if session[:session_token].nil?
@@ -32,6 +33,11 @@ class ApplicationController < ActionController::API
     current_user.reset_session_token! if logged_in?
     session[:session_token] = nil
     @current_user = nil
+  end
+
+  def from_template(template, locals = {})
+    # debugger
+    JSON.parse(self.class.render(:json, template: template, locals: locals))
   end
 
   private

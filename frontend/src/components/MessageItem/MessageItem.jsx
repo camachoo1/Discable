@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import logo from '../../assets/discord-logo.png';
 import './MessageItem.css';
 
-const MessageItem = ({ message }) => {
+const MessageItem = ({ server, message }) => {
   // const [msgContent, setMsgContent] = useState('');
   // const sessionUser = useSelector((state) => state.session.user);
   const users = useSelector((state) => state.users);
@@ -38,7 +38,8 @@ const MessageItem = ({ message }) => {
     'gray',
   ];
   const generateColor = (id) => colors[id % 7];
-  return (
+  // debugger;
+  return users ? (
     <div className='message-item'>
       <div
         className='message-user-icon'
@@ -59,7 +60,7 @@ const MessageItem = ({ message }) => {
         </div>
       </div>
     </div>
-  );
+  ) : null;
 };
 
 export default MessageItem;
