@@ -20,13 +20,13 @@ ApplicationRecord.connection.reset_pk_sequence!("channels")
 ApplicationRecord.connection.reset_pk_sequence!("messages")
 
 puts "Creating Users…"
-user1 = User.create!(username: "Demo", email: "demo@demo.com", password: "password", status: "online")
-user2 = User.create!(username: "Omar", email: "omar@gmail.com", password: "password", status: "online")
-user3 = User.create!(username: "Paulo", email: "paulo@gmail.com", password: "password", status: "online")
-user4 = User.create!(username: "Chris", email: "chris@gmail.com", password: "password", status: "online")
-user5 = User.create!(username: "Mike", email: "mike@gmail.com", password: "password", status: "online")
-user6 = User.create!(username: "Jason", email: "jason@gmail.com", password: "password", status: "online")
-user7 = User.create!(username: "Stan", email: "stan@gmail.com", password: "password", status: "online")
+user1 = User.create!(username: "Demo", tag: "0001", email: "demo@demo.com", password: "password", status: "online")
+user2 = User.create!(username: "Omar", tag: "0002", email: "omar@gmail.com", password: "password", status: "online")
+user3 = User.create!(username: "Paulo", tag: "0003", email: "paulo@gmail.com", password: "password", status: "online")
+user4 = User.create!(username: "Chris", tag: "0004", email: "chris@gmail.com", password: "password", status: "online")
+user5 = User.create!(username: "Mike", tag: "0005", email: "mike@gmail.com", password: "password", status: "online")
+user6 = User.create!(username: "Jason", tag: "0006", email: "jason@gmail.com", password: "password", status: "online")
+user7 = User.create!(username: "Stan", tag: "0007", email: "stan@gmail.com", password: "password", status: "online")
 
 puts "Creating Servers…"
 my_demo_server = Server.create!(server_name: "Demo Server", owner_id: user1.id)

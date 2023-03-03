@@ -59,7 +59,7 @@
 }
 
 .server-panel p {
-  margin: 10px 15px;
+  /* margin: 10px 15px; */
   font-family: 'gg-sans-bold';
 }
 
@@ -130,6 +130,10 @@ svg {
   cursor: pointer;
   margin-top: 15px;
   padding-right: 10px;
+}
+
+.user-settings > svg {
+  margin-bottom: 10px;
 }
 
 .divide-line {
@@ -271,6 +275,10 @@ span {
   color: #96989d;
 }
 
+.text-channels > svg {
+  margin-bottom: 15px;
+}
+
 .channels-list {
   width: 100%;
   margin-block-end: 0;
@@ -302,6 +310,10 @@ span {
   align-items: center;
 }
 
+.channel-name h4 {
+  font-size: 20px;
+}
+
 .remainder-of-page h4 {
   margin: 0;
   padding-top: 12px;
@@ -310,3 +322,7 @@ span {
 /* .channels-list li > p {
   margin-top: 10px;
 } */
+
+svg.MuiSvgIcon-root.MuiSvgIcon-fontSizeMedium.css-1xa4f4y-MuiSvgIcon-root {
+  margin-bottom: 15px;
+}

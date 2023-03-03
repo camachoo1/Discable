@@ -9,6 +9,7 @@ const SignupFormPage = () => {
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
+  const [tag, setTag] = useState('');
   const [password, setPassword] = useState('');
   const [errors, setErrors] = useState([]);
 
@@ -64,6 +65,18 @@ const SignupFormPage = () => {
             className='form-text'
             value={username}
             onChange={(e) => setUsername(e.target.value)}
+            required
+          />
+
+          <label htmlFor='tag' className='form-text'>
+            TAG <span>{errors.length ? `- ${errors[0]}` : '*'}</span>
+          </label>
+          <input
+            type='text'
+            name='tag'
+            className='form-text'
+            value={tag}
+            onChange={(e) => setTag(e.target.value)}
             required
           />
 

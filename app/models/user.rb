@@ -14,8 +14,10 @@
 class User < ApplicationRecord
   has_secure_password
   validates :session_token, presence: true, uniqueness: true
-  validates :username, length: { minimum: 3, maximum: 30 }, format: { without: URI::MailTo::EMAIL_REGEXP, message: "Can't be an email" }, uniqueness: true
+  validates :username, length: { minimum: 3, maximum: 30 }, format: { without: URI::MailTo::EMAIL_REGEXP, message: "Can't be an email" }
   validates :email, length: { minimum: 3, maximum: 255 }, format: { with: URI::MailTo::EMAIL_REGEXP }, uniqueness: true
+  validates :tag, presence: true, length: { is: 4 }
+  validates :username, uniqueness: { scope: :tag }
   validates :password, length: { in: 6..225 }, allow_nil: true
   validates :status, inclusion: { in: ["online", "away", "offline"] }
   before_validation :ensure_session_token

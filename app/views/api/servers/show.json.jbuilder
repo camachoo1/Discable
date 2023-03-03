@@ -17,7 +17,7 @@ end
 json.users do
   @server.users.each do |user|
     json.set! user.id do
-      json.extract! user, :id, :username, :email, :status
+      json.extract! user, :id, :username, :email, :tag, :status
     end
   end
 end

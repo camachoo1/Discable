@@ -7,6 +7,7 @@ import HeadsetOffIcon from '@mui/icons-material/HeadsetOff';
 import SettingsIcon from '@mui/icons-material/Settings';
 import { useLocation } from 'react-router-dom';
 import { logout } from '../../store/session';
+import logo from '../../assets/discord-logo.png';
 
 const BottomPanel = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -15,6 +16,17 @@ const BottomPanel = () => {
   const [micToggle, setMicToggle] = useState(true);
   const [deafenToggle, setDeafenToggle] = useState(true);
 
+  const colors = [
+    'red',
+    'fuchsia',
+    'yellow',
+    'green',
+    'blurple',
+    'black',
+    'gray',
+  ];
+  const generateColor = (id) => colors[id % 7];
+
   if (!sessionUser || location.pathname === '/') {
     return null;
   } else {
@@ -22,10 +34,16 @@ const BottomPanel = () => {
       <>
         <div className='bottom-panel'>
           <div className='user-button'>
-            <div className='user-circle'>{/* avatar */}</div>
+            <div
+              className='user-circle'
+              id={generateColor(sessionUser.id)}
+            >
+              <img src={logo} alt='logo' className='user-logo' />
+            </div>
 
             <div className='user-details'>
               <h4 className='username'>{sessionUser.username}</h4>
+              <p className='usertag'>#{sessionUser.tag}</p>
             </div>
           </div>
 
