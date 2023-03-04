@@ -64,7 +64,7 @@ const MessageItem = ({ server, message }) => {
   ];
   const generateColor = (id) => colors[id % 7];
   // debugger;
-  return users ? (
+  return users.length ? (
     <div
       className='message-item'
       id={msgEdit ? 'message-edit-active' : undefined}

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { fetchServers } from '../../store/server';
+import UsersPanel from '../ServerShowPage/UsersPanel';
 import './UserShowPage.css';
 
 const UserShowPage = () => {
@@ -18,11 +19,12 @@ const UserShowPage = () => {
   return (
     <>
       <div className='user-show'>
-        {sessionUser ? (
-          <h1>{sessionUser.username}</h1>
-        ) : (
-          <Navigate to='/login' />
-        )}
+        <div className='friend-panel-container'>
+          <div className='text-channels'>
+            <p>DIRECT MESSAGES</p>
+          </div>
+          <UsersPanel />
+        </div>
       </div>
     </>
   );
