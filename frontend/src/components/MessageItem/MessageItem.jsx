@@ -64,7 +64,7 @@ const MessageItem = ({ server, message }) => {
   ];
   const generateColor = (id) => colors[id % 7];
   // debugger;
-  return users.length ? (
+  return users ? (
     <div
       className='message-item'
       id={msgEdit ? 'message-edit-active' : undefined}
@@ -81,6 +81,9 @@ const MessageItem = ({ server, message }) => {
       <div className='message-body'>
         <div className='message-username'>
           <h4>
+            {console.log(users[message.authorId])}
+            {console.log('users', users)}
+            {console.log('message', message)}
             {users[message.authorId].username}
             <span id='time'>{formatTime(message.createdAt)}</span>
           </h4>

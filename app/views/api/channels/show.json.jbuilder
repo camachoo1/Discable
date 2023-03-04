@@ -10,3 +10,7 @@ json.messages do
     end
   end
 end
+
+# json.users do
+#   @channel.users
+# end

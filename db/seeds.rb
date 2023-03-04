@@ -94,7 +94,7 @@ Message.create!(author_id: user2.id, channel_id: channel6.id, body: "sounds comp
 Message.create!(author_id: user3.id, channel_id: channel6.id, body: "find a job while you're at it", parent_id: nil)
 Message.create!(author_id: user5.id, channel_id: channel6.id, body: "^^^ what he said", parent_id: nil)
 Message.create!(author_id: user6.id, channel_id: channel6.id, body: "same", parent_id: nil)
-Message.create!(author_id: user7.id, channel_id: channel6.id, body: "we all need a job", parent_id: nil)
+Message.create!(author_id: user6.id, channel_id: channel6.id, body: "we all need a job", parent_id: nil)
 
 Message.create!(author_id: user2.id, channel_id: channel9.id, body: "hi", parent_id: nil)
 Message.create!(author_id: user3.id, channel_id: channel9.id, body: "wyd?", parent_id: nil)

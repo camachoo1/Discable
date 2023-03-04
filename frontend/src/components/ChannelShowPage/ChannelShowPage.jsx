@@ -36,6 +36,7 @@ const ChannelShowPage = () => {
   );
   const sessionUser = useSelector((state) => state.session.user);
   const server = useSelector((state) => state.servers[serverId]);
+  const users = useSelector((state) => state.users);
   const ref = useScroll(messages);
 
   const handleSubmit = (e) => {
