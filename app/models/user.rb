@@ -10,6 +10,7 @@
 #  session_token   :string           not null
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  tag             :string           not null
 #
 class User < ApplicationRecord
   has_secure_password
@@ -40,6 +41,16 @@ class User < ApplicationRecord
   has_many :messages,
     foreign_key: :author_id,
     class_name: :Message,
+    dependent: :destroy
+
+  has_many :sent_requests,
+    foreign_key: :user1_id,
+    class_name: :Friend,
+    dependent: :destroy
+
+  has_many :received_requests,
+    foreign_key: :user2_id,
+    class_name: :Friend,
     dependent: :destroy
 
   def self.find_by_credentials(credential, password)

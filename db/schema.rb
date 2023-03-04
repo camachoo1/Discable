@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_03_010518) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_04_003104) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -21,6 +21,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_010518) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["server_id"], name: "index_channels_on_server_id"
+  end
+
+  create_table "friends", force: :cascade do |t|
+    t.bigint "user1_id", null: false
+    t.bigint "user2_id", null: false
+    t.string "status", default: "pending", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user1_id"], name: "index_friends_on_user1_id"
+    t.index ["user2_id"], name: "index_friends_on_user2_id"
   end
 
   create_table "messages", force: :cascade do |t|
@@ -69,6 +79,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_03_010518) do
   end
 
   add_foreign_key "channels", "servers"
+  add_foreign_key "friends", "users", column: "user1_id"
+  add_foreign_key "friends", "users", column: "user2_id"
   add_foreign_key "messages", "channels"
   add_foreign_key "messages", "messages", column: "parent_id"
   add_foreign_key "messages", "users", column: "author_id"
