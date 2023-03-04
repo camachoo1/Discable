@@ -77,7 +77,7 @@ const ChannelShowPage = () => {
     );
 
     return () => subscription?.unsubscribe();
-  }, [dispatch, channelId]);
+  }, [dispatch, channelId, serverId]);
 
   return (
     <>
