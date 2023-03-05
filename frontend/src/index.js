@@ -12,6 +12,7 @@ import * as sessionActions from './store/session';
 import * as serverActions from './store/server';
 import * as channelActions from './store/channel';
 import * as messageActions from './store/message';
+import * as friendActions from './store/friend';
 
 // Testing
 window.login = login;
@@ -28,6 +29,7 @@ const initializeApp = () => {
     window.serverActions = serverActions;
     window.channelActions = channelActions;
     window.messageActions = messageActions;
+    window.friendActions = friendActions;
   }
 
   if (currentUser) {

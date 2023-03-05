@@ -21,13 +21,4 @@ class Friend < ApplicationRecord
   belongs_to :receiver,
     foreign_key: :user2_id,
     class_name: :User
-
-  def dm_collector
-    user1 = User.find(self.user1_id)
-    user2 = User.find(self.user2_id)
-    dm_channel = {}
-
-    user1.each { |user1_channel| dm_channel[user1_channel.id] = user1_channel }
-    user2.each { |user2_channel| return user2_channel if dm_channel[user2_channel.id] }
-  end
 end

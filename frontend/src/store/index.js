@@ -11,6 +11,7 @@ import sessionReducer from './session';
 import usersReducer from './users';
 import channelReducer from './channel';
 import messageReducer from './message';
+import friendReducer from './friend';
 
 const rootReducer = combineReducers({
   session: sessionReducer,
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   users: usersReducer,
   channels: channelReducer,
   messages: messageReducer,
+  friends: friendReducer,
 });
 
 // const middleware = [thunk];
