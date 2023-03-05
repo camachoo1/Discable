@@ -1,3 +1,4 @@
+import { useSelector } from 'react-redux';
 import './SplashPage.css';
 import logo from '../../assets/discord-logo.png';
 import section2 from '../../assets/section2.svg';
@@ -6,13 +7,14 @@ import section4 from '../../assets/section4.svg';
 import section5 from '../../assets/section5.svg';
 import sparkles from '../../assets/sparkles.svg';
 import { useNavigate } from 'react-router-dom';
-import GitHubIcon from '@mui/icons-material/GitHub';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
+// import GitHubIcon from '@mui/icons-material/GitHub';
+// import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const SplashPage = () => {
   const navigate = useNavigate();
+  const sessionUser = useSelector((state) => state.session.user);
   const handleClick = (e) => {
-    navigate('/login');
+    navigate('/@me');
   };
   return (
     <>
@@ -30,7 +32,7 @@ const SplashPage = () => {
                 rel='noreferrer'
                 className='splash-page-links'
               >
-                <GitHubIcon />
+                Github
               </a>
               <a
                 href='https://linkedin.com/in/omar-camacho-aa01b3133'
@@ -38,7 +40,7 @@ const SplashPage = () => {
                 rel='noreferrer'
                 className='splash-page-links'
               >
-                <LinkedInIcon />
+                LinkedIn
               </a>
             </div>
             <div className='nav-right'>
@@ -46,7 +48,7 @@ const SplashPage = () => {
                 onClick={handleClick}
                 className='splash-button login-button'
               >
-                Login
+                {sessionUser ? 'Open Disclone' : 'Login'}
               </button>
             </div>
           </div>

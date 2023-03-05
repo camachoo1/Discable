@@ -9,10 +9,33 @@ import UserShowPage from './components/UserShowPage';
 import BottomPanel from './components/UserShowPage/BottomPanel';
 import ErrorPage from './components/ErrorPage';
 
+// export const ModalContext = createContext();
+
 const App = () => {
-  // const [showModal, setShowModal] = useState(false);
+  // const [open, setOpen] = useState(false);
+  // const [deleteForm, setDeleteForm] = useState(false);
+  // const [edit, setEdit] = useState(false);
+  // const [leave, setLeave] = useState(false);
+  // const [editChannel, setEditChannel] = useState(true);
+  // const [formType, setFormType] = useState('server');
   return (
     <div className='app'>
+      {/* <ModalContext.Provider
+        value={{
+          open,
+          setOpen,
+          deleteForm,
+          setDeleteForm,
+          edit,
+          setEdit,
+          leave,
+          setLeave,
+          editChannel,
+          setEditChannel,
+          formType,
+          setFormType,
+        }}
+      > */}
       <ServerNavBar />
       <BottomPanel />
       <Routes>
@@ -30,12 +53,13 @@ const App = () => {
           path='/servers/:serverId'
           element=<ServerShowPage />
         />
-        <Route path='/error' element=<ErrorPage /> />
+        <Route exact path='/error' element=<ErrorPage /> />
         <Route
           path='/error'
           render={() => <Navigate to='/error' />}
         />
       </Routes>
+      {/* </ModalContext.Provider> */}
     </div>
   );
 };
