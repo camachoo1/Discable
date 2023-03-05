@@ -23,6 +23,16 @@ class Channel < ApplicationRecord
     class_name: :Message,
     dependent: :destroy
 
+  has_many :user_subscriptions,
+    foreign_key: :channel_id,
+    class_name: :ChannelSubscription,
+    dependent: :destroy
+
+  has_many :users,
+    through: :user_subscriptions,
+    source: :user,
+    dependent: :destroy
+
   def message_collector
     self.messages.map { |msg| msg.id }
   end

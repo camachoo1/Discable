@@ -53,6 +53,16 @@ class User < ApplicationRecord
     class_name: :Friend,
     dependent: :destroy
 
+  has_many :channel_subscriptions,
+    foreign_key: :user_id,
+    class_name: :ChannelSubscription,
+    dependent: :destroy
+
+  has_many :dm_channels,
+    through: :channel_subscriptions,
+    source: :channel,
+    dependent: :destroy
+
   def self.find_by_credentials(credential, password)
     if credential.include?("@")
       user = User.find_by(email: credential)
