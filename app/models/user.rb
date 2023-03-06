@@ -71,7 +71,7 @@ class User < ApplicationRecord
   end
 
   def friends
-    Friend.where("user1_id = ? OR user2_id = ?", self.id, self.id)
+    Friend.where(user1_id: self.id).or(Friend.where(user2_id: self.id)).to_a
   end
 
   private

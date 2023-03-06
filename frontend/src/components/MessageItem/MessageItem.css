@@ -66,7 +66,7 @@
 }
 
 .edit-action, .delete-action {
-  padding: 3px;
+  padding: 2px;
   display: flex;
   align-items: center;
   border-radius: 4px;
@@ -119,3 +119,10 @@
   font-family: 'gg-sans-med';
 }
 
+.edit-action > svg {
+  margin-left: 10px;
+}
+
+.delete-action > svg {
+  margin-left: 10px;
+}

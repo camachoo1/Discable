@@ -106,7 +106,10 @@ const ServerFormModal = ({ sessionUser, setShowForm }) => {
           </div>
 
           <div className='form-footer'>
-            <button>Create</button>
+            <button type='button' id='back' onClick={hideModal}>
+              Back
+            </button>
+            <button type='submit'>Create</button>
           </div>
         </form>
       </div>

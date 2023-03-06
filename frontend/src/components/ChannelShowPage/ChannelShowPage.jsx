@@ -87,7 +87,7 @@ const ChannelShowPage = () => {
           <div className='channel-show'>
             <div className='channel-icon'>
               <TagIcon
-                sx={{ transform: 'skew(-20deg', fontSize: '54px' }}
+                sx={{ transform: 'skew(-10deg)', fontSize: '54px' }}
               />
             </div>
 
