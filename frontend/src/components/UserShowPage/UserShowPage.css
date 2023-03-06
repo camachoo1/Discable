@@ -8,6 +8,55 @@
   color: white;
 }
 
+.friends-panel-container {
+  margin-top: 50px;
+}
+
+.user-show-header {
+  position: fixed;
+  left: 80px;
+}
+
+.user-show-left {
+  width: 240px;
+}
+
+.friend-options {
+  display: flex;
+  gap: 15px;
+  margin-left: 15px;
+}
+
+.options-button {
+  background: none;
+  border: none;
+  font-family: 'gg-sans-med';
+  font-weight: bold;
+  font-size: 16px;
+  padding: 3px 10px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  border-radius: 5px;
+  color: #b9bbbe;
+}
+
+.options-button:hover {
+  background-color: #45494e;
+  color: white;
+}
+
+#options-active {
+  background-color: #45494e;
+  color: white;
+}
+
+.friend-info {
+  width: calc(100% - 320px);
+  background-color: #36393f;
+  margin-top: 50px;
+}
+
 .bottom-panel {
   display: flex;
   width: 240px;
@@ -78,4 +127,32 @@
   justify-content: center;
   align-items: center;
   user-select: none;
+}
+
+
+.channel-name > svg {
+  margin-bottom: 12px;
+}
+
+.user-show-left > svg {
+  margin-left: 10px;
+}
+
+.friend-show-li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.vertical-line {
+  width: 1px;
+  background-color: white;
+  height: 50%;
+  opacity: 0.1;
+  margin: 10px 0 10px 15px;
+  z-index: 101;
+  border-radius: 2px;
 }

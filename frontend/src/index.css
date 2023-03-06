@@ -20,6 +20,11 @@
 }
 
 @font-face {
+  font-family: 'gg-sans-extra-bold';
+  src: url('./assets/gg_sans_Extrabold.ttf');
+}
+
+@font-face {
   font-family: 'ginto-nord-1';
   src: url('./assets/Ginto-Nord-500.woff2');
 }

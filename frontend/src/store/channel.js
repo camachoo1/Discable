@@ -45,20 +45,11 @@ export const fetchChannel = (channelId) => async (dispatch) => {
   }
 };
 
-export const createChannel = (channelInfo) => async (dispatch) => {
-  const res = await csrfFetch(
-    `/api/servers/${channelInfo.serverId}/channels`,
-    {
-      method: 'POST',
-      body: JSON.stringify(channelInfo),
-    }
-  );
-
-  if (res.ok) {
-    const data = await res.json();
-    dispatch(addChannel(data));
-    return data;
-  }
+export const createChannel = (channelInfo) => {
+  csrfFetch(`/api/servers/${channelInfo.serverId}/channels`, {
+    method: 'POST',
+    body: JSON.stringify(channelInfo),
+  });
 };
 
 export const updateChannel = (channel) => async (dispatch) => {

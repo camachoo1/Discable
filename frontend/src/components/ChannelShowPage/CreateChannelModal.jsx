@@ -48,27 +48,14 @@ const CreateChannelModal = ({ sessionUser, setShowCreateForm }) => {
         channel_name: channelName,
         server_id: serverId,
       };
-      return dispatch(createChannel(channelInfo))
-        .then((res) => {
-          navigate(
-            `/servers/${res.channel.serverId}/channels/${res.channel.id}`
-          );
-          setShowCreateForm(false);
-          setChannelName('');
-        })
-        .catch(async (res) => {
-          let data;
-
-          try {
-            data = await res.clone().json();
-          } catch {
-            data = await res.text();
-          }
-
-          if (data?.errors) setErrors(data.errors);
-          else if (data) setErrors([data]);
-          else setErrors([res.statusText]);
-        });
+      createChannel(channelInfo);
+      // .then((res) => {
+      // navigate(
+      //   `/servers/${serverId}/channels/${res.channel.id}`
+      // );
+      // });
+      setShowCreateForm(false);
+      setChannelName('');
     }
   };
 

@@ -34,23 +34,18 @@ const MessageItem = ({ server, message }) => {
     }
   };
   const formatTime = (time) => {
-    let dateObj = new Date(time);
-    let date = dateObj.getDate();
-    let year = dateObj.getFullYear();
-    let month = dateObj.getMonth() + 1;
-    let hours = dateObj.getHours();
-    let minutes = dateObj.getMinutes();
-    let ampm = 'AM';
+    let date = new Date(time);
+    let options = {
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: 'numeric',
+      minute: '2-digit',
+      hour12: true,
+      timeZone: 'America/Los_Angeles',
+    };
 
-    if (date < 10) date = '0' + date;
-    if (month < 10) month = '0' + month;
-    if (minutes < 10) minutes = '0' + minutes;
-    if (hours >= 12) {
-      hours %= 12;
-      ampm = 'PM';
-    }
-
-    return `${month}/${date}/${year} ${hours}:${minutes} ${ampm}`;
+    return new Intl.DateTimeFormat('en-US', options).format(date);
   };
 
   const colors = [
