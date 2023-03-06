@@ -13,7 +13,7 @@ class Api::ChannelsController < ApplicationController
   end
 
   def create
-    debugger
+    # debugger
     @server = Server.find(params[:channel][:server_id])
     @channel = Channel.new(channel_params)
     # debugger
@@ -23,7 +23,8 @@ class Api::ChannelsController < ApplicationController
                                   type: "RECEIVE_CHANNEL",
                                   **from_template("api/channels/creation", channel: @channel)
       # render :show
-      render json: nil, status: :ok
+      # render json: nil, status: :ok
+      render json: { id: @channel.id }, status: :ok
     else
       # debugger
       render json: { errors: @channel.errors.full_messages }, status: 422

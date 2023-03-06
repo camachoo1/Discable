@@ -13,6 +13,7 @@ class Api::FriendsController < ApplicationController
     @friend = Friend.new(friend_params)
 
     if @friend.save
+      debugger
       @user1 = User.find(@friend.user1_id)
       @user2 = User.find(@friend.user2_id)
       FriendsChannel.broadcast_to @user1,
@@ -73,6 +74,6 @@ class Api::FriendsController < ApplicationController
   private
 
   def friend_params
-    params.require(:friend).permit(:user1_id, :user2_id, :status)
+    params.require(:friend).permit(:id, :user1_id, :user2_id, :status)
   end
 end

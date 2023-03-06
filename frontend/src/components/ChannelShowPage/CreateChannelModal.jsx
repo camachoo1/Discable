@@ -11,6 +11,9 @@ const CreateChannelModal = ({ sessionUser, setShowCreateForm }) => {
   const [errors, setErrors] = useState([]);
   const { serverId } = useParams();
   const server = useSelector((state) => state.servers[serverId]);
+  const channels = useSelector((state) =>
+    Object.values(state.channels)
+  );
   const hideModal = (e) => {
     e.preventDefault();
     setShowCreateForm(false);
@@ -48,14 +51,12 @@ const CreateChannelModal = ({ sessionUser, setShowCreateForm }) => {
         channel_name: channelName,
         server_id: serverId,
       };
-      createChannel(channelInfo);
-      // .then((res) => {
-      // navigate(
-      //   `/servers/${serverId}/channels/${res.channel.id}`
-      // );
-      // });
-      setShowCreateForm(false);
-      setChannelName('');
+      createChannel(channelInfo).then((res) => {
+        setShowCreateForm(false);
+        setChannelName('');
+        navigate(`/servers/${serverId}/channels/${res.id}`);
+      });
+      // console.log(channelId.json());
     }
   };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { fetchServer } from '../../store/server';
 import {
   addChannel,
@@ -39,6 +39,13 @@ const ServerShowPage = () => {
     e.stopPropagation();
     setOpen(false);
   };
+
+  // const channelRef = useRef();
+  // useEffect(() => {
+  //   channelRef.current = channels.length;
+  //   console.log(channelRef.current, channels.length);
+  // }, []);
+
   useEffect(() => {
     dispatch(clearChannels());
     dispatch(fetchServer(serverId));
