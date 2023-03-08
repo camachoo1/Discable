@@ -149,7 +149,7 @@ const ChannelShowPage = ({ showEdit, setShowEdit }) => {
           </div>
 
           <div className='messages-container'>
-            {console.log(messages)}
+            {/* {console.log(messages)} */}
             {messages?.map((message, idx) => (
               <MessageItem
                 key={idx}

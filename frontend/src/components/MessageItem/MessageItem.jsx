@@ -76,7 +76,6 @@ const MessageItem = ({ server, message }) => {
       <div className='message-body'>
         <div className='message-username'>
           <h4>
-            {console.log(users[message.authorId].username)}
             {users[message.authorId].username}
             <span id='time'>{formatTime(message.createdAt)}</span>
           </h4>
