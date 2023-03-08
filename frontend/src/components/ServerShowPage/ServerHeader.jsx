@@ -40,6 +40,7 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
     e.preventDefault();
     e.stopPropagation();
     dispatch(deleteChannel(channelId));
+    setOpen(false);
     navigate(
       `/servers/${server.id}/channels/${server.defaultChannel}`
     );
@@ -54,6 +55,7 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
         subscriptions.find((sub) => sub.userId === sessionUser.id).id
       )
     );
+    setOpen(false);
     navigate('/@me');
   };
 
@@ -140,7 +142,10 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
 
                     <div className='divide-line'></div>
 
-                    <li className='settings-item'>
+                    <li
+                      className='settings-item'
+                      style={{ color: 'red' }}
+                    >
                       <button
                         className='delete-button'
                         onClick={() => setShowDeleteForm(true)}
@@ -157,7 +162,10 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
                   <>
                     <div className='divide-line'></div>
 
-                    <li className='settings-item'>
+                    <li
+                      className='settings-item'
+                      style={{ color: 'red' }}
+                    >
                       <button
                         className='delete-button'
                         onClick={leaveAction}

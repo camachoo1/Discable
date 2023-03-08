@@ -45,6 +45,11 @@ const App = () => {
         <Route exact path='/@me' element=<UserShowPage /> />
         <Route
           exact
+          path='@me/channels/:channelId'
+          element=<UserShowPage />
+        />
+        <Route
+          exact
           path='/servers/:serverId/channels/:channelId'
           element=<ServerShowPage />
         />

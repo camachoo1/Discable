@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { fetchServer } from '../../store/server';
 import {
   addChannel,
@@ -25,6 +25,7 @@ import consumer from '../../consumer';
 const ServerShowPage = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [open, setOpen] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
   const { serverId, channelId } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -33,18 +34,13 @@ const ServerShowPage = () => {
   const channels = useSelector((state) =>
     Object.values(state.channels)
   );
+  const users = useSelector((state) => state.users);
 
   const handleClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
     setOpen(false);
   };
-
-  // const channelRef = useRef();
-  // useEffect(() => {
-  //   channelRef.current = channels.length;
-  //   console.log(channelRef.current, channels.length);
-  // }, []);
 
   useEffect(() => {
     dispatch(clearChannels());
@@ -87,14 +83,16 @@ const ServerShowPage = () => {
       />
     );
 
-  return (
+  return users ? (
     <>
       <div>
-        {showCreateForm ? (
+        {showCreateForm || showEdit ? (
           <div
             className={showCreateForm ? 'modal-show' : 'modal-hide'}
           >
             <CreateChannelModal
+              showEdit={showEdit}
+              setShowEdit={setShowEdit}
               setShowCreateForm={setShowCreateForm}
               showCreateForm={showCreateForm}
             />
@@ -145,7 +143,10 @@ const ServerShowPage = () => {
               </div>
 
               <div className='channels-container'>
-                <ChannelShowPage />
+                <ChannelShowPage
+                  showEdit={showEdit}
+                  setShowEdit={setShowEdit}
+                />
               </div>
 
               <div className='users-panel'>
@@ -156,7 +157,7 @@ const ServerShowPage = () => {
         )}
       </div>
     </>
-  );
+  ) : null;
 };
 
 export default ServerShowPage;

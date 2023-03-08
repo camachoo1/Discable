@@ -1,22 +1,31 @@
 import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { createChannel, updateChannel } from '../../store/channel';
+import {
+  createChannel,
+  deleteChannel,
+  updateChannel,
+} from '../../store/channel';
 import { useNavigate, useParams } from 'react-router-dom';
 import './CreateChannelModal.css';
+import Tag from '@mui/icons-material/Tag';
 
-const CreateChannelModal = ({ sessionUser, setShowCreateForm }) => {
+const CreateChannelModal = ({
+  showEdit,
+  setShowEdit,
+  setShowCreateForm,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [channelName, setChannelName] = useState('');
   const [errors, setErrors] = useState([]);
-  const { serverId } = useParams();
+  const { serverId, channelId } = useParams();
   const server = useSelector((state) => state.servers[serverId]);
-  const channels = useSelector((state) =>
-    Object.values(state.channels)
-  );
+  const channel = useSelector((state) => state.channels[channelId]);
+  // const [showEdit, setShowEdit] = useState(false);
   const hideModal = (e) => {
     e.preventDefault();
     setShowCreateForm(false);
+    setShowEdit(false);
   };
 
   const openModal = (e) => {
@@ -27,25 +36,16 @@ const CreateChannelModal = ({ sessionUser, setShowCreateForm }) => {
     e.preventDefault();
     setErrors([]);
 
-    if (!true) {
-      return dispatch(updateChannel({ ...server }))
-        .then(() => {
-          navigate(`/servers/${serverId}`);
-          setShowCreateForm(false);
-        })
-        .catch(async (res) => {
-          let data;
+    if (showEdit) {
+      const channelInfo = {
+        channel_name: channelName,
+        server_id: serverId,
+      };
 
-          try {
-            data = await res.clone().json();
-          } catch {
-            data = await res.text();
-          }
-
-          if (data?.errors) setErrors(data.errors);
-          else if (data) setErrors([data]);
-          else setErrors([res.statusText]);
-        });
+      updateChannel(channelInfo);
+      setShowEdit(false);
+      setShowCreateForm(false);
+      setChannelName('');
     } else {
       const channelInfo = {
         channel_name: channelName,
@@ -56,8 +56,16 @@ const CreateChannelModal = ({ sessionUser, setShowCreateForm }) => {
         setChannelName('');
         navigate(`/servers/${serverId}/channels/${res.id}`);
       });
-      // console.log(channelId.json());
     }
+  };
+
+  const handleDelete = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    dispatch(deleteChannel(channelId));
+    navigate(
+      `/servers/${serverId}/channels/${server.defaultChannel}`
+    );
   };
 
   return (
@@ -65,7 +73,11 @@ const CreateChannelModal = ({ sessionUser, setShowCreateForm }) => {
       <div className='channel-form' onClick={openModal}>
         <form onSubmit={handleSubmit}>
           <div className='channel-form-header'>
-            <h2>Create Channel</h2>
+            <h2>
+              {showEdit
+                ? `Edit #${channel?.channelName}`
+                : 'Create Channel'}
+            </h2>
           </div>
 
           <div className='form-user-inputs'>
@@ -73,22 +85,54 @@ const CreateChannelModal = ({ sessionUser, setShowCreateForm }) => {
               CHANNEL NAME{' '}
               <span>{errors.length ? ` - ${errors[0]}` : ''}</span>
             </label>
-            <input
-              type='text'
-              name='name'
-              value={channelName}
-              autoComplete='off'
-              onChange={(e) => setChannelName(e.target.value)}
-            />
+            <div className='input-container'>
+              <Tag
+                sx={{
+                  color: '#2e3338',
+                  position: 'absolute',
+                  boxSizing: 'border-box',
+                  transform: 'skew(-10deg)',
+                  ml: '5px',
+                  fontSize: '30px',
+                  mb: '14px',
+                  fontFamily: 'gg-sans-bold',
+                  fontWeight: 'bold',
+                }}
+              />
+              <input
+                type='text'
+                name='name'
+                id='channel__name'
+                value={channelName}
+                placeholder='channel-name'
+                autoComplete='off'
+                onChange={(e) => setChannelName(e.target.value)}
+              />
+            </div>
           </div>
 
           <div className='form-footer'>
+            {showEdit ? (
+              <>
+                <button
+                  type='button'
+                  onClick={handleDelete}
+                  style={{ width: '125px' }}
+                >
+                  Delete Channel
+                </button>
+              </>
+            ) : (
+              <button type='button' onClick={hideModal} id='back'>
+                Back
+              </button>
+            )}
             <button
               type='submit'
               onClick={handleSubmit}
               style={{ width: '125px' }}
             >
-              Create Channel
+              {showEdit ? 'Update' : 'Create'} Channel
             </button>
           </div>
         </form>

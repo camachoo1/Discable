@@ -16,8 +16,9 @@ const ServerNavBar = () => {
   const servers = useSelector((state) => state.servers);
 
   useEffect(() => {
-    if (sessionUser) dispatch(fetchServers());
-  }, [dispatch, sessionUser]);
+    // debugger;
+    dispatch(fetchServers());
+  }, []);
 
   if (location.pathname === '/') return null;
 
@@ -54,7 +55,7 @@ const ServerNavBar = () => {
                   </li>
                 </NavLink>
 
-                <li className='divider'></li>
+                <li className='divide-line'></li>
 
                 {Object.values(servers)?.map((server) => (
                   <NavLink

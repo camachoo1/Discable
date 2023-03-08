@@ -9,6 +9,7 @@ import {
   addMessage,
   removeMessage,
 } from '../../store/message';
+import logo from '../../assets/discord-logo.png';
 import TagIcon from '@mui/icons-material/Tag';
 import EditIcon from '@mui/icons-material/Edit';
 import './ChannelShowPage.css';
@@ -26,7 +27,7 @@ const useScroll = (toggle) => {
   return ref;
 };
 
-const ChannelShowPage = () => {
+const ChannelShowPage = ({ showEdit, setShowEdit }) => {
   const [body, setBody] = useState('');
   const dispatch = useDispatch();
   const { serverId, channelId } = useParams();
@@ -36,9 +37,16 @@ const ChannelShowPage = () => {
   );
   const sessionUser = useSelector((state) => state.session.user);
   const server = useSelector((state) => state.servers[serverId]);
-  const users = useSelector((state) => state.users);
+  // const users = useSelector((state) => state.users);
   const ref = useScroll(messages);
+  const dmUser = channel?.dmUser;
+  // const [showEdit, setShowEdit] = useState(false);
 
+  const handleEdit = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowEdit(true);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -50,6 +58,17 @@ const ChannelShowPage = () => {
     createMessage(messageInfo);
     setBody('');
   };
+
+  const colors = [
+    'red',
+    'fuchsia',
+    'yellow',
+    'green',
+    'blurple',
+    'black',
+    'gray',
+  ];
+  const generateColor = (id) => colors[id % 7];
 
   useEffect(() => {
     dispatch(clearMessages());
@@ -81,28 +100,56 @@ const ChannelShowPage = () => {
   }, [dispatch, channelId, serverId]);
 
   return (
-    <>
+    <div className={serverId ? undefined : 'dms-wrapper'}>
       {channel && (
         <div className='channel-wrapper' ref={ref}>
           <div className='channel-show'>
-            <div className='channel-icon'>
-              <TagIcon
-                sx={{ transform: 'skew(-10deg)', fontSize: '54px' }}
-              />
-            </div>
+            {serverId ? (
+              <>
+                <div className='channel-icon'>
+                  <TagIcon
+                    sx={{
+                      transform: 'skew(-10deg)',
+                      fontSize: '54px',
+                    }}
+                  />
+                </div>
 
-            <h1>Welcome to #{channel.channelName}!</h1>
-            <p>
-              This is the start of the #{channel.channelName} channel!
-            </p>
+                <h1>Welcome to #{channel.channelName}!</h1>
+                <p>
+                  This is the start of the #{channel.channelName}{' '}
+                  channel!
+                </p>
 
-            <div className='edit-channel'>
-              <EditIcon sx={{ mr: '5px', fontSize: '16px' }} />
-              Edit Channel
-            </div>
+                <div
+                  className='edit-channel'
+                  onClick={() => setShowEdit(true)}
+                >
+                  <EditIcon sx={{ mr: '5px', fontSize: '16px' }} />
+                  Edit Channel
+                </div>
+              </>
+            ) : (
+              <>
+                {/* {console.log(channel?.dmUser)} */}
+                <div
+                  className='large-channel-icon'
+                  id={generateColor(dmUser.id)}
+                >
+                  <img src={logo} alt='logo' className='user-logo' />
+                </div>
+
+                <h1>{dmUser.username}</h1>
+                <p className='dm-first-message'>
+                  This is the beginning of your direct message history
+                  with <strong>@{dmUser.username}</strong>
+                </p>
+              </>
+            )}
           </div>
 
           <div className='messages-container'>
+            {console.log(messages)}
             {messages?.map((message, idx) => (
               <MessageItem
                 key={idx}
@@ -119,13 +166,17 @@ const ChannelShowPage = () => {
               id='message'
               value={body}
               onChange={(e) => setBody(e.target.value)}
-              placeholder={`Message #${channel.channelName}`}
+              placeholder={
+                serverId
+                  ? `Message #${channel.channelName}`
+                  : `Message @${dmUser.username}`
+              }
               autoComplete='off'
             />
           </form>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

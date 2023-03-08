@@ -2,7 +2,7 @@ import { csrfFetch } from './csrf';
 
 // TYPE CONSTANTS
 const ADD_FRIEND = 'friends/addFriend';
-const ADD_FRIENDS = 'friends/addFriends';
+export const ADD_FRIENDS = 'friends/addFriends';
 const REMOVE_FRIEND = 'friends/removeFriend';
 
 // ACTION CREATORS
@@ -55,7 +55,8 @@ const friendReducer = (state = {}, action) => {
   const nextState = { ...state };
   switch (action.type) {
     case ADD_FRIENDS:
-      return { ...action.payload };
+      return { ...state, ...action.payload.friends };
+    // return { ...action.payload };
     case ADD_FRIEND:
       return { ...state, [action.payload.id]: action.payload };
     case REMOVE_FRIEND:

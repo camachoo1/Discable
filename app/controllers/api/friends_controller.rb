@@ -4,6 +4,7 @@ class Api::FriendsController < ApplicationController
   def index
     if current_user
       @friends = current_user.friends
+      render :index
     else
       render json: { errors: ["You are not logged in"] }, status: 422
     end
@@ -11,11 +12,15 @@ class Api::FriendsController < ApplicationController
 
   def create
     @friend = Friend.new(friend_params)
-
     if @friend.save
-      debugger
       @user1 = User.find(@friend.user1_id)
       @user2 = User.find(@friend.user2_id)
+
+      @dm_channel = Channel.create(channel_name: "#{@user1.username}_#{@user2.username}_dm", channel_type: "private")
+
+      ChannelSubscription.create(user_id: @user1.id, channel_id: @dm_channel.id)
+      ChannelSubscription.create(user_id: @user2.id, channel_id: @dm_channel.id)
+
       FriendsChannel.broadcast_to @user1,
                                   type: "RECEIVE_FRIEND",
                                   **from_template("api/friends/show", friend: @friend, current_user: current_user)
@@ -74,6 +79,10 @@ class Api::FriendsController < ApplicationController
   private
 
   def friend_params
-    params.require(:friend).permit(:id, :user1_id, :user2_id, :status)
+    params.require(:friend).permit(:user1_id, :user2_id, :status)
   end
+
+  # def status_params
+  #   params.require(:friend).permit(:status)
+  # end
 end

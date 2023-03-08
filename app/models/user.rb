@@ -53,6 +53,16 @@ class User < ApplicationRecord
     class_name: :Friend,
     dependent: :destroy
 
+  has_many :dm_channel_subscriptions,
+    foreign_key: :user_id,
+    class_name: :ChannelSubscription,
+    dependent: :destroy
+
+  has_many :dm_channels,
+    through: :dm_channel_subscriptions,
+    source: :channel,
+    dependent: :destroy
+
   def self.find_by_credentials(credential, password)
     if credential.include?("@")
       user = User.find_by(email: credential)
@@ -71,7 +81,27 @@ class User < ApplicationRecord
   end
 
   def friends
-    Friend.where(user1_id: self.id).or(Friend.where(user2_id: self.id)).to_a
+    # Friend.where(user1_id: self.id).or(Friend.where(user2_id: self.id)).to_a
+    arr1 = Friend.where(user1_id: self.id)
+    arr2 = Friend.where(user2_id: self.id)
+
+    all_friends = arr1 + arr2
+
+    all_friends.map do |friend|
+      friendship = {}
+      if friend.user1_id == self.id
+        friendship[:user_id] = friend.user2_id
+        friendship[:status] = friend.status
+        friendship[:dm_channel_id] = friend.dm_channel.id
+        friendship[:id] = friend.id
+      else
+        friendship[:user_id] = friend.user1_id
+        friendship[:status] = friend.status
+        friendship[:dm_channel_id] = friend.dm_channel.id
+        friendship[:id] = friend.id
+      end
+      friendship
+    end
   end
 
   private

@@ -2,7 +2,7 @@ import { csrfFetch } from './csrf';
 
 // Constants
 const ADD_CHANNELS = 'channels/addChannels';
-const ADD_CHANNEL = 'channels/addChannel';
+export const ADD_CHANNEL = 'channels/addChannel';
 const REMOVE_CHANNEL = 'channels/removeChannel';
 const CLEAR_CHANNELS = 'channels/clearChannels';
 
@@ -88,10 +88,15 @@ const channelReducer = (state = {}, action) => {
     case ADD_CHANNELS:
       return { ...action.payload.channels };
     case ADD_CHANNEL:
-      return {
-        ...state,
-        [action.payload.channel.id]: action.payload.channel,
-      };
+      // debugger;
+      if (action.payload.channelType === 'private') {
+        return { [action.payload.id]: action.payload };
+      } else {
+        return {
+          ...state,
+          [action.payload.channel.id]: action.payload.channel,
+        };
+      }
     case REMOVE_CHANNEL:
       delete nextState[action.channelId];
       return nextState;

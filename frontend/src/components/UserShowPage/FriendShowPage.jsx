@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
-import { useDispatch } from 'react-redux';
-import { addFriend, removeFriend } from '../../store/friend';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  addFriend,
+  fetchFriends,
+  removeFriend,
+} from '../../store/friend';
 import { useNavigate } from 'react-router-dom';
 import consumer from '../../consumer';
 import FriendItem from './FriendItem';
@@ -13,28 +17,33 @@ const FriendShowPage = ({
 }) => {
   const sessionUserId = sessionUser?.id;
   const navigate = useNavigate();
+  const users = useSelector((state) => state.users);
   const dispatch = useDispatch();
+  if (!sessionUserId) navigate('/login');
 
   const onlineFriends = friends.filter(
-    (user) =>
-      user.friend.status === 'online' &&
-      user.status !== 'pending' &&
-      user.status !== 'blocked'
+    (friend) =>
+      friend.status !== 'pending' && friend.status !== 'blocked'
   );
 
   const allFriends = friends.filter(
-    (user) => user.status !== 'pending' && user.status !== 'blocked'
+    (friend) =>
+      friend.status !== 'pending' && friend.status !== 'blocked'
   );
 
   const pendingFriends = friends.filter(
-    (user) => user.status === 'pending' && user.status !== 'blocked'
+    (friend) =>
+      friend.status === 'pending' && friend.status !== 'blocked'
   );
 
   const blockedFriends = friends.filter(
-    (user) => user.status === 'blocked'
+    (friend) => friend.status === 'blocked'
   );
 
-  if (!sessionUserId) navigate('/login');
+  useEffect(() => {
+    dispatch(fetchFriends());
+  }, [dispatch]);
+
   useEffect(() => {
     const subscription = consumer.subscriptions.create(
       { channel: 'FriendsChannel', id: sessionUserId },
@@ -62,9 +71,9 @@ const FriendShowPage = ({
 
   if (friendsTab === 'online') {
     return (
-      <div className='friends-show'>
+      <div className='friends-show-main'>
         <div className='user-text-channels'>
-          <p>ONLINE &#8212; {onlineFriends.langth}</p>
+          <p>ONLINE &#8212; {onlineFriends.length}</p>
         </div>
 
         <ul>
@@ -77,14 +86,14 @@ const FriendShowPage = ({
             />
           ))}
         </ul>
-        <div className='divider'></div>
+        <div className='divide-line'></div>
       </div>
     );
   } else if (friendsTab === 'all') {
     return (
-      <div className='friends-show'>
+      <div className='friends-show-main'>
         <div className='user-text-channels'>
-          <p>ALL FRIENDS &#8212; {allFriends.langth}</p>
+          <p>ALL FRIENDS &#8212; {allFriends.length}</p>
         </div>
 
         <ul>
@@ -97,14 +106,14 @@ const FriendShowPage = ({
             />
           ))}
         </ul>
-        <div className='divider'></div>
+        <div className='divide-line'></div>
       </div>
     );
   } else if (friendsTab === 'pending') {
     return (
-      <div className='friends-show'>
+      <div className='friends-show-main'>
         <div className='user-text-channels'>
-          <p>PENDING &#8212; {pendingFriends.langth}</p>
+          <p>PENDING &#8212; {pendingFriends.length}</p>
         </div>
 
         <ul>
@@ -117,14 +126,14 @@ const FriendShowPage = ({
             />
           ))}
         </ul>
-        <div className='divider'></div>
+        <div className='divide-line'></div>
       </div>
     );
   } else {
     return (
-      <div className='friends-show'>
+      <div className='friends-show-main'>
         <div className='user-text-channels'>
-          <p>BLOCKED &#8212; {blockedFriends.langth}</p>
+          <p>BLOCKED &#8212; {blockedFriends.length}</p>
         </div>
 
         <ul>
@@ -137,7 +146,7 @@ const FriendShowPage = ({
             />
           ))}
         </ul>
-        <div className='divider'></div>
+        <div className='divide-line'></div>
       </div>
     );
   }

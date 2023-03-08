@@ -82,3 +82,17 @@
   cursor: pointer;
   transition: 0.3s;
 }
+
+.input-container > input {
+  width: 94%;
+}
+
+.input-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+#channel__name {
+  padding-left: 25px;
+}

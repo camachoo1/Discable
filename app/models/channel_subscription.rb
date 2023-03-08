@@ -9,9 +9,9 @@
 #  updated_at :datetime         not null
 #
 class ChannelSubscription < ApplicationRecord
-  validates :user_id, uniqueness: {scope: :channel_id}
+  validates :user_id, uniqueness: { scope: :channel_id }
 
-  belongs_to :user,
+  belongs_to :user
 
   belongs_to :channel
 end

@@ -11,28 +11,31 @@ import FriendShowPage from './FriendShowPage';
 import './UserShowPage.css';
 
 const UserShowPage = () => {
-  const friendships = useSelector((state) =>
-    Object.values(state.friends)
-  );
-  const friends = friendships.map((user) => ({
-    friend: user.friend,
-    status: user.status,
-    friendId: user.id,
-  }));
-  const [friendsTab, setFriendsTab] = useState('online');
-  const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const { channelId } = useParams();
   const channel = useSelector((state) => state.channels[channelId]);
+  const friendships = useSelector((state) =>
+    Object.values(state.friends)
+  );
+  const friends = friendships.map((friend) => ({
+    friend: friend.userId,
+    status: friend.status,
+    friendId: friend.id,
+    dmChannelId: friend.dmChannelId,
+  }));
+  const [friendsTab, setFriendsTab] = useState('online');
+  const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (sessionUser) dispatch(fetchServers());
-  }, [dispatch, sessionUser]);
+  // useEffect(() => {
+  //   debugger;
+  //   if (sessionUser) dispatch(fetchServers());
+  // }, [dispatch, sessionUser]);
 
   if (!sessionUser) return <Navigate to='/login' />;
 
   return (
     <>
+      {/* {console.log(friends.filter((friend) => friend.friendId === 2))} */}
       <div className='server-header user-show-header'>
         <div className='server-header-left user-show-left'>
           <GroupsIcon sx={{ opacity: '0.5' }} />
@@ -40,11 +43,11 @@ const UserShowPage = () => {
         </div>
 
         <div className='remainder-of-page'>
-          <div className='channel-name'>
+          <div className='channel-name width'>
             {channelId ? (
               <>
                 <AlternateIcon sx={{ mr: '5px', opacity: '0.5' }} />
-                <h4>{channel?.channelName}</h4>
+                <h4>{channel?.dmUser.username}</h4>
               </>
             ) : (
               <>
@@ -129,8 +132,8 @@ const UserShowPage = () => {
             <FriendShowPage
               friendsTab={friendsTab}
               sessionUser={sessionUser}
-              friendships={friendships}
               friends={friends}
+              friendships={friendships}
             />
           )}
         </div>

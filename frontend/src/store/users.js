@@ -1,5 +1,12 @@
 import { ADD_SERVER, REMOVE_SERVER } from './server';
 import { REMOVE_CURRENT_USER } from './session';
+import { ADD_FRIENDS } from './friend';
+import { ADD_CHANNEL } from './channel';
+const CLEAR_USERS = 'users/clearUsers';
+
+export const clearUsers = () => ({
+  type: CLEAR_USERS,
+});
 
 const usersReducer = (state = {}, action) => {
   const nextState = { ...state };
@@ -9,6 +16,16 @@ const usersReducer = (state = {}, action) => {
     case REMOVE_SERVER:
       delete nextState[action.serverId];
       return nextState;
+    case CLEAR_USERS:
+      return {};
+    case ADD_FRIENDS:
+      return { ...state, ...action.payload.users };
+    case ADD_CHANNEL:
+      if (action.payload.users) {
+        return action.payload.users;
+      } else {
+        return nextState;
+      }
     case REMOVE_CURRENT_USER:
       return {};
     default:

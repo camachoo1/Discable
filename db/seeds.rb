@@ -12,6 +12,8 @@ Server.destroy_all
 ServerSubscription.destroy_all
 Channel.destroy_all
 Message.destroy_all
+ChannelSubscription.destroy_all
+Friend.destroy_all
 
 puts "Resetting primary keys..."
 ApplicationRecord.connection.reset_pk_sequence!("users")
@@ -19,6 +21,8 @@ ApplicationRecord.connection.reset_pk_sequence!("servers")
 ApplicationRecord.connection.reset_pk_sequence!("server_subscriptions")
 ApplicationRecord.connection.reset_pk_sequence!("channels")
 ApplicationRecord.connection.reset_pk_sequence!("messages")
+ApplicationRecord.connection.reset_pk_sequence!("channel_subscriptions")
+ApplicationRecord.connection.reset_pk_sequence!("friends")
 
 puts "Creating Users…"
 user1 = User.create!(username: "Demo", tag: "0001", email: "demo@demo.com", password: "password", status: "online")
