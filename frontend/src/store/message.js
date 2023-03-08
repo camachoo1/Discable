@@ -41,25 +41,22 @@ export const fetchMessages =
     }
   };
 
-export const createMessage = (messageInfo) => {
-  return csrfFetch('/api/messages', {
+export const createMessage = (messageInfo) =>
+  csrfFetch('/api/messages', {
     method: 'POST',
     body: JSON.stringify(messageInfo),
   });
-};
 
-export const updateMessage = (messageInfo) => {
-  return csrfFetch(`/api/messages/${messageInfo.id}`, {
+export const updateMessage = (messageInfo) =>
+  csrfFetch(`/api/messages/${messageInfo.id}`, {
     method: 'PATCH',
     body: JSON.stringify(messageInfo),
   });
-};
 
-export const deleteMessage = (messageId) => {
-  return csrfFetch(`/api/messages/${messageId}`, {
+export const deleteMessage = (messageId) =>
+  csrfFetch(`/api/messages/${messageId}`, {
     method: 'DELETE',
   });
-};
 
 // Reducer
 
