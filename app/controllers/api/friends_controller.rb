@@ -16,7 +16,7 @@ class Api::FriendsController < ApplicationController
       @user1 = User.find(@friend.user1_id)
       @user2 = User.find(@friend.user2_id)
 
-      @dm_channel = Channel.create(channel_name: "#{@user1.username}_#{@user2.username}_dm", channel_type: "private")
+      @dm_channel = Channel.create(channel_name: "#{@user1.username}_#{@user2.username}_dm_channel", channel_type: "private")
 
       ChannelSubscription.create(user_id: @user1.id, channel_id: @dm_channel.id)
       ChannelSubscription.create(user_id: @user2.id, channel_id: @dm_channel.id)
@@ -81,8 +81,4 @@ class Api::FriendsController < ApplicationController
   def friend_params
     params.require(:friend).permit(:user1_id, :user2_id, :status)
   end
-
-  # def status_params
-  #   params.require(:friend).permit(:status)
-  # end
 end

@@ -19,7 +19,7 @@ const SignupFormPage = () => {
     e.preventDefault();
     setErrors([]);
     return dispatch(
-      sessionActions.signUpUser({ email, username, password })
+      sessionActions.signUpUser({ email, username, tag, password })
     ).catch(async (res) => {
       let data;
       try {
