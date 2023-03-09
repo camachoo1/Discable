@@ -38,6 +38,7 @@ const CreateChannelModal = ({
 
     if (showEdit) {
       const channelInfo = {
+        id: channel.id,
         channel_name: channelName,
         server_id: serverId,
       };

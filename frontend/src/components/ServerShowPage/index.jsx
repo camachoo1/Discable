@@ -90,7 +90,9 @@ const ServerShowPage = () => {
       <div>
         {showCreateForm || showEdit ? (
           <div
-            className={showCreateForm ? 'modal-show' : 'modal-hide'}
+            className={
+              showCreateForm || showEdit ? 'modal-show' : 'modal-hide'
+            }
           >
             <CreateChannelModal
               showEdit={showEdit}
