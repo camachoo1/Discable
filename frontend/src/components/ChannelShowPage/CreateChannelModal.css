@@ -96,3 +96,11 @@
 #channel__name {
   padding-left: 25px;
 }
+
+.form-footer >.delete-button {
+  background-color: #e43e41;
+}
+
+.form-footer>.delete-button:hover {
+  background-color: #a12d2f;
+}

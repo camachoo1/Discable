@@ -115,13 +115,25 @@ const CreateChannelModal = ({
           <div className='form-footer'>
             {showEdit ? (
               <>
-                <button
-                  type='button'
-                  onClick={handleDelete}
-                  style={{ width: '125px' }}
-                >
-                  Delete Channel
-                </button>
+                {console.log(channelId, server?.defaultChannel)}
+                {channel?.channelName === 'general' ? (
+                  <button
+                    type='button'
+                    onClick={() => setShowEdit(false)}
+                    id='back'
+                  >
+                    Back
+                  </button>
+                ) : (
+                  <button
+                    type='button'
+                    onClick={handleDelete}
+                    style={{ width: '125px' }}
+                    className='delete-button'
+                  >
+                    Delete Channel
+                  </button>
+                )}
               </>
             ) : (
               <button type='button' onClick={hideModal} id='back'>
