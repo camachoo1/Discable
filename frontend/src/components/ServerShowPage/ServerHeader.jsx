@@ -87,53 +87,12 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
           {open ? (
             <div className='settings-menu'>
               <ul className='settings' onClick={keepOpen}>
-                <li className='settings-item'>
-                  <button>
-                    Server Info
-                    <PeopleIcon
-                      fontSize='small'
-                      sx={{ mt: 0, pr: 0 }}
-                    />
-                  </button>
-                </li>
                 {server.ownerId === sessionUser.id ? (
                   <>
-                    <div className='divide-line'></div>
-
-                    <li
-                      className='settings-item'
-                      // onClick={() => setChannelEdit(true)}
-                    >
-                      <button>
-                        Edit Channel
-                        <CreateIcon
-                          fontSize='small'
-                          sx={{ mt: 0, pr: 0 }}
-                        />
-                      </button>
-                    </li>
-
-                    <div className='divide-line'></div>
-
                     <li className='settings-item'>
                       <button>
                         Edit Server
                         <EditIcon
-                          fontSize='small'
-                          sx={{ mt: 0, pr: 0 }}
-                        />
-                      </button>
-                    </li>
-
-                    <div className='divide-line'></div>
-
-                    <li className='settings-item'>
-                      <button
-                        className='delete-button'
-                        onClick={deleteAction}
-                      >
-                        Delete Channel
-                        <DeleteIcon
                           fontSize='small'
                           sx={{ mt: 0, pr: 0 }}
                         />
@@ -160,8 +119,6 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
                   </>
                 ) : (
                   <>
-                    <div className='divide-line'></div>
-
                     <li
                       className='settings-item'
                       style={{ color: 'red' }}

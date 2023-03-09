@@ -54,8 +54,8 @@ const FriendItem = ({ friendsTab, friendObj, friends }) => {
 
           <div className='user-details-li'>
             <p className='user-name'>
-              {console.log(friendObj.friend)}
-              {console.log(users[friendObj.friend])}
+              {/* {console.log(friendObj.friend)}
+              {console.log(users[friendObj.friend])} */}
               {users[friendObj.friend].username}{' '}
               <span className='hidden-tag'>
                 #{users[friendObj.friend].tag}
