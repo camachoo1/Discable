@@ -4,6 +4,7 @@ import { csrfFetch } from './csrf';
 const ADD_FRIEND = 'friends/addFriend';
 export const ADD_FRIENDS = 'friends/addFriends';
 const REMOVE_FRIEND = 'friends/removeFriend';
+export const CLEAR_FRIENDS = 'friends/clearFriends';
 
 // ACTION CREATORS
 export const addFriend = (friend) => ({
@@ -21,6 +22,9 @@ export const removeFriend = (friendId) => ({
   payload: friendId,
 });
 
+export const clearFriends = () => ({
+  type: CLEAR_FRIENDS,
+});
 // THUNK ACTION CREATORS
 export const fetchFriends = () => async (dispatch) => {
   const res = await csrfFetch('/api/friends');
@@ -62,6 +66,8 @@ const friendReducer = (state = {}, action) => {
     case REMOVE_FRIEND:
       delete nextState[action.friendId];
       return nextState;
+    case CLEAR_FRIENDS:
+      return {};
     default:
       return nextState;
   }

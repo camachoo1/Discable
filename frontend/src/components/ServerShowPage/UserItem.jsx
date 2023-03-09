@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import logo from '../../assets/discord-logo.png';
 import { useNavigate, useParams } from 'react-router-dom';
 
-const UserItem = ({ user, ids, friendships }) => {
+const UserItem = ({ user, friendships }) => {
   const sessionUser = useSelector((state) => state.session.user);
   const navigate = useNavigate();
   const { serverId, channelId } = useParams();
@@ -15,6 +15,17 @@ const UserItem = ({ user, ids, friendships }) => {
   //   friendships.find((friend) => friend.userId === user.id)
   //     .dmChannelId
   // );
+
+  const colors = [
+    'red',
+    'fuchsia',
+    'yellow',
+    'green',
+    'blurple',
+    'black',
+    'gray',
+  ];
+  const generateColor = (id) => colors[id % 7];
 
   if (!sessionUser) return null;
 
@@ -35,13 +46,15 @@ const UserItem = ({ user, ids, friendships }) => {
       >
         <div className='user-panel-item-wrapper'>
           <div className='user-item-left'>
-            <div
-              className='user-circle'
-              // id={generateColor(user.id)}
-            >
-              <img src={logo} alt='logo' className='user-logo' />
+            <div className='user-circle'>
+              <img
+                src={logo}
+                alt='logo'
+                className='user-logo'
+                id={generateColor(user.id)}
+              />
             </div>
-            {/* {console.log(user.id)} */}
+
             <p className='user-name'>{user.username}</p>
           </div>
         </div>

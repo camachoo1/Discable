@@ -19,10 +19,13 @@ const usersReducer = (state = {}, action) => {
     case CLEAR_USERS:
       return {};
     case ADD_FRIENDS:
-      return { ...state, ...action.payload.users };
+      // return { ...state, ...action.payload.users };
+      return { ...action.payload.users };
+
     case ADD_CHANNEL:
       if (action.payload.users) {
-        return action.payload.users;
+        return { ...state, ...action.payload.users };
+        // return { ...action.payload.users };
       } else {
         return nextState;
       }

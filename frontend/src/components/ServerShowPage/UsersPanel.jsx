@@ -18,7 +18,7 @@ const UsersPanel = () => {
     (friend) =>
       friend.status !== 'blocked' && friend.status !== 'pending'
   );
-  const ids = friendships.map((friend) => friend.id);
+
   const colors = [
     'red',
     'fuchsia',
@@ -44,34 +44,48 @@ const UsersPanel = () => {
           </div>
         )}
 
-        {!server
-          ? Object.values(friends).map((user, idx) => (
-              <UserItem
-                user={user}
-                key={idx}
-                friendships={friendships}
-                ids={ids}
-              />
-            ))
-          : users.map((user) => (
-              <li key={user.id}>
-                <div className='user-item'>
-                  <div className='user-item-left'>
-                    <div
-                      className='user-bubble'
-                      id={generateColor(user.id)}
-                    >
-                      <img
-                        src={logo}
-                        alt='logo'
-                        className='user-logo'
-                      />
-                    </div>
-                    <p className='users-name'>{user.username}</p>
-                  </div>
-                </div>
-              </li>
-            ))}
+        {
+          !users
+            ? friends.map((user, idx) => {
+                if (user.id !== sessionUser.id)
+                  return (
+                    <UserItem
+                      user={user}
+                      key={idx}
+                      friendships={friendships}
+                    />
+                  );
+              })
+            : users.map((user, idx) => {
+                if (user.id !== sessionUser.id)
+                  return (
+                    <UserItem
+                      user={user}
+                      key={idx}
+                      friendships={friendships}
+                    />
+                  );
+              })
+          // users.map((user) => (
+          //     <li key={user.id}>
+          //       <div className='user-item'>
+          //         <div className='user-item-left'>
+          //           <div
+          //             className='user-bubble'
+          //             id={generateColor(user.id)}
+          //           >
+          //             <img
+          //               src={logo}
+          //               alt='logo'
+          //               className='user-logo'
+          //             />
+          //           </div>
+          //           <p className='users-name'>{user.username}</p>
+          //         </div>
+          //       </div>
+          //     </li>
+          // ))
+        }
       </ul>
     </>
   );
