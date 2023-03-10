@@ -19,7 +19,8 @@ const ServerNavBar = () => {
     if (sessionUser) dispatch(fetchServers());
   }, [dispatch, sessionUser]);
 
-  if (location.pathname === '/') return null;
+  if (location.pathname === '/' || location.pathname === '/errors')
+    return null;
 
   return (
     <>

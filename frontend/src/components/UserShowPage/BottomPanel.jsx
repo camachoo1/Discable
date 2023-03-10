@@ -28,7 +28,11 @@ const BottomPanel = () => {
   ];
   const generateColor = (id) => colors[id % 7];
 
-  if (!sessionUser || location.pathname === '/') {
+  if (
+    !sessionUser ||
+    location.pathname === '/' ||
+    location.pathname === '/error'
+  ) {
     return null;
   } else {
     return (
