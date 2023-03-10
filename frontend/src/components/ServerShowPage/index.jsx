@@ -44,7 +44,7 @@ const ServerShowPage = () => {
   };
 
   useEffect(() => {
-    dispatch(clearFriends());
+    // dispatch(clearFriends());
     dispatch(clearChannels());
     dispatch(fetchServer(serverId));
     dispatch(fetchChannels(serverId));

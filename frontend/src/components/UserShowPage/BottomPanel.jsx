@@ -8,6 +8,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import { useLocation } from 'react-router-dom';
 import { logout } from '../../store/session';
 import logo from '../../assets/discord-logo.png';
+import { clearFriends } from '../../store/friend';
 
 const BottomPanel = () => {
   const sessionUser = useSelector((state) => state.session.user);
@@ -87,7 +88,10 @@ const BottomPanel = () => {
             <SettingsIcon
               fontSize='small'
               className='icons'
-              onClick={() => dispatch(logout())}
+              onClick={() => {
+                dispatch(clearFriends());
+                dispatch(logout());
+              }}
             />
           </div>
         </div>

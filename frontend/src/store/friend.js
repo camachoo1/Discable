@@ -62,6 +62,7 @@ const friendReducer = (state = {}, action) => {
       return { ...state, ...action.payload.friends };
     // return { ...action.payload };
     case ADD_FRIEND:
+      // debugger;
       return { ...state, [action.payload.id]: action.payload };
     case REMOVE_FRIEND:
       delete nextState[action.friendId];

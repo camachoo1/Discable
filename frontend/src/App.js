@@ -20,34 +20,9 @@ const App = () => {
   // const [formType, setFormType] = useState('server');
   return (
     <div className='app'>
-      {/* <ModalContext.Provider
-        value={{
-          open,
-          setOpen,
-          deleteForm,
-          setDeleteForm,
-          edit,
-          setEdit,
-          leave,
-          setLeave,
-          editChannel,
-          setEditChannel,
-          formType,
-          setFormType,
-        }}
-      > */}
       <ServerNavBar />
       <BottomPanel />
       <Routes>
-        <Route exact path='/' element=<SplashPage /> />
-        <Route exact path='/login' element=<LoginFormPage /> />
-        <Route exact path='/register' element=<SignupFormPage /> />
-        <Route exact path='/@me' element=<UserShowPage /> />
-        <Route
-          exact
-          path='@me/channels/:channelId'
-          element=<UserShowPage />
-        />
         <Route
           exact
           path='/servers/:serverId/channels/:channelId'
@@ -55,14 +30,23 @@ const App = () => {
         />
         <Route
           exact
+          path='@me/channels/:channelId'
+          element=<UserShowPage />
+        />
+        <Route
+          exact
           path='/servers/:serverId'
           element=<ServerShowPage />
         />
+        <Route exact path='/login' element=<LoginFormPage /> />
+        <Route exact path='/register' element=<SignupFormPage /> />
+        <Route exact path='/@me' element=<UserShowPage /> />
         <Route exact path='/error' element=<ErrorPage /> />
         <Route
           path='/error'
           render={() => <Navigate to='/error' />}
         />
+        <Route exact path='/' element=<SplashPage /> />
       </Routes>
       {/* </ModalContext.Provider> */}
     </div>

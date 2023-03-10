@@ -16,6 +16,7 @@ import './ChannelShowPage.css';
 // import CreateChannelModal from './CreateChannelModal';
 import MessageItem from '../MessageItem/MessageItem';
 import consumer from '../../consumer';
+import { clearFriends } from '../../store/friend';
 
 const useScroll = (toggle) => {
   const ref = useRef(null);
@@ -71,6 +72,7 @@ const ChannelShowPage = ({ showEdit, setShowEdit }) => {
   const generateColor = (id) => colors[id % 7];
 
   useEffect(() => {
+    dispatch(clearFriends());
     dispatch(clearMessages());
     dispatch(fetchMessages(serverId, channelId));
     dispatch(fetchChannel(channelId));

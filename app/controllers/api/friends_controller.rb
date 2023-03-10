@@ -12,6 +12,7 @@ class Api::FriendsController < ApplicationController
 
   def create
     @friend = Friend.new(friend_params)
+    debugger
     if @friend.save
       @user1 = User.find(@friend.user1_id)
       @user2 = User.find(@friend.user2_id)

@@ -16,9 +16,8 @@ const ServerNavBar = () => {
   const servers = useSelector((state) => state.servers);
 
   useEffect(() => {
-    // debugger;
-    dispatch(fetchServers());
-  }, []);
+    if (sessionUser) dispatch(fetchServers());
+  }, [dispatch, sessionUser]);
 
   if (location.pathname === '/') return null;
 

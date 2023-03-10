@@ -27,7 +27,7 @@ class Friend < ApplicationRecord
     user2 = User.find(self.user2_id)
     friends = Hash.new()
 
-    user1.dm_channels.each { |user1_channel| friends[user1_channel.id] = user1_channel }
+    user1.dm_channels.each { |user1_channel| friends[user1_channel.id] = user1_channel.id }
     user2.dm_channels.each { |user2_channel| return user2_channel if friends[user2_channel.id] }
   end
 end

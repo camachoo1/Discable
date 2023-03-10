@@ -92,12 +92,12 @@ class User < ApplicationRecord
       if friend.user1_id == self.id
         friendship[:user_id] = friend.user2_id
         friendship[:status] = friend.status
-        friendship[:dm_channel_id] = friend.dm_channel.id
+        friendship[:dm_channel_id] = friend.dm_channel
         friendship[:id] = friend.id
       else
         friendship[:user_id] = friend.user1_id
         friendship[:status] = friend.status
-        friendship[:dm_channel_id] = friend.dm_channel.id
+        friendship[:dm_channel_id] = friend.dm_channel
         friendship[:id] = friend.id
       end
       friendship
