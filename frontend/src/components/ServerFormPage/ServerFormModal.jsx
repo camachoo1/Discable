@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { createServer, updateServer } from '../../store/server';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-// import { Navigate } from 'react-router-dom';
 
 const ServerFormModal = ({ sessionUser, setShowForm }) => {
   const dispatch = useDispatch();

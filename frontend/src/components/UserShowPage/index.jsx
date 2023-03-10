@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useParams } from 'react-router-dom';
-import { fetchServers } from '../../store/server';
 import AlternateIcon from '@mui/icons-material/AlternateEmail';
 import GroupsIcon from '@mui/icons-material/Groups';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
@@ -10,11 +9,8 @@ import ChannelShowPage from '../ChannelShowPage/ChannelShowPage';
 import FriendShowPage from './FriendShowPage';
 import './UserShowPage.css';
 import { fetchFriends } from '../../store/friend';
-import { clearMessages } from '../../store/message';
 
 const UserShowPage = () => {
-  // const [load, setLoad] = useState(false);
-  const [newMsg, setNewMsg] = useState([]);
   const sessionUser = useSelector((state) => state.session.user);
   const { channelId } = useParams();
   const channel = useSelector((state) => state.channels[channelId]);
@@ -29,47 +25,10 @@ const UserShowPage = () => {
   }));
   const [friendsTab, setFriendsTab] = useState('online');
   const dispatch = useDispatch();
-  // const users = useSelector((state) => Object.keys(state.users));
-  const messages = useSelector((state) =>
-    Object.values(state.messages)
-  );
 
-  // useEffect(() => {
-  //   setNewMsg(messages);
-  // }, [messages]);
-
-  // const checker = () => {
-  //   let i = 0;
-  //   let count = 0;
-  //   let hash = {};
-  //   const f = friendships.forEach(
-  //     (frnd) => (hash[frnd.userId] = true)
-  //   );
-  //   const u = users.forEach((usr) => (hash[usr.id] = false));
-  //   const hashArr = Object.values(hash);
-  //   console.log(friendships, users);
-  //   console.log(hashArr.length);
-  //   while (i < hashArr.length - 1) {
-  //     if (hashArr[i] === true) count++;
-  //     i++;
-  //   }
-  //   // console.log(hashArr, users);
-  //   if (count === hashArr.length && count === users.length)
-  //     setLoad(true);
-  // };
   useEffect(() => {
-    // debugger;
-    // dispatch(clearMessages());
     dispatch(fetchFriends());
   }, [dispatch]);
-
-  // useEffect(() => {
-  //   if (messages.length === 0) setLoad(true);
-  // }, [messages]);
-
-  // useEffect(() => {
-  //   if (sessionUser) dispatch(fetchServers())
-  // }, [dispatch, sessionUser])
 
   if (!sessionUser) return <Navigate to='/login' />;
 

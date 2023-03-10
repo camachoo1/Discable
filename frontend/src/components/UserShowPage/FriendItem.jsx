@@ -7,10 +7,8 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useSelector } from 'react-redux';
 
 const FriendItem = ({ friendsTab, friendObj, friends }) => {
-  const friend = friendObj.friendId;
   const navigate = useNavigate();
   const friendReceiver = !!friendObj.friend.user2Id;
-  // console.log(friendObj);
   const users = useSelector((state) => state.users);
 
   const handleAccept = (e) => {
@@ -44,7 +42,6 @@ const FriendItem = ({ friendsTab, friendObj, friends }) => {
       <div className='divide-line' id='user-show-divider'></div>
       <li className='friend-show-li'>
         <div className='item-left'>
-          {/* {console.log(users)} */}
           <div
             className='user-circle'
             id={generateColor(friendObj.friend)}
@@ -54,9 +51,6 @@ const FriendItem = ({ friendsTab, friendObj, friends }) => {
 
           <div className='user-details-li'>
             <p className='user-name'>
-              {/* {console.log(users)} */}
-              {/* {console.log(friendObj)} */}
-              {/* {console.log(users[friendObj.friend])} */}
               {users[friendObj.friend].username}{' '}
               <span className='hidden-tag'>
                 #{users[friendObj.friend].tag}

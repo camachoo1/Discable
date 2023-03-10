@@ -1,39 +1,20 @@
-import logo from '../../assets/discord-logo.png';
 import './UsersPanel.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
-import { fetchFriends } from '../../store/friend';
 import UserItem from './UserItem';
 
 const UsersPanel = () => {
-  const dispatch = useDispatch();
   const sessionUser = useSelector((state) => state.session.user);
   const friendships = useSelector((state) =>
     Object.values(state.friends)
   );
   const { serverId } = useParams();
-  const server = useSelector((state) => state.servers[serverId]);
   const friends = friendships.filter(
     (friend) =>
       friend.status !== 'blocked' && friend.status !== 'pending'
   );
 
-  const colors = [
-    'red',
-    'fuchsia',
-    'yellow',
-    'green',
-    'blurple',
-    'black',
-    'gray',
-  ];
-  const generateColor = (id) => colors[id % 7];
   const users = useSelector((state) => Object.values(state.users));
-
-  // useEffect(() => {
-  //   if (sessionUser) dispatch(fetchFriends());
-  // }, [dispatch]);
 
   return (
     <>
@@ -44,48 +25,27 @@ const UsersPanel = () => {
           </div>
         )}
 
-        {
-          !users
-            ? friends.map((user, idx) => {
-                if (user.id !== sessionUser.id)
-                  return (
-                    <UserItem
-                      user={user}
-                      key={idx}
-                      friendships={friendships}
-                    />
-                  );
-              })
-            : users.map((user, idx) => {
-                if (user.id !== sessionUser.id)
-                  return (
-                    <UserItem
-                      user={user}
-                      key={idx}
-                      friendships={friendships}
-                    />
-                  );
-              })
-          // users.map((user) => (
-          //     <li key={user.id}>
-          //       <div className='user-item'>
-          //         <div className='user-item-left'>
-          //           <div
-          //             className='user-bubble'
-          //             id={generateColor(user.id)}
-          //           >
-          //             <img
-          //               src={logo}
-          //               alt='logo'
-          //               className='user-logo'
-          //             />
-          //           </div>
-          //           <p className='users-name'>{user.username}</p>
-          //         </div>
-          //       </div>
-          //     </li>
-          // ))
-        }
+        {!users
+          ? friends.map((user, idx) => {
+              if (user.id !== sessionUser.id)
+                return (
+                  <UserItem
+                    user={user}
+                    key={idx}
+                    friendships={friendships}
+                  />
+                );
+            })
+          : users.map((user, idx) => {
+              if (user.id !== sessionUser.id)
+                return (
+                  <UserItem
+                    user={user}
+                    key={idx}
+                    friendships={friendships}
+                  />
+                );
+            })}
       </ul>
     </>
   );

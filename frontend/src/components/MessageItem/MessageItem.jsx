@@ -58,7 +58,6 @@ const MessageItem = ({ server, message }) => {
     'gray',
   ];
   const generateColor = (id) => colors[id % 7];
-  // debugger;
   return users[message.authorId].username ? (
     <div
       className='message-item'

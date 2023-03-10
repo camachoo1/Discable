@@ -8,10 +8,6 @@ const DeleteConfirmation = ({ sessionUser, setShowDeleteForm }) => {
   const navigate = useNavigate();
   const { serverId } = useParams();
   const server = useSelector((state) => state.servers[serverId]);
-  // const sessionUser = useSelector((state) => state.session.user);
-  // const subscriptions = useSelector((state) =>
-  //   Object.values(state.serverSubscriptions)
-  // );
 
   const hideDeleteModal = (e) => {
     e.preventDefault();
@@ -29,18 +25,6 @@ const DeleteConfirmation = ({ sessionUser, setShowDeleteForm }) => {
     navigate('/@me');
   };
 
-  // const handleLeaveServer = (e) => {
-  //   e.preventDefault();
-  //   e.stopPropagation();
-
-  //   dispatch(
-  //     leaveServer(
-  //       server.id,
-  //       subscriptions.find((sub) => sub.userId === sessionUser.id).id
-  //     )
-  //   );
-  //   navigate('/@me');
-  // };
   return (
     <div className='delete-modal' onClick={hideDeleteModal}>
       <div className='delete-confirmation' onClick={openDeleteModal}>

@@ -11,7 +11,6 @@ class Api::ChannelsController < ApplicationController
     @channel = Channel.find_by(id: params[:id])
     if @channel.channel_type == "private"
       @dm_users = @channel.dm_users
-      # debugger
       render "api/channels/dms"
     else
       render :show
@@ -19,20 +18,15 @@ class Api::ChannelsController < ApplicationController
   end
 
   def create
-    # debugger
     @server = Server.find(params[:channel][:server_id])
     @channel = Channel.new(channel_params)
-    # debugger
+
     if @channel.save
-      # debugger
       ServersChannel.broadcast_to @server,
                                   type: "RECEIVE_CHANNEL",
                                   **from_template("api/channels/creation", channel: @channel)
-      # render :show
-      # render json: nil, status: :ok
       render json: { id: @channel.id }, status: :ok
     else
-      # debugger
       render json: { errors: @channel.errors.full_messages }, status: 422
     end
   end

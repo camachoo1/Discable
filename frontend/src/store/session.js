@@ -72,18 +72,12 @@ const storeCurrentUser = (user) => {
 };
 
 const sessionReducer = (state = initialState, action) => {
-  // const nextState = { ...state };
   switch (action.type) {
     case SET_CURRENT_USER:
-      // nextState.user = action.payload.id;
-      // return nextState;
       return { ...state, user: action.payload };
     case REMOVE_CURRENT_USER:
-      // nextState.user = null;
-      // return nextState;
       return { user: null };
     default:
-      // return nextState;
       return state;
   }
 };

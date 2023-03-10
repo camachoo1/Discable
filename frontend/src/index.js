@@ -1,5 +1,4 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
@@ -13,9 +12,7 @@ import * as serverActions from './store/server';
 import * as channelActions from './store/channel';
 import * as messageActions from './store/message';
 import * as friendActions from './store/friend';
-// import { ModalProvider } from './context/Modal';
 
-// Testing
 window.login = login;
 window.logout = logout;
 window.signUpUser = signUpUser;
@@ -45,7 +42,6 @@ const initializeApp = () => {
 
   const root = createRoot(document.getElementById('root'));
   return root.render(
-    // <ModalProvider>
     <Provider store={store}>
       <React.StrictMode>
         <BrowserRouter>
@@ -53,7 +49,6 @@ const initializeApp = () => {
         </BrowserRouter>
       </React.StrictMode>
     </Provider>
-    // </ModalProvider>
   );
 };
 

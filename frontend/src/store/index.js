@@ -23,10 +23,6 @@ const rootReducer = combineReducers({
   friends: friendReducer,
 });
 
-// const middleware = [thunk];
-// if (process.env.NODE_ENV !== 'production') {
-//   middleware.push(logger);
-// }
 let enhancer;
 if (process.env.NODE_ENV === 'production') {
   enhancer = applyMiddleware(thunk);

@@ -21,7 +21,6 @@ import UsersPanel from './UsersPanel';
 import ChannelShowPage from '../ChannelShowPage/ChannelShowPage';
 import CreateChannelModal from '../ChannelShowPage/CreateChannelModal';
 import consumer from '../../consumer';
-import { clearFriends } from '../../store/friend';
 
 const ServerShowPage = () => {
   const [showCreateForm, setShowCreateForm] = useState(false);
@@ -44,7 +43,6 @@ const ServerShowPage = () => {
   };
 
   useEffect(() => {
-    // dispatch(clearFriends());
     dispatch(clearChannels());
     dispatch(fetchServer(serverId));
     dispatch(fetchChannels(serverId));

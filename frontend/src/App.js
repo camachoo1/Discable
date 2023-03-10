@@ -9,46 +9,32 @@ import UserShowPage from './components/UserShowPage';
 import BottomPanel from './components/UserShowPage/BottomPanel';
 import ErrorPage from './components/ErrorPage';
 
-// export const ModalContext = createContext();
-
 const App = () => {
-  // const [open, setOpen] = useState(false);
-  // const [deleteForm, setDeleteForm] = useState(false);
-  // const [edit, setEdit] = useState(false);
-  // const [leave, setLeave] = useState(false);
-  // const [editChannel, setEditChannel] = useState(true);
-  // const [formType, setFormType] = useState('server');
   return (
     <div className='app'>
       <ServerNavBar />
       <BottomPanel />
       <Routes>
+        <Route path='/' element={<SplashPage />} />
+        <Route path='/login' element={<LoginFormPage />} />
+        <Route path='/register' element={<SignupFormPage />} />
+        <Route path='/@me' element={<UserShowPage />} />
         <Route
-          exact
-          path='/servers/:serverId/channels/:channelId'
-          element=<ServerShowPage />
-        />
-        <Route
-          exact
           path='@me/channels/:channelId'
-          element=<UserShowPage />
+          element={<UserShowPage />}
+        />
+
+        <Route
+          path='/servers/:serverId/channels/:channelId'
+          element={<ServerShowPage />}
         />
         <Route
-          exact
           path='/servers/:serverId'
-          element=<ServerShowPage />
+          element={<ServerShowPage />}
         />
-        <Route exact path='/login' element=<LoginFormPage /> />
-        <Route exact path='/register' element=<SignupFormPage /> />
-        <Route exact path='/@me' element=<UserShowPage /> />
-        <Route exact path='/error' element=<ErrorPage /> />
-        <Route
-          path='/error'
-          render={() => <Navigate to='/error' />}
-        />
-        <Route exact path='/' element=<SplashPage /> />
+        <Route path='/error' element={<ErrorPage />} />
+        <Route path='*' element={<Navigate to='/error' />} />
       </Routes>
-      {/* </ModalContext.Provider> */}
     </div>
   );
 };

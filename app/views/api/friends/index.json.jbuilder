@@ -1,6 +1,5 @@
 json.friends do
   @friends.each do |friend|
-    # debugger
     json.set! friend[:id] do
       json.status friend[:status]
       json.user_id friend[:user_id]

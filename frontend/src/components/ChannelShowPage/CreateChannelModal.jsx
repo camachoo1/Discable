@@ -21,7 +21,7 @@ const CreateChannelModal = ({
   const { serverId, channelId } = useParams();
   const server = useSelector((state) => state.servers[serverId]);
   const channel = useSelector((state) => state.channels[channelId]);
-  // const [showEdit, setShowEdit] = useState(false);
+
   const hideModal = (e) => {
     e.preventDefault();
     setShowCreateForm(false);
@@ -115,7 +115,6 @@ const CreateChannelModal = ({
           <div className='form-footer'>
             {showEdit ? (
               <>
-                {console.log(channelId, server?.defaultChannel)}
                 {channel?.channelName === 'general' ? (
                   <button
                     type='button'

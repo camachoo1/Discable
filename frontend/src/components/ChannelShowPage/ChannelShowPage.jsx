@@ -13,7 +13,6 @@ import logo from '../../assets/discord-logo.png';
 import TagIcon from '@mui/icons-material/Tag';
 import EditIcon from '@mui/icons-material/Edit';
 import './ChannelShowPage.css';
-// import CreateChannelModal from './CreateChannelModal';
 import MessageItem from '../MessageItem/MessageItem';
 import consumer from '../../consumer';
 import { clearFriends } from '../../store/friend';
@@ -38,16 +37,9 @@ const ChannelShowPage = ({ showEdit, setShowEdit }) => {
   );
   const sessionUser = useSelector((state) => state.session.user);
   const server = useSelector((state) => state.servers[serverId]);
-  // const users = useSelector((state) => state.users);
   const ref = useScroll(messages);
   const dmUser = channel?.dmUser;
-  // const [showEdit, setShowEdit] = useState(false);
 
-  const handleEdit = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setShowEdit(true);
-  };
   const handleSubmit = (e) => {
     e.preventDefault();
     e.stopPropagation();
@@ -133,7 +125,6 @@ const ChannelShowPage = ({ showEdit, setShowEdit }) => {
               </>
             ) : (
               <>
-                {/* {console.log(channel?.dmUser)} */}
                 <div
                   className='large-channel-icon'
                   id={generateColor(dmUser.id)}
@@ -151,7 +142,6 @@ const ChannelShowPage = ({ showEdit, setShowEdit }) => {
           </div>
 
           <div className='messages-container'>
-            {/* {console.log(messages)} */}
             {messages?.map((message, idx) => (
               <MessageItem
                 key={idx}

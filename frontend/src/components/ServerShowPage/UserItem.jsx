@@ -6,15 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 const UserItem = ({ user, friendships }) => {
   const sessionUser = useSelector((state) => state.session.user);
   const navigate = useNavigate();
-  const { serverId, channelId } = useParams();
-  const friend = friendships.filter(
-    (usr) => usr.status !== 'pending' && usr.status !== 'blocked'
-  );
-  // .find((usr) => usr.userId === user.id);
-  // console.log(
-  //   friendships.find((friend) => friend.userId === user.id)
-  //     .dmChannelId
-  // );
+  const { serverId } = useParams();
 
   const colors = [
     'red',

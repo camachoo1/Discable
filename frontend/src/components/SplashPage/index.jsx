@@ -7,8 +7,6 @@ import section4 from '../../assets/section4.svg';
 import section5 from '../../assets/section5.svg';
 import sparkles from '../../assets/sparkles.svg';
 import { useNavigate } from 'react-router-dom';
-// import GitHubIcon from '@mui/icons-material/GitHub';
-// import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const SplashPage = () => {
   const navigate = useNavigate();

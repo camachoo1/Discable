@@ -3,8 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { leaveServer } from '../../store/server';
 import { useNavigate, useParams } from 'react-router-dom';
 import KeyBoardDownArrowIcon from '@mui/icons-material/KeyboardArrowDown';
-import PeopleIcon from '@mui/icons-material/PeopleAlt';
-import CreateIcon from '@mui/icons-material/AddCircle';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import LeaveIcon from '@mui/icons-material/ArrowCircleLeft';
@@ -12,7 +10,6 @@ import CloseIcon from '@mui/icons-material/Close';
 import './ServerShow.css';
 import DeleteConfirmation from '../DeleteConfirmation';
 import TagIcon from '@mui/icons-material/Tag';
-import { deleteChannel } from '../../store/channel';
 
 const ServerHeader = ({ server, open, setOpen, handleClick }) => {
   const [showDeleteForm, setShowDeleteForm] = useState(false);
@@ -27,23 +24,12 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
   const navigate = useNavigate();
 
   const keepOpen = (e) => {
-    // e.preventDefault()
     e.stopPropagation();
   };
   const handleOtherClick = (e) => {
     e.preventDefault();
     e.stopPropagation();
     setOpen((lastState) => !lastState);
-  };
-
-  const deleteAction = (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-    dispatch(deleteChannel(channelId));
-    setOpen(false);
-    navigate(
-      `/servers/${server.id}/channels/${server.defaultChannel}`
-    );
   };
 
   const leaveAction = (e) => {

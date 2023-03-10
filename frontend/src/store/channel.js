@@ -53,10 +53,8 @@ export const createChannel = async (channelInfo) => {
       body: JSON.stringify(channelInfo),
     }
   );
-  // return await res.json();
   if (res.ok) {
     const channelId = await res.json();
-    // debugger;
     return channelId;
   }
 };
@@ -69,6 +67,7 @@ export const updateChannel = async (channel) => {
 
   if (res.ok) {
     const data = await res.json();
+    return data;
   }
 };
 
@@ -87,7 +86,6 @@ const channelReducer = (state = {}, action) => {
     case ADD_CHANNELS:
       return { ...action.payload.channels };
     case ADD_CHANNEL:
-      // debugger;
       if (action.payload.channelType === 'private') {
         return { [action.payload.id]: action.payload };
       } else {

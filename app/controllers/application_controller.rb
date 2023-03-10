@@ -29,14 +29,13 @@ class ApplicationController < ActionController::API
   end
 
   def logout!
-    # current_user.status = "offline"
+    current_user.status = "offline"
     current_user.reset_session_token! if logged_in?
     session[:session_token] = nil
     @current_user = nil
   end
 
   def from_template(template, locals = {})
-    # debugger
     JSON.parse(self.class.render(:json, template: template, locals: locals))
   end
 
