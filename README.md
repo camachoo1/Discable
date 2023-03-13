@@ -14,7 +14,8 @@ Logged in users are able to create their own servers and channels. Users will al
 ### Live Messaging
 ![LiveMessaging](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjY3MDEyN2E1NDEzNTk5MzEwMTNjMmRiNzcyNmU2NmU0YWI0MTI1NyZjdD1n/pvb5yqMPgS5F7trLnC/giphy.gif)
 
-![Messages]()
+### Edit/Delete Messages
+![Messages](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExMjE4ODhhMjQ0ZTZhNzcwMTdjNWI1NmZjYTNiMmU3Mzc3MGZiYzI1YSZjdD1n/jfWZcX1x9cRqA0mGx0/giphy.gif)
 
 ## Important Code
 
