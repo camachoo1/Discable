@@ -12,7 +12,7 @@ In order to build Disclone I had to use a React-Redux frontend, a Ruby on Rails 
 Logged in users are able to create their own servers and channels. Users will also be able to update and delete both of their servers and channels. Once a user is in a channel then they are able to send messages inside of those channes to be able to chat with friends in real time.
 
 ### Live Messaging
-![LiveMessaging](https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExYjY3MDEyN2E1NDEzNTk5MzEwMTNjMmRiNzcyNmU2NmU0YWI0MTI1NyZjdD1n/pvb5yqMPgS5F7trLnC/giphy.gif)
+![message-send](https://user-images.githubusercontent.com/116383442/224832221-5d11364d-166a-444e-bb01-9804862a83ac.gif)
 
 ### Edit/Delete Messages
 ![message-crud](https://user-images.githubusercontent.com/116383442/224832059-9a39f051-b5b5-4cf6-bd67-98eee8d6dca1.gif)
