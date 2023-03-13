@@ -1,7 +1,7 @@
-# [Disclone](https://discable-k8cm.onrender.com)
+# [Discable](https://discable-k8cm.onrender.com)
 
 ## Overview
-[Disclone](https://discable-k8cm.onrender.com) is a clone of Discord. Discord has over 150 million monthly active users and over 19 million active servers per week. With Disclone, users are able to communicate with each other through real-time chat messaging, create servers and channels, and collaborate with others through friends.
+[Discable](https://discable-k8cm.onrender.com) is a clone of Discord. Discord has over 150 million monthly active users and over 19 million active servers per week. With Discable, users are able to communicate with each other through real-time chat messaging, create servers and channels, and collaborate with others through friends.
 
 ![splashpage](https://user-images.githubusercontent.com/116383442/224833430-54153164-b324-4feb-9d51-47ecbf02586e.gif)
 
