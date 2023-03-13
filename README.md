@@ -3,7 +3,9 @@
 ## Overview
 [Disclone](https://discable-k8cm.onrender.com) is a clone of Discord. Discord has over 150 million monthly active users and over 19 million active servers per week. With Disclone, users are able to communicate with each other through real-time chat messaging, create servers and channels, and collaborate with others through friends.
 
-##Technologies
+![splashpage](https://user-images.githubusercontent.com/116383442/224833430-54153164-b324-4feb-9d51-47ecbf02586e.gif)
+
+## Technologies
 
 In order to build Disclone I had to use a React-Redux frontend, a Ruby on Rails backend, and PostgreSQL as the DBMS. For formatting and styling I used CSS and [MUI](https://mui.com) for the icons.
 
