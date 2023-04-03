@@ -65,7 +65,7 @@ const CreateChannelModal = ({
     e.stopPropagation();
     dispatch(deleteChannel(channelId));
     navigate(
-      `/servers/${serverId}/channels/${server.defaultChannel}`
+      `/servers/${serverId}/channels/${server.defaultChannel.id}`
     );
   };
 

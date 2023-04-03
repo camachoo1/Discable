@@ -81,27 +81,27 @@ class User < ApplicationRecord
   end
 
   def friends
-    # Friend.where(user1_id: self.id).or(Friend.where(user2_id: self.id)).to_a
-    arr1 = Friend.where(user1_id: self.id)
-    arr2 = Friend.where(user2_id: self.id)
+    Friend.where(user1_id: self.id).or(Friend.where(user2_id: self.id)).to_a
+    # arr1 = Friend.where(user1_id: self.id)
+    # arr2 = Friend.where(user2_id: self.id)
 
-    all_friends = arr1 + arr2
+    # all_friends = arr1 + arr2
 
-    all_friends.map do |friend|
-      friendship = {}
-      if friend.user1_id == self.id
-        friendship[:user_id] = friend.user2_id
-        friendship[:status] = friend.status
-        friendship[:dm_channel_id] = friend.dm_channel
-        friendship[:id] = friend.id
-      else
-        friendship[:user_id] = friend.user1_id
-        friendship[:status] = friend.status
-        friendship[:dm_channel_id] = friend.dm_channel
-        friendship[:id] = friend.id
-      end
-      friendship
-    end
+    # all_friends.map do |friend|
+    #   friendship = {}
+    #   if friend.user1_id == self.id
+    #     friendship[:user_id] = friend.user2_id
+    #     friendship[:status] = friend.status
+    #     friendship[:dm_channel_id] = friend.dm_channel
+    #     friendship[:id] = friend.id
+    #   else
+    #     friendship[:user_id] = friend.user1_id
+    #     friendship[:status] = friend.status
+    #     friendship[:dm_channel_id] = friend.dm_channel
+    #     friendship[:id] = friend.id
+    #   end
+    #   friendship
+    # end
   end
 
   private

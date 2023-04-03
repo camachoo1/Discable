@@ -1,25 +1,39 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { createServer, updateServer } from '../../store/server';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 
-const ServerFormModal = ({ sessionUser, setShowForm }) => {
+const ServerFormModal = ({
+  sessionUser,
+  setShowForm,
+  isUpdate,
+  setIsUpdate,
+}) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [serverName, setServerName] = useState('');
   const [errors, setErrors] = useState([]);
-  const { serverId } = useParams();
+  // const { serverId } = useParams();
+  const location = useLocation();
+  const serverId = location.pathname[9];
   const server = useSelector((state) => state.servers[serverId]);
+
+  useEffect(() => {
+    if (isUpdate) setServerName(server.serverName);
+  }, [serverId]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setErrors([]);
 
-    if (!true) {
+    if (isUpdate) {
       return dispatch(updateServer({ ...server, serverName }))
         .then(() => {
-          navigate(`/servers/${serverId}`);
+          navigate(
+            `/servers/${serverId}/channels/${server.defaultChannel.id}`
+          );
           setShowForm(false);
+          setIsUpdate(false);
         })
         .catch(async (res) => {
           let data;
@@ -36,8 +50,10 @@ const ServerFormModal = ({ sessionUser, setShowForm }) => {
         });
     } else {
       return dispatch(createServer({ serverName }))
-        .then((res) => {
-          navigate(`/servers/${res.server.id}`);
+        .then(async (server) => {
+          navigate(
+            `/servers/${server.id}/channels/${server.defaultChannel.id}`
+          );
           setShowForm(false);
         })
         .catch(async (res) => {
@@ -59,6 +75,7 @@ const ServerFormModal = ({ sessionUser, setShowForm }) => {
   const hideModal = (e) => {
     e.preventDefault();
     setShowForm(false);
+    setIsUpdate(false);
   };
 
   const openModal = (e) => {
@@ -70,7 +87,7 @@ const ServerFormModal = ({ sessionUser, setShowForm }) => {
       <div className='server-form' onClick={openModal}>
         <form onSubmit={handleSubmit}>
           <div className='server-form-header'>
-            <h2>Customize your server</h2>
+            <h2>{isUpdate ? 'Edit' : 'Customize'} your server</h2>
             <center>
               <p>
                 Give your server a personality with a name. You can
@@ -89,26 +106,31 @@ const ServerFormModal = ({ sessionUser, setShowForm }) => {
               name='name'
               value={serverName}
               onChange={(e) => setServerName(e.target.value)}
+              autoComplete='false'
             />
 
-            <p style={{ fontSize: '12px', marginTop: 0 }}>
-              By creating a server, you agree to Discable's{' '}
-              <a
-                href='https://discord.com/guidelines'
-                target='_blank'
-                rel='noreferrer'
-                style={{ color: '#0068e0' }}
-              >
-                <strong>Community Guidelines</strong>
-              </a>
-            </p>
+            {!isUpdate && (
+              <p style={{ fontSize: '12px', marginTop: 0 }}>
+                By creating a server, you agree to Discable's{' '}
+                <a
+                  href='https://discord.com/guidelines'
+                  target='_blank'
+                  rel='noreferrer'
+                  style={{ color: '#0068e0' }}
+                >
+                  <strong>Community Guidelines</strong>
+                </a>
+              </p>
+            )}
           </div>
 
           <div className='form-footer'>
             <button type='button' id='back' onClick={hideModal}>
               Back
             </button>
-            <button type='submit'>Create</button>
+            <button type='submit'>
+              {isUpdate ? 'Update' : 'Create'}
+            </button>
           </div>
         </form>
       </div>

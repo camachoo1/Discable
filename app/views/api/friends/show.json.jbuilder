@@ -1,26 +1,38 @@
-json.friend do
-  json.set! friend[:id] do
-    json.status friend[:status]
-    json.user_id friend[:user_id]
-    json.dm_channel_id friend[:dm_channel_id]
-    json.id friend[:id]
+json.extract! friend, :id, :created_at, :updated_at, :status
+
+friendship = {
+  id: nil,
+  username: nil,
+  email: nil,
+  status: nil,
+  tag: nil,
+  created_at: nil,
+}
+
+if friend.user1_id != current_user.id
+  friend2 = User.select(:id, :username, :email, :status, :tag, :created_at).find(friend.user2_id)
+  friendship[:id] = friend2.id
+  friendship[:username] = friend2.username
+  friendship[:email] = friend2.email
+  friendship[:status] = friend2.status
+  friendship[:tag] = friend2.tag
+  friendship[:created_at] = friend2.created_at
+  json.friendship do
+    json.merge!(friendship)
+    json.user1_id friend.user1_id
+  end
+else
+  friend1 = User.select(:id, :username, :email, :status, :tag, :created_at).find(friend.user1_id)
+  friendship[:id] = friend1.id
+  friendship[:username] = friend1.username
+  friendship[:email] = friend1.email
+  friendship[:status] = friend1.status
+  friendship[:tag] = friend1.tag
+  friendship[:created_at] = friend1.created_at
+  json.friendship do
+    json.merge!(friendship)
+    json.user2_id friend.user2_id
   end
 end
 
-# friends_arr = @friends.map { |friend| friend[:user_id] }.map { |user_id| User.find(user_id) }
-
-# json.users do
-#   friends_arr.each do |friend|
-#     json.set! friend.id do
-#       json.extract! friend, :id, :email, :username, :tag, :status, :created_at, :updated_at
-#     end
-#   end
-# end
-
-json.users do
-  friend.dm_channel.dm_users.each do |user|
-    json.set! user.id do
-      json.extract! user, :id, :username, :email, :tag, :status, :created_at, :updated_at
-    end
-  end
-end
+json.dm_channel_id friend&.dm_channel&.id

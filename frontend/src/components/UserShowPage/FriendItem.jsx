@@ -8,8 +8,8 @@ import { useSelector } from 'react-redux';
 
 const FriendItem = ({ friendsTab, friendObj, friends }) => {
   const navigate = useNavigate();
-  const friendReceiver = !!friendObj.friend.user2Id;
-  const users = useSelector((state) => state.users);
+  const friendReceiver = !!friendObj.friend;
+  const friend = friendObj.friend;
 
   const handleAccept = (e) => {
     e.preventDefault();
@@ -44,17 +44,15 @@ const FriendItem = ({ friendsTab, friendObj, friends }) => {
         <div className='item-left'>
           <div
             className='user-circle'
-            id={generateColor(friendObj.friend)}
+            id={generateColor(friendObj.friend.id)}
           >
             <img src={logo} alt='logo' className='user-logo' />
           </div>
 
           <div className='user-details-li'>
             <p className='user-name'>
-              {users[friendObj.friend].username}{' '}
-              <span className='hidden-tag'>
-                #{users[friendObj.friend].tag}
-              </span>
+              {friend.username}{' '}
+              <span className='hidden-tag'>#{friend.tag}</span>
             </p>
 
             {friendsTab === 'pending' ? (
@@ -71,7 +69,8 @@ const FriendItem = ({ friendsTab, friendObj, friends }) => {
               </>
             ) : (
               <p className='user-status'>
-                {users[friendObj.friend].status.toUpperCase()}
+                {console.log(friend)}
+                {friend.status.toUpperCase()}
               </p>
             )}
           </div>

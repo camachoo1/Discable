@@ -8,14 +8,14 @@ export const REMOVE_SERVER = '/servers/REMOVE_SERVERS';
 
 // Action Creators
 
-export const addServer = (payload) => ({
+export const addServer = (server) => ({
   type: ADD_SERVER,
-  payload,
+  server,
 });
 
-export const addServers = (payload) => ({
+export const addServers = (servers) => ({
   type: ADD_SERVERS,
-  payload,
+  servers,
 });
 
 export const removeServer = (serverId) => ({
@@ -108,10 +108,10 @@ const serverReducer = (state = {}, action) => {
     case ADD_SERVER:
       return {
         ...state,
-        [action.payload.server.id]: action.payload.server,
+        [action.server.id]: action.server,
       };
     case ADD_SERVERS:
-      return { ...action.payload.servers };
+      return { ...action.servers };
     case REMOVE_SERVER:
       delete nextState[action.serverId];
       return nextState;

@@ -64,7 +64,6 @@ const ChannelShowPage = ({ showEdit, setShowEdit }) => {
   const generateColor = (id) => colors[id % 7];
 
   useEffect(() => {
-    dispatch(clearFriends());
     dispatch(clearMessages());
     dispatch(fetchMessages(serverId, channelId));
     dispatch(fetchChannel(channelId));

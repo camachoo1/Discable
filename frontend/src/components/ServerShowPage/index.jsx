@@ -22,7 +22,7 @@ import ChannelShowPage from '../ChannelShowPage/ChannelShowPage';
 import CreateChannelModal from '../ChannelShowPage/CreateChannelModal';
 import consumer from '../../consumer';
 
-const ServerShowPage = () => {
+const ServerShowPage = ({ isUpdate, setIsUpdate }) => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [open, setOpen] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -34,7 +34,6 @@ const ServerShowPage = () => {
   const channels = useSelector((state) =>
     Object.values(state.channels)
   );
-  const users = useSelector((state) => state.users);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -62,7 +61,7 @@ const ServerShowPage = () => {
               dispatch(removeChannel(channelObj.id));
               if (+channelId === channelObj.id)
                 navigate(
-                  `/servers/${serverId}/channels/${server.defaultChannel}`
+                  `/servers/${serverId}/channels/${server.defaultChannel.id}`
                 );
               break;
             default:
@@ -79,11 +78,11 @@ const ServerShowPage = () => {
   if (!channelId)
     return (
       <Navigate
-        to={`/servers/${server.id}/channels/${server.defaultChannel}`}
+        to={`/servers/${server.id}/channels/${server.defaultChannel.id}`}
       />
     );
 
-  return users ? (
+  return (
     <>
       <div>
         {showCreateForm || showEdit ? (
@@ -109,6 +108,8 @@ const ServerShowPage = () => {
               open={open}
               setOpen={setOpen}
               handleClick={handleClick}
+              isUpdate={isUpdate}
+              setIsUpdate={setIsUpdate}
             />
             <div className='panels-container'>
               <div className='server-panel'>
@@ -131,11 +132,12 @@ const ServerShowPage = () => {
                       >
                         <TagIcon
                           sx={{
-                            mr: '5px',
+                            // mr: '5px',
+                            // mb: '5px',
                             transform: 'skew(-10deg)',
                           }}
                         />
-                        <p className='channel-item-text'>
+                        <p className='channel-item-text shorten'>
                           {channel.channelName}
                         </p>
                       </NavLink>
@@ -152,14 +154,14 @@ const ServerShowPage = () => {
               </div>
 
               <div className='users-panel'>
-                <UsersPanel />
+                <UsersPanel users={server.users} />
               </div>
             </div>
           </div>
         )}
       </div>
     </>
-  ) : null;
+  );
 };
 
 export default ServerShowPage;
