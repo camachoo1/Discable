@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import './SplashPage.css';
 import logo from '../../assets/discord-logo.png';
@@ -7,6 +8,8 @@ import section4 from '../../assets/section4.svg';
 import section5 from '../../assets/section5.svg';
 import sparkles from '../../assets/sparkles.svg';
 import { useNavigate } from 'react-router-dom';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const SplashPage = () => {
   const navigate = useNavigate();
@@ -14,6 +17,10 @@ const SplashPage = () => {
   const handleClick = (e) => {
     navigate('/@me');
   };
+
+  useEffect(() => {
+    AOS.init({ duration: 500 });
+  }, []);
   return (
     <>
       <div className='splash-page-main'>
@@ -39,6 +46,14 @@ const SplashPage = () => {
                 className='splash-page-links'
               >
                 LinkedIn
+              </a>
+              <a
+                href='https://camachoo1.github.io/'
+                target='_blank'
+                rel='noreferrer'
+                className='splash-page-links'
+              >
+                Portfolio
               </a>
             </div>
             <div className='nav-right'>
@@ -71,31 +86,35 @@ const SplashPage = () => {
         </div>
 
         <div className='hero-section'>
-          <div className='img-container'>
-            <img src={section2} alt='inv' className='all-sec-img' />
-          </div>
-          <div className='content'>
-            <h1 className='section-header'>
-              Create an invite-only place where you belong
-            </h1>
-            <p className='section-text'>
-              Discord servers are organized into topic-based channels
-              where you can collaborate, share, and just talk about
-              your day without clogging up a group chat.
-            </p>
+          <div data-aos='fade-up' className='section-container'>
+            <div className='img-container'>
+              <img src={section2} alt='inv' className='all-sec-img' />
+            </div>
+            <div className='content'>
+              <h1 className='section-header'>
+                Create an invite-only place where you belong
+              </h1>
+              <p className='section-text'>
+                Discord servers are organized into topic-based
+                channels where you can collaborate, share, and just
+                talk about your day without clogging up a group chat.
+              </p>
+            </div>
           </div>
         </div>
 
         <div className='hero-section alternate-section'>
-          <div className='content'>
-            <h1 className='section-header'>
-              Where hanging out is easy
-            </h1>
-            <p className='section-text'>
-              Grab a seat in a voice channel when you’re free. Friends
-              in your server can see you’re around and instantly pop
-              in to talk without having to call.
-            </p>
+          <div data-aos='fade-up' className='section-container'>
+            <div className='content'>
+              <h1 className='section-header'>
+                Where hanging out is easy
+              </h1>
+              <p className='section-text'>
+                Grab a seat in a voice channel when you’re free.
+                Friends in your server can see you’re around and
+                instantly pop in to talk without having to call.
+              </p>
+            </div>
           </div>
           <div className='img-container'>
             <img src={section3} alt='txt' className='all-sec-img' />
@@ -103,39 +122,47 @@ const SplashPage = () => {
         </div>
 
         <div className='hero-section'>
-          <div className='img-container'>
-            <img
-              src={section4}
-              alt='mod-tools'
-              className='all-sec-img'
-            />
-          </div>
-          <div className='content'>
-            <h1 className='section-header'>From few to a fandom</h1>
-            <p className='section-text'>
-              Get any community running with moderation tools and
-              custom member access. Give members special powers, set
-              up private channels, and more.
-            </p>
+          <div data-aos='fade-up' className='section-container'>
+            <div className='img-container'>
+              <img
+                src={section4}
+                alt='mod-tools'
+                className='all-sec-img'
+              />
+            </div>
+            <div className='content'>
+              <h1 className='section-header'>From few to a fandom</h1>
+              <p className='section-text'>
+                Get any community running with moderation tools and
+                custom member access. Give members special powers, set
+                up private channels, and more.
+              </p>
+            </div>
           </div>
         </div>
 
         <div className='section-5 alternate-section'>
-          <div className='content-top'>
-            <h1 className='section-header-top'>
-              RELIABLE TECH FOR STAYING CLOSE
-            </h1>
-            <p className='section-text section-text-top'>
-              Low-latency voice and video feels like you’re in the
-              same room. Wave hello over video, watch friends stream
-              their games, or gather up and have a drawing session
-              with screen share.
-            </p>
-            <img
-              src={section5}
-              alt='reliable'
-              className='bigger-img'
-            />
+          <div
+            data-aos='fade-up'
+            data-aos-offset='-30'
+            className='section-container-top'
+          >
+            <div className='content-top'>
+              <h1 className='section-header-top'>
+                RELIABLE TECH FOR STAYING CLOSE
+              </h1>
+              <p className='section-text section-text-top'>
+                Low-latency voice and video feels like you’re in the
+                same room. Wave hello over video, watch friends stream
+                their games, or gather up and have a drawing session
+                with screen share.
+              </p>
+              <img
+                src={section5}
+                alt='reliable'
+                className='bigger-img'
+              />
+            </div>
           </div>
         </div>
 

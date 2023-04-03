@@ -36,11 +36,13 @@ body {
 
 .splash-page-after-nav {
   padding: 120px 40px;
-  width: 40%;
+  /* width: 40%; */
+  width: 800px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  text-align: center;
 }
 
 .splash-page-main-heading {
@@ -108,20 +110,28 @@ body {
 
 .hero-section {
   display: flex;
-  height: 625px;
+  height: 680px;
   justify-content: center;
   align-items: center;
 }
 
 .content {
-  width: 20%
+  width: 380px
+}
+
+.section-container {
+  width: 1260px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 120px 40px;
 }
 
 .section-header {
   font-family: 'gg-sans-bold', sans-serif;
   font-weight: bold;
   font-size: 48px;
-  line-height: 1;
+  line-height: 1.15;
 }
 
 .section-text {
@@ -137,11 +147,11 @@ body {
 }
 
 .content-top {
+  width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
-  width: 100%;
 }
 
 .section-5 {
@@ -181,4 +191,100 @@ body {
 
 .alternate-section {
   background-color: #f6f6f6;
+}
+
+.sparkles {
+  margin-bottom: -20px;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+@media screen and (max-width: 1340px) {
+  .section-6-content {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .all-sec-img {
+    width: 90%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .nav {
+    width: 90%;
+  }
+
+  .section-container-top,
+  .content-top {
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 880px) {
+  .splash-page-after-nav {
+    width: 80%;
+  }
+
+  .splash-page-main-heading {
+    font-size: 44px;
+  }
+
+  .section-header,
+  .section-header-top {
+    font-size: 36px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+
+  .section-container,
+  .section-container-top {
+    flex-direction: column;
+    padding: 80px 40px;
+  }
+
+  .all-sec-img {
+    width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .section-text {
+    margin-bottom: 24px;
+  }
+
+  .section6-content {
+    margin-bottom: 80px;
+  }
+}
+
+@media screen and (max-width: 690px) {
+  .splash-page-after-nav {
+    padding: 80px 40px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .nav-mid {
+    display: none;
+  }
+
+  .sparkles {
+    width: 100%;
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .splash-page-after-nav {
+    padding: 40px;
+  }
+
+  .section6-content h1 {
+    text-align: center;
+  }
+
+  .section-container {
+    padding: 30px 10px;
+  }
 }
