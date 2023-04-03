@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import LoginFormPage from './components/LoginFormPage';
 import ServerNavBar from './components/ServerNavBar';
@@ -10,9 +10,10 @@ import BottomPanel from './components/UserShowPage/BottomPanel';
 import ErrorPage from './components/ErrorPage';
 
 const App = () => {
+  const [isUpdate, setIsUpdate] = useState(false);
   return (
     <div className='app'>
-      <ServerNavBar />
+      <ServerNavBar isUpdate={isUpdate} setIsUpdate={setIsUpdate} />
       <BottomPanel />
       <Routes>
         <Route path='/' element={<SplashPage />} />
@@ -26,11 +27,21 @@ const App = () => {
 
         <Route
           path='/servers/:serverId/channels/:channelId'
-          element={<ServerShowPage />}
+          element={
+            <ServerShowPage
+              isUpdate={isUpdate}
+              setIsUpdate={setIsUpdate}
+            />
+          }
         />
         <Route
           path='/servers/:serverId'
-          element={<ServerShowPage />}
+          element={
+            <ServerShowPage
+              isUpdate={isUpdate}
+              setIsUpdate={setIsUpdate}
+            />
+          }
         />
         <Route path='/error' element={<ErrorPage />} />
         <Route path='*' element={<Navigate to='/error' />} />

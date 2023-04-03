@@ -22,7 +22,7 @@ import ChannelShowPage from '../ChannelShowPage/ChannelShowPage';
 import CreateChannelModal from '../ChannelShowPage/CreateChannelModal';
 import consumer from '../../consumer';
 
-const ServerShowPage = () => {
+const ServerShowPage = ({ isUpdate, setIsUpdate }) => {
   const [showCreateForm, setShowCreateForm] = useState(false);
   const [open, setOpen] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
@@ -108,6 +108,8 @@ const ServerShowPage = () => {
               open={open}
               setOpen={setOpen}
               handleClick={handleClick}
+              isUpdate={isUpdate}
+              setIsUpdate={setIsUpdate}
             />
             <div className='panels-container'>
               <div className='server-panel'>
@@ -130,11 +132,12 @@ const ServerShowPage = () => {
                       >
                         <TagIcon
                           sx={{
-                            mr: '5px',
+                            // mr: '5px',
+                            // mb: '5px',
                             transform: 'skew(-10deg)',
                           }}
                         />
-                        <p className='channel-item-text'>
+                        <p className='channel-item-text shorten'>
                           {channel.channelName}
                         </p>
                       </NavLink>

@@ -11,12 +11,20 @@ import './ServerShow.css';
 import DeleteConfirmation from '../DeleteConfirmation';
 import TagIcon from '@mui/icons-material/Tag';
 
-const ServerHeader = ({ server, open, setOpen, handleClick }) => {
+const ServerHeader = ({
+  server,
+  open,
+  setOpen,
+  handleClick,
+  isUpdate,
+  setIsUpdate,
+}) => {
   const [showDeleteForm, setShowDeleteForm] = useState(false);
 
   const sessionUser = useSelector((state) => state.session.user);
   const { channelId } = useParams();
   const channel = useSelector((state) => state.channels[channelId]);
+  // const server = useSelector((state) => state.servers[serverId]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -57,13 +65,16 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
       ) : null}
       <div className='server-header' onClick={handleClick}>
         <div className='server-header-left'>
-          <h4>{server.serverName}</h4>
+          <h4 className='shorten'>{server.serverName}</h4>
 
           <div onClick={handleOtherClick}>
             {open ? (
-              <CloseIcon fontSize='small' />
+              <CloseIcon className='svg' fontSize='small' />
             ) : (
-              <KeyBoardDownArrowIcon fontSize='small' />
+              <KeyBoardDownArrowIcon
+                className='svg'
+                fontSize='small'
+              />
             )}
           </div>
 
@@ -73,7 +84,12 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
                 {server.ownerId === sessionUser.id ? (
                   <>
                     <li className='settings-item'>
-                      <button>
+                      <button
+                        onClick={() => {
+                          setIsUpdate(true);
+                          setOpen(false);
+                        }}
+                      >
                         Edit Server
                         <EditIcon
                           fontSize='small'
@@ -130,6 +146,7 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
                 <TagIcon
                   sx={{
                     mr: '5px',
+                    mb: '100px',
                     transform: 'skew(-20deg)',
                     opcaity: '0.5',
                   }}
