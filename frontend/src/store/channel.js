@@ -7,14 +7,14 @@ const REMOVE_CHANNEL = 'channels/removeChannel';
 const CLEAR_CHANNELS = 'channels/clearChannels';
 
 // Action Creators
-export const addChannels = (payload) => ({
+export const addChannels = (channels) => ({
   type: ADD_CHANNELS,
-  payload,
+  payload: channels,
 });
 
-export const addChannel = (payload) => ({
+export const addChannel = (channel) => ({
   type: ADD_CHANNEL,
-  payload,
+  payload: channel,
 });
 
 export const removeChannel = (channelId) => ({
@@ -84,16 +84,9 @@ const channelReducer = (state = {}, action) => {
   const nextState = { ...state };
   switch (action.type) {
     case ADD_CHANNELS:
-      return { ...action.payload.channels };
+      return { ...action.payload };
     case ADD_CHANNEL:
-      if (action.payload.channelType === 'private') {
-        return { [action.payload.id]: action.payload };
-      } else {
-        return {
-          ...state,
-          [action.payload.channel.id]: action.payload.channel,
-        };
-      }
+      return { ...state, [action.payload.id]: action.payload };
     case REMOVE_CHANNEL:
       delete nextState[action.channelId];
       return nextState;

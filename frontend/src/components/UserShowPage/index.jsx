@@ -17,11 +17,11 @@ const UserShowPage = () => {
   const friendships = useSelector((state) =>
     Object.values(state.friends)
   );
-  const friends = friendships.map((friend) => ({
-    friend: friend.userId,
-    status: friend.status,
-    friendId: friend.id,
-    dmChannelId: friend.dmChannelId,
+  const friends = friendships.map((usr) => ({
+    friend: usr.friend,
+    status: usr.status,
+    friendId: usr.id,
+    dmChannelId: usr.dmChannelId,
   }));
   const [friendsTab, setFriendsTab] = useState('online');
   const dispatch = useDispatch();
@@ -32,7 +32,7 @@ const UserShowPage = () => {
 
   if (!sessionUser) return <Navigate to='/login' />;
 
-  return friendships.length ? (
+  return (
     <>
       <div className='server-header user-show-header'>
         <div className='server-header-left user-show-left'>
@@ -137,7 +137,7 @@ const UserShowPage = () => {
         </div>
       </div>
     </>
-  ) : null;
+  );
 };
 
 export default UserShowPage;

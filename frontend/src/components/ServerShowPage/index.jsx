@@ -34,7 +34,6 @@ const ServerShowPage = () => {
   const channels = useSelector((state) =>
     Object.values(state.channels)
   );
-  const users = useSelector((state) => state.users);
 
   const handleClick = (e) => {
     e.preventDefault();
@@ -62,7 +61,7 @@ const ServerShowPage = () => {
               dispatch(removeChannel(channelObj.id));
               if (+channelId === channelObj.id)
                 navigate(
-                  `/servers/${serverId}/channels/${server.defaultChannel}`
+                  `/servers/${serverId}/channels/${server.defaultChannel.id}`
                 );
               break;
             default:
@@ -79,11 +78,11 @@ const ServerShowPage = () => {
   if (!channelId)
     return (
       <Navigate
-        to={`/servers/${server.id}/channels/${server.defaultChannel}`}
+        to={`/servers/${server.id}/channels/${server.defaultChannel.id}`}
       />
     );
 
-  return users ? (
+  return (
     <>
       <div>
         {showCreateForm || showEdit ? (
@@ -152,14 +151,14 @@ const ServerShowPage = () => {
               </div>
 
               <div className='users-panel'>
-                <UsersPanel />
+                <UsersPanel users={server.users} />
               </div>
             </div>
           </div>
         )}
       </div>
     </>
-  ) : null;
+  );
 };
 
 export default ServerShowPage;

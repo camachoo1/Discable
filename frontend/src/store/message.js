@@ -8,19 +8,19 @@ const CLEAR_MESSAGES = 'messages/clearMessages';
 
 // Action Creators
 
-export const addMessages = (payload) => ({
+export const addMessages = (messages) => ({
   type: ADD_MESSAGES,
-  payload,
+  messages,
 });
 
-export const addMessage = (payload) => ({
+export const addMessage = (message) => ({
   type: ADD_MESSAGE,
-  payload,
+  message,
 });
 
 export const removeMessage = (messageId) => ({
   type: REMOVE_MESSAGE,
-  payload: messageId,
+  messageId,
 });
 
 export const clearMessages = () => ({
@@ -64,14 +64,14 @@ const messageReducer = (state = {}, action) => {
   const nextState = { ...state };
   switch (action.type) {
     case ADD_MESSAGES:
-      return { ...action.payload.messages };
+      return { ...action.messages };
     case ADD_MESSAGE:
       return {
         ...state,
-        [action.payload.message.id]: action.payload.message,
+        [action.message.id]: action.message,
       };
     case REMOVE_MESSAGE:
-      delete nextState[action.payload];
+      delete nextState[action.messageId];
       return nextState;
     case CLEAR_MESSAGES:
       return {};

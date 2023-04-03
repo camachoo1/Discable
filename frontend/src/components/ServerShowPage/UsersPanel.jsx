@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import UserItem from './UserItem';
 
-const UsersPanel = () => {
+const UsersPanel = ({ users }) => {
   const sessionUser = useSelector((state) => state.session.user);
   const friendships = useSelector((state) =>
     Object.values(state.friends)
@@ -13,8 +13,6 @@ const UsersPanel = () => {
     (friend) =>
       friend.status !== 'blocked' && friend.status !== 'pending'
   );
-
-  const users = useSelector((state) => Object.values(state.users));
 
   return (
     <>
@@ -26,7 +24,7 @@ const UsersPanel = () => {
         )}
 
         {!users
-          ? friends.map((user, idx) => {
+          ? Object.values(friends).map((user, idx) => {
               if (user.id !== sessionUser.id)
                 return (
                   <UserItem
@@ -36,7 +34,7 @@ const UsersPanel = () => {
                   />
                 );
             })
-          : users.map((user, idx) => {
+          : Object.values(users).map((user, idx) => {
               if (user.id !== sessionUser.id)
                 return (
                   <UserItem

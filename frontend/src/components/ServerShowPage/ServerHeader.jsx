@@ -15,9 +15,6 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
   const [showDeleteForm, setShowDeleteForm] = useState(false);
 
   const sessionUser = useSelector((state) => state.session.user);
-  const subscriptions = useSelector((state) =>
-    Object.values(state.serverSubscriptions)
-  );
   const { channelId } = useParams();
   const channel = useSelector((state) => state.channels[channelId]);
   const dispatch = useDispatch();
@@ -38,7 +35,7 @@ const ServerHeader = ({ server, open, setOpen, handleClick }) => {
     dispatch(
       leaveServer(
         server.id,
-        subscriptions.find((sub) => sub.userId === sessionUser.id).id
+        server.users[sessionUser.id].subscriptionId
       )
     );
     setOpen(false);

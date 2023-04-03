@@ -59,7 +59,7 @@ const friendReducer = (state = {}, action) => {
   const nextState = { ...state };
   switch (action.type) {
     case ADD_FRIENDS:
-      return { ...state, ...action.payload.friends };
+      return { ...action.payload };
     // return { ...action.payload };
     case ADD_FRIEND:
       return { ...state, [action.payload.id]: action.payload };

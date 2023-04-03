@@ -24,7 +24,7 @@ class Api::ChannelsController < ApplicationController
     if @channel.save
       ServersChannel.broadcast_to @server,
                                   type: "RECEIVE_CHANNEL",
-                                  **from_template("api/channels/creation", channel: @channel)
+                                  **from_template("api/channels/show", channel: @channel)
       render json: { id: @channel.id }, status: :ok
     else
       render json: { errors: @channel.errors.full_messages }, status: 422
@@ -39,7 +39,7 @@ class Api::ChannelsController < ApplicationController
       if @channel.update(channel_params)
         ServersChannel.broadcast_to @server,
                                     type: "UPDATE_CHANNEL",
-                                    **from_template("api/channels/creation", channel: @channel)
+                                    **from_template("api/channels/show", channel: @channel)
         render :show
       else
         render json: { errors: @channel.errors.full_messages }, status: 422

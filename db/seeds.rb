@@ -104,10 +104,10 @@ Message.create!(author_id: user2.id, channel_id: channel9.id, body: "hi", parent
 Message.create!(author_id: user3.id, channel_id: channel9.id, body: "wyd?", parent_id: nil)
 Message.create!(author_id: user2.id, channel_id: channel9.id, body: "nada!", parent_id: nil)
 
-puts "Creating Friendships..."
-Friend.create!(user1_id: 1, user2_id: 2, status: "friends")
-Friend.create!(user1_id: 1, user2_id: 3, status: "friends")
-Friend.create!(user1_id: 1, user2_id: 4, status: "friends")
-Friend.create!(user1_id: 1, user2_id: 5, status: "friends")
-Friend.create!(user1_id: 1, user2_id: 6, status: "friends")
-Friend.create!(user1_id: 1, user2_id: 7, status: "friends")
+# puts "Creating Friendships..."
+# Friend.create!(user1_id: 1, user2_id: 2, status: "friends")
+# Friend.create!(user1_id: 1, user2_id: 3, status: "friends")
+# Friend.create!(user1_id: 1, user2_id: 4, status: "friends")
+# Friend.create!(user1_id: 1, user2_id: 5, status: "friends")
+# Friend.create!(user1_id: 1, user2_id: 6, status: "friends")
+# Friend.create!(user1_id: 1, user2_id: 7, status: "friends")
