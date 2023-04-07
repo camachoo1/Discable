@@ -7,7 +7,7 @@ import ServerFormModal from '../ServerFormPage/ServerFormModal';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import ExploreIcon from '@mui/icons-material/Explore';
 
-const ServerNavBar = () => {
+const ServerNavBar = ({ isUpdate, setIsUpdate }) => {
   const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
@@ -19,20 +19,25 @@ const ServerNavBar = () => {
     if (sessionUser) dispatch(fetchServers());
   }, [dispatch, sessionUser]);
 
-  if (location.pathname === '/' || location.pathname === '/errors')
-    return null;
+  if (location.pathname === '/') return null;
 
   return (
     <>
       {sessionUser && (
         <>
           <div>
-            {showForm ? (
-              <div className={showForm ? 'modal-show' : 'modal-hide'}>
+            {showForm || isUpdate ? (
+              <div
+                className={
+                  showForm || isUpdate ? 'modal-show' : 'modal-hide'
+                }
+              >
                 <ServerFormModal
                   sessionUser={sessionUser}
                   setShowForm={setShowForm}
                   showForm={showForm}
+                  isUpdate={isUpdate}
+                  setIsUpdate={setIsUpdate}
                 />
               </div>
             ) : null}
