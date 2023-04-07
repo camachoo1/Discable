@@ -14,7 +14,9 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :channels, only: [:update, :show, :destroy]
+    resources :channels, only: [:update, :show, :destroy] do
+      resources :messages, only: :index
+    end
     resources :server_subscriptions, only: [:create, :destroy]
     resources :messages, only: [:show, :create, :update, :destroy]
     resources :friends, only: [:index, :create, :update, :destroy]
