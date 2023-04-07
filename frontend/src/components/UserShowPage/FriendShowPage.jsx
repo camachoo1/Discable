@@ -1,10 +1,6 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import {
-  addFriend,
-  fetchFriends,
-  removeFriend,
-} from '../../store/friend';
+import { addFriend, removeFriend } from '../../store/friend';
 import { useNavigate } from 'react-router-dom';
 import consumer from '../../consumer';
 import FriendItem from './FriendItem';
@@ -21,27 +17,23 @@ const FriendShowPage = ({
   if (!sessionUserId) navigate('/login');
 
   const onlineFriends = friends.filter(
-    (friend) =>
-      friend.status !== 'pending' && friend.status !== 'blocked'
+    (usr) =>
+      usr.friend.status === 'online' &&
+      usr.status !== 'blocked' &&
+      usr.status !== 'pending'
   );
 
   const allFriends = friends.filter(
-    (friend) =>
-      friend.status !== 'pending' && friend.status !== 'blocked'
+    (usr) => usr.status !== 'pending' && usr.status !== 'blocked'
   );
 
   const pendingFriends = friends.filter(
-    (friend) =>
-      friend.status === 'pending' && friend.status !== 'blocked'
+    (usr) => usr.status === 'pending' && usr.status !== 'blocked'
   );
 
   const blockedFriends = friends.filter(
-    (friend) => friend.status === 'blocked'
+    (usr) => usr.status === 'blocked'
   );
-
-  useEffect(() => {
-    dispatch(fetchFriends());
-  }, [dispatch]);
 
   useEffect(() => {
     const subscription = consumer.subscriptions.create(
@@ -49,13 +41,13 @@ const FriendShowPage = ({
       {
         received: (friendObj) => {
           switch (friendObj.type) {
-            case 'RECEIVE_MESSAGE':
+            case 'RECEIVE_FRIEND':
               dispatch(addFriend(friendObj));
               break;
-            case 'UPDATE_MESSAGE':
+            case 'UPDATE_FRIEND':
               dispatch(addFriend(friendObj));
               break;
-            case 'DESTROY_MESSAGE':
+            case 'DESTROY_FRIEND':
               dispatch(removeFriend(friendObj.id));
               break;
             default:
